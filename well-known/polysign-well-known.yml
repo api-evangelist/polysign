@@ -1,0 +1,48 @@
+generated: '2026-08-02'
+method: probed
+source: live GET of the /.well-known/ discovery surface on every PolySign host in apis.yml
+result: none — every probed path returned 404 on both hosts
+note: Both hosts are static S3/CloudFront origins that answer 404 with an S3 NoSuchKey XML body, so there are no
+  HTML false positives. No pointer of type WellKnown is wired in apis.yml because no document was found; recording
+  the probe, not a capability.
+hosts:
+- host: https://www.polysign.io
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/oauth-protected-resource
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+  - path: /.well-known/mcp.json
+    status: 404
+- host: https://docs.polynet.sandbox.polysign.io
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/oauth-protected-resource
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+  - path: /.well-known/mcp.json
+    status: 404

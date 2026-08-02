@@ -1,0 +1,375 @@
+generated: '2026-08-02'
+method: derived
+source: openapi/polysign-atomicnet-api-server-openapi.json, openapi/polysign-merchant-gate-openapi.json, openapi/polysign-abc-proxy-service-openapi.json
+note: Derived from OpenAPI components.schemas $ref links and the *_id reference fields inside each record schema.
+  No object reference page is published, so id prefixes/formats are unknown and are not asserted.
+entities:
+- name: Asset
+  schema: Asset
+  record: AssetRecord
+  id: asset_id
+  spec: openapi/polysign-atomicnet-api-server-openapi.json
+  operations:
+  - GET /v1/assets/{asset_id}
+  - GET /v1/assets/list
+  - PUT /v1/assets/
+  - PUT /v1/assets/list
+  - PUT /v1/assets/update_asset_mapping
+  fields:
+  - asset_id
+  - book_operator_id
+  - exchange_id
+  - precision
+  - status
+  - partner_asset_id
+- name: Partner
+  schema: Partner
+  id: atomicnet_id
+  spec: openapi/polysign-atomicnet-api-server-openapi.json
+  operations:
+  - GET /v1/partners/{atomicnet_id}
+  - GET /v1/partners/list
+  - PUT /v1/partners/
+  - PUT /v1/partners/list
+  fields:
+  - atomicnet_id
+  - partner_name
+  - role
+  - status
+  - abc_account_id
+  - public_key
+  - private_key
+- name: Investor
+  schema: Investor
+  id: real_investor_id
+  spec: openapi/polysign-atomicnet-api-server-openapi.json
+  operations:
+  - GET /v1/investors/real_investor_id/{real_investor_id}
+  - GET /v1/investors/one_time_investor_id/{one_time_investor_id}
+  fields:
+  - real_investor_id
+  - one_time_investor_ids
+- name: EscrowAuthorization
+  schema: EscrowAuth
+  record: EscrowAuthRecord
+  id: escrow_auth_id
+  spec: openapi/polysign-atomicnet-api-server-openapi.json
+  operations:
+  - GET /v1/escrow_authorizations/{escrow_auth_id}
+  - GET /v1/escrow_authorizations/list
+  - GET /v1/escrow_authorizations/list/local
+  - POST /v1/escrow_authorizations/request
+  - PUT /v1/escrow_authorizations/
+  - GET /v1/escrow_status_updates/{escrow_auth_id}
+  fields:
+  - escrow_auth_id
+  - investor_id
+  - asset_id
+  - asset_quantity
+  - expiration
+  - remaining_quantity
+  - execution_status
+- name: BeneficiaryAuthorization
+  schema: BeneficiaryAuth
+  record: BeneficiaryAuthRecord
+  id: beneficiary_auth_id
+  spec: openapi/polysign-atomicnet-api-server-openapi.json
+  operations:
+  - GET /v1/beneficiary_authorizations/{beneficiary_auth_id}
+  - GET /v1/beneficiary_authorizations/list
+  - GET /v1/beneficiary_authorizations/list/local
+  - POST /v1/beneficiary_authorizations/request
+  - PUT /v1/beneficiary_authorizations/
+  - GET /v1/beneficiary_status_updates/{beneficiary_auth_id}
+  fields:
+  - beneficiary_auth_id
+  - investor_id
+  - asset_id
+  - expiration
+- name: Order
+  schema: Order
+  record: OrderRecord
+  id: order_id
+  spec: openapi/polysign-atomicnet-api-server-openapi.json
+  operations:
+  - GET /v1/orders/{order_id}
+  - GET /v1/orders/list
+  - PUT /v1/orders/
+  - GET /v1/order_status_updates/{order_id}
+  fields:
+  - order_id
+  - investor_id
+  - give_asset_id
+  - give_quantity
+  - take_asset_id
+  - take_quantity
+  - expiration
+  - give_remaining
+  - execution_status
+  - escrow_auth_id
+  - beneficiary_auth_id
+- name: Settlement
+  schema: Settlement
+  record: SettlementRecord
+  id: settlement_id
+  spec: openapi/polysign-atomicnet-api-server-openapi.json
+  operations:
+  - GET /v1/settlements/{settlement_id}
+  - GET /v1/settlements/list
+  - GET /v1/settlements/order/{order_id}
+  - PUT /v1/settlements/
+  - GET /v1/settlement_status_updates/{settlement_id}
+  fields:
+  - settlement_id
+  - left_order_id
+  - right_order_id
+  - left_order_give_quantity
+  - right_order_give_quantity
+  - left_order_commission
+  - right_order_commission
+  - abc_memorial_digest
+  - abc_memorialization_block
+- name: SettlementConfirmation
+  schema: SettlementConfirmation
+  record: SettlementConfirmationRecord
+  id: give_order_id + take_order_id
+  spec: openapi/polysign-atomicnet-api-server-openapi.json
+  operations:
+  - GET /v1/settlement_confirmations/{settlement_id}
+  - GET /v1/settlement_confirmations/{give_order_id}/{take_order_id}
+  - GET /v1/settlement_confirmations/list
+  - GET /v1/settlement_confirmations/list/local
+  - PUT /v1/settlement_confirmations/
+  - GET /v1/settlement_confirmation_status_updates/{give_order_id}/{take_order_id}
+  fields:
+  - settlement_id
+  - give_order_id
+  - take_order_id
+  - asset_id
+  - asset_quantity
+  - escrow_auth_id
+  - beneficiary_auth_id
+  - abc_memorial_digest
+  - abc_memorialization_block
+- name: BookTransfer
+  schema: BookTransfer
+  record: BookTransferRecord
+  id: book_transfer_id
+  spec: openapi/polysign-atomicnet-api-server-openapi.json
+  operations:
+  - GET /v1/book_transfers/{book_transfer_id}
+  - GET /v1/book_transfers/list
+  - GET /v1/book_transfers/list/local
+  - PUT /v1/book_transfers/
+  fields:
+  - book_transfer_id
+  - asset_id
+  - quantity
+  - give_investor_id
+  - take_investor_id
+  - escrow_auth_id
+  - beneficiary_auth_id
+  - execution_status
+- name: BookTransferConfirmation
+  schema: BookTransferConfirmation
+  record: BookTransferConfirmationRecord
+  id: book_transfer_id
+  spec: openapi/polysign-atomicnet-api-server-openapi.json
+  operations:
+  - GET /v1/book_transfer_confirmations/{book_transfer_id}
+  - GET /v1/book_transfer_confirmations/list
+  - GET /v1/book_transfer_confirmations/list/local
+  - PUT /v1/book_transfer_confirmations/
+  fields:
+  - book_transfer_id
+  - asset_id
+  - asset_quantity
+  - escrow_auth_id
+  - beneficiary_auth_id
+- name: AbcAccount
+  schema: (inline)
+  id: abc_account_id
+  spec: openapi/polysign-abc-proxy-service-openapi.json
+  operations:
+  - GET /v1/abc_accounts/{atomicnet_id}
+  - GET /v1/abc_accounts/info/{abc_account_id}
+  - PUT /v1/abc_accounts/
+  - PUT /v1/abc_testnet/
+  - GET /v1/abc_testnet/faucet/{abc_account_id}
+- name: AbcSignature
+  schema: AbcSignature
+  id: digest
+  spec: openapi/polysign-abc-proxy-service-openapi.json
+  operations:
+  - PUT /v1/abc_signing/
+  - GET /v1/abc_signing/
+  - PUT /v1/abc_memorials/
+  - GET /v1/abc_memorials/{digest}
+  fields:
+  - abc_account_id
+  - digest
+  - digest_type
+  - signature
+- name: DataSyncRequest
+  schema: DataSyncStatus
+  id: request_id
+  spec: openapi/polysign-atomicnet-api-server-openapi.json
+  operations:
+  - PUT /v1/data_sync/
+  - GET /v1/data_sync/{request_id}
+  - GET /v1/data_sync/list
+- name: Metadata
+  schema: Metadata
+  spec: openapi/polysign-atomicnet-api-server-openapi.json
+  note: Shared envelope attached to every record type.
+  fields:
+  - request_id
+  - status
+  - expired
+  - commission
+  - exchange_id
+  - book_operator_id
+  - trade_portal_id
+  - real_investor_id
+  - investor_ids
+relationships:
+- from: Order
+  to: Investor
+  kind: belongs_to
+  via: record.investor_id
+- from: Order
+  to: Asset
+  kind: belongs_to
+  via: record.give_asset_id
+  note: the asset offered
+- from: Order
+  to: Asset
+  kind: belongs_to
+  via: record.take_asset_id
+  note: the asset requested
+- from: Order
+  to: EscrowAuthorization
+  kind: belongs_to
+  via: escrow_auth_id
+- from: Order
+  to: BeneficiaryAuthorization
+  kind: belongs_to
+  via: beneficiary_auth_id
+- from: Order
+  to: OrderStatusUpdate
+  kind: has_many
+  via: order_id
+- from: EscrowAuthorization
+  to: Investor
+  kind: belongs_to
+  via: record.investor_id
+- from: EscrowAuthorization
+  to: Asset
+  kind: belongs_to
+  via: record.asset_id
+- from: EscrowAuthorization
+  to: EscrowAuthStatusUpdate
+  kind: has_many
+  via: escrow_auth_id
+- from: BeneficiaryAuthorization
+  to: Investor
+  kind: belongs_to
+  via: record.investor_id
+- from: BeneficiaryAuthorization
+  to: Asset
+  kind: belongs_to
+  via: record.asset_id
+- from: BeneficiaryAuthorization
+  to: BeneficiaryAuthStatusUpdate
+  kind: has_many
+  via: beneficiary_auth_id
+- from: Settlement
+  to: Order
+  kind: has_one
+  via: record.left_order_id
+- from: Settlement
+  to: Order
+  kind: has_one
+  via: record.right_order_id
+- from: Settlement
+  to: SettlementStatusUpdate
+  kind: has_many
+  via: settlement_id
+- from: Settlement
+  to: SettlementConfirmation
+  kind: has_many
+  via: settlement_id
+- from: SettlementConfirmation
+  to: Order
+  kind: belongs_to
+  via: record.give_order_id
+- from: SettlementConfirmation
+  to: Order
+  kind: belongs_to
+  via: record.take_order_id
+- from: SettlementConfirmation
+  to: EscrowAuthorization
+  kind: belongs_to
+  via: record.escrow_auth_id
+- from: SettlementConfirmation
+  to: BeneficiaryAuthorization
+  kind: belongs_to
+  via: record.beneficiary_auth_id
+- from: SettlementConfirmation
+  to: Asset
+  kind: belongs_to
+  via: record.asset_id
+- from: BookTransfer
+  to: Asset
+  kind: belongs_to
+  via: record.asset_id
+- from: BookTransfer
+  to: Investor
+  kind: belongs_to
+  via: record.give_investor_id
+- from: BookTransfer
+  to: Investor
+  kind: belongs_to
+  via: record.take_investor_id
+- from: BookTransfer
+  to: BookTransferConfirmation
+  kind: has_many
+  via: book_transfer_id
+- from: BookTransferConfirmation
+  to: EscrowAuthorization
+  kind: belongs_to
+  via: record.escrow_auth_id
+- from: BookTransferConfirmation
+  to: BeneficiaryAuthorization
+  kind: belongs_to
+  via: record.beneficiary_auth_id
+- from: Asset
+  to: Partner
+  kind: belongs_to
+  via: record.book_operator_id
+  note: the Book Operator node processing the asset
+- from: Asset
+  to: Partner
+  kind: belongs_to
+  via: record.exchange_id
+  note: the Exchange node processing the asset
+- from: Partner
+  to: AbcAccount
+  kind: has_one
+  via: abc_account_id
+- from: Investor
+  to: OnetimeIdMap
+  kind: has_many
+  via: one_time_investor_ids
+- from: Settlement
+  to: AbcSignature
+  kind: has_one
+  via: abc_memorial_digest
+  note: memorialized on the ABC ledger
+- from: AbcSignature
+  to: AbcAccount
+  kind: belongs_to
+  via: abc_account_id
+signing:
+  note: Every record type carries a signature (AbcSignature) over the canonical form of record, produced against
+    an ABC account. GET /v1/utils/canonicalize reproduces that canonical form.

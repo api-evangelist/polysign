@@ -1,0 +1,110 @@
+generated: '2026-08-02'
+method: derived
+status: candidate
+source: openapi/polysign-atomicnet-api-server-openapi.json, openapi/polysign-merchant-gate-openapi.json, openapi/polysign-abc-proxy-service-openapi.json
+searched:
+  date: '2026-08-02'
+  result: none — PolySign publishes no hosted or remote MCP server
+  checked:
+  - https://docs.polynet.sandbox.polysign.io/ (RapiDoc docs, no MCP reference)
+  - https://www.polysign.io/
+  - https://github.com/PolySignInc
+  - mcp.polysign.io (NXDOMAIN)
+  - /.well-known/mcp.json on both hosts (404)
+  - npm registry search for polysign / atomicnet
+server:
+  name: polysign-atomicnet
+  transport: http
+  url: null
+note: This is a CANDIDATE tool surface derived from the three published OpenAPI documents so an implementer can
+  see what an AtomicNet MCP server would expose. It is NOT a PolySign product. No MCPServer pointer is wired into
+  apis.yml, because wiring one would assert a server that does not exist. The upstream specs declare no operationId,
+  so each tool is bound to its backing operation by method+path.
+tools:
+- name: get_order
+  description: Get the detail of an order on AtomicNet by its id.
+  source_operation: openapi/polysign-atomicnet-api-server-openapi.json#GET /v1/orders/{order_id}
+- name: list_orders
+  description: Get the detail of all orders on AtomicNet.
+  source_operation: openapi/polysign-atomicnet-api-server-openapi.json#GET /v1/orders/list
+- name: publish_order
+  description: Publish a new order to AtomicNet.
+  source_operation: openapi/polysign-atomicnet-api-server-openapi.json#PUT /v1/orders/
+- name: get_order_status_updates
+  description: Get all status updates associated with an order.
+  source_operation: openapi/polysign-atomicnet-api-server-openapi.json#GET /v1/order_status_updates/{order_id}
+- name: get_asset
+  description: Get the detail of a registered asset on AtomicNet.
+  source_operation: openapi/polysign-atomicnet-api-server-openapi.json#GET /v1/assets/{asset_id}
+- name: list_assets
+  description: Get the detail of all registered assets on AtomicNet.
+  source_operation: openapi/polysign-atomicnet-api-server-openapi.json#GET /v1/assets/list
+- name: register_asset
+  description: Register a new asset and publish it to AtomicNet.
+  source_operation: openapi/polysign-atomicnet-api-server-openapi.json#PUT /v1/assets/
+- name: request_escrow_authorization
+  description: Request a new escrow authorization.
+  source_operation: openapi/polysign-atomicnet-api-server-openapi.json#POST /v1/escrow_authorizations/request
+- name: approve_escrow_authorization
+  description: Approve an escrow authorization.
+  source_operation: openapi/polysign-atomicnet-api-server-openapi.json#PUT /v1/escrow_authorizations/
+- name: get_escrow_authorization
+  description: Get the detail of an escrow authorization on AtomicNet.
+  source_operation: openapi/polysign-atomicnet-api-server-openapi.json#GET /v1/escrow_authorizations/{escrow_auth_id}
+- name: request_beneficiary_authorization
+  description: Request a new beneficiary authorization.
+  source_operation: openapi/polysign-atomicnet-api-server-openapi.json#POST /v1/beneficiary_authorizations/request
+- name: approve_beneficiary_authorization
+  description: Approve a beneficiary authorization.
+  source_operation: openapi/polysign-atomicnet-api-server-openapi.json#PUT /v1/beneficiary_authorizations/
+- name: publish_settlement
+  description: Publish a settlement to AtomicNet after it has been memorialized.
+  source_operation: openapi/polysign-atomicnet-api-server-openapi.json#PUT /v1/settlements/
+- name: get_settlement
+  description: Get the detail of a settlement on AtomicNet by its id.
+  source_operation: openapi/polysign-atomicnet-api-server-openapi.json#GET /v1/settlements/{settlement_id}
+- name: list_settlements_for_order
+  description: Get the detail of all settlements for an order on AtomicNet.
+  source_operation: openapi/polysign-atomicnet-api-server-openapi.json#GET /v1/settlements/order/{order_id}
+- name: release_settlement_confirmation
+  description: Release a settlement confirmation on execution.
+  source_operation: openapi/polysign-atomicnet-api-server-openapi.json#PUT /v1/settlement_confirmations/
+- name: publish_book_transfer
+  description: Publish a new book transfer to AtomicNet.
+  source_operation: openapi/polysign-atomicnet-api-server-openapi.json#PUT /v1/book_transfers/
+- name: release_book_transfer_confirmation
+  description: Release a book transfer confirmation on execution.
+  source_operation: openapi/polysign-atomicnet-api-server-openapi.json#PUT /v1/book_transfer_confirmations/
+- name: register_partner
+  description: Register a new partner to this node.
+  source_operation: openapi/polysign-atomicnet-api-server-openapi.json#PUT /v1/partners/
+- name: get_one_time_investor_id
+  description: Generate a one-time investor ID for a real investor ID.
+  source_operation: openapi/polysign-atomicnet-api-server-openapi.json#GET /v1/investors/real_investor_id/{real_investor_id}
+- name: canonicalize_record
+  description: Canonicalize an AtomicNet object record.
+  source_operation: openapi/polysign-atomicnet-api-server-openapi.json#GET /v1/utils/canonicalize
+- name: get_atomicnet_uid
+  description: Get an AtomicNet UID.
+  source_operation: openapi/polysign-atomicnet-api-server-openapi.json#GET /v1/utils/atomicnet_uid
+- name: memorialize_digest
+  description: Memorialize a digest using an ABC account.
+  source_operation: openapi/polysign-abc-proxy-service-openapi.json#PUT /v1/abc_memorials/
+- name: verify_memorial
+  description: Verify whether a digest is memorialized to ABC.
+  source_operation: openapi/polysign-abc-proxy-service-openapi.json#GET /v1/abc_memorials/{digest}
+- name: sign_digest
+  description: Sign a digest using an ABC account for the given AtomicNet ID.
+  source_operation: openapi/polysign-abc-proxy-service-openapi.json#PUT /v1/abc_signing/
+- name: verify_signature
+  description: Verify an ABC signature.
+  source_operation: openapi/polysign-abc-proxy-service-openapi.json#GET /v1/abc_signing/
+- name: submit_merchant_order
+  description: Submit an order to an AtomicNet node through the Merchant Gate.
+  source_operation: openapi/polysign-merchant-gate-openapi.json#PUT /v1/orders/submit_order
+- name: submit_merchant_book_transfer
+  description: Submit a book transfer to an AtomicNet node through the Merchant Gate.
+  source_operation: openapi/polysign-merchant-gate-openapi.json#PUT /v1/book_transfers/submit
+- name: node_health
+  description: Deep health check of the AtomicNet node.
+  source_operation: openapi/polysign-atomicnet-api-server-openapi.json#GET /v1/system/deep_ping

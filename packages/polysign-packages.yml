@@ -1,0 +1,32 @@
+generated: '2026-08-02'
+method: searched
+source: npm registry search, PyPI JSON API, github.com/PolySignInc, https://www.polysign.io/, https://docs.polynet.sandbox.polysign.io/
+packages: []
+result: none — PolySign publishes no first-party client libraries for the AtomicNet APIs
+registries_checked:
+- registry: npm
+  query: polysign, atomicnet
+  result: no first-party package; the only "polysign" hit is an unrelated Firestore ORM
+- registry: pypi
+  query: Polysign
+  result: PyPI project "Polysign" is Bismuth Foundation cryptographic primitives — a different project, not PolySign,
+    Inc.
+- registry: maven-central
+  result: no first-party artifact found
+- registry: nuget
+  result: no first-party artifact found
+- registry: rubygems
+  result: no first-party artifact found
+- registry: packagist
+  result: no first-party artifact found
+- registry: crates.io
+  result: no first-party AtomicNet client crate found
+- registry: pkg.go.dev
+  result: no first-party module found
+github_org:
+  url: https://github.com/PolySignInc
+  repos: 14
+  note: The PolySign, Inc. GitHub org holds forks of third-party cryptography/blockchain libraries (tough, cosmos-rust,
+    tendermint-rs, rust-crypto, rust-secp256k1, py_webauthn, uuid, class, centipede, okta-aws-cli-assume-role) —
+    infrastructure dependencies, not AtomicNet client SDKs. No SDKs pointer is wired because none of these is a
+    first-party client library for the documented APIs.

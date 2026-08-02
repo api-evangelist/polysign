@@ -1,0 +1,63 @@
+generated: '2026-08-02'
+method: generated
+source: openapi/polysign-atomicnet-api-server-openapi.json, openapi/polysign-merchant-gate-openapi.json,
+  openapi/polysign-abc-proxy-service-openapi.json
+note: >-
+  Searched first for provider-published agent skills or an AGENTS.md on www.polysign.io,
+  docs.polynet.sandbox.polysign.io and github.com/PolySignInc — none exist. These four skills are
+  generated from the three published OpenAPI documents. The upstream specs declare no operationId on
+  any operation, so every step is grounded in the verbatim method + path from the spec instead.
+skills:
+- file: polysign-authenticate-atomicnet.md
+  name: Authenticate against an AtomicNet node
+  api: openapi/polysign-atomicnet-api-server-openapi.json
+  operations:
+  - POST /v1/auth/token
+  - GET /v1/system/ping
+  - GET /v1/system/deep_ping
+  - GET /v1/system/version
+  - GET /v1/system/circuit_breakers
+- file: polysign-escrowed-order-to-settlement.md
+  name: Escrowed order to settlement on AtomicNet
+  api: openapi/polysign-atomicnet-api-server-openapi.json
+  operations:
+  - PUT /v1/assets/
+  - GET /v1/investors/real_investor_id/{real_investor_id}
+  - POST /v1/escrow_authorizations/request
+  - PUT /v1/escrow_authorizations/
+  - POST /v1/beneficiary_authorizations/request
+  - PUT /v1/beneficiary_authorizations/
+  - PUT /v1/orders/
+  - GET /v1/orders/{order_id}
+  - GET /v1/order_status_updates/{order_id}
+  - GET /v1/settlements/order/{order_id}
+  - GET /v1/settlement_confirmations/{give_order_id}/{take_order_id}
+  - PUT /v1/settlement_confirmations/
+  - GET /v1/settlement_status_updates/{settlement_id}
+- file: polysign-book-transfer.md
+  name: Book transfer between investors on AtomicNet
+  api: openapi/polysign-atomicnet-api-server-openapi.json
+  operations:
+  - POST /v1/escrow_authorizations/request
+  - PUT /v1/escrow_authorizations/
+  - POST /v1/beneficiary_authorizations/request
+  - PUT /v1/beneficiary_authorizations/
+  - PUT /v1/book_transfers/
+  - GET /v1/book_transfers/{book_transfer_id}
+  - GET /v1/book_transfers/list/local
+  - GET /v1/book_transfer_confirmations/{book_transfer_id}
+  - PUT /v1/book_transfer_confirmations/
+  - PUT /v1/book_transfers/submit
+- file: polysign-abc-memorialize-and-verify.md
+  name: Memorialize and verify a digest on the ABC ledger
+  api: openapi/polysign-abc-proxy-service-openapi.json
+  operations:
+  - PUT /v1/abc_accounts/
+  - GET /v1/abc_accounts/{atomicnet_id}
+  - GET /v1/abc_accounts/info/{abc_account_id}
+  - PUT /v1/abc_signing/
+  - GET /v1/abc_signing/
+  - PUT /v1/abc_memorials/
+  - GET /v1/abc_memorials/{digest}
+  - PUT /v1/abc_testnet/
+  - GET /v1/abc_testnet/faucet/{abc_account_id}

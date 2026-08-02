@@ -1,0 +1,25 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for AtomicNet ABC Proxy Service
+  version: 1.0.0
+extends: openapi/polysign-abc-proxy-service-openapi.json
+x-generated: '2026-08-02'
+x-method: generated
+x-note: Captures API Evangelist observations about the harvested spec without mutating it. The upstream document
+  declares no servers[] and no operationId on any operation.
+actions:
+- target: $.info
+  update:
+    x-apievangelist-source: https://docs.polynet.sandbox.polysign.io/
+    x-apievangelist-harvested: '2026-08-02'
+    x-apievangelist-operations: 14
+    x-apievangelist-provider: PolySign, Inc.
+- target: $
+  update:
+    x-apievangelist-gaps:
+    - no servers[] block — base URL is participant-deployed and not published
+    - no operationId on any operation — tooling must address operations by method+path
+    - only 200 responses are documented on resource operations; 4xx/5xx are undocumented except 401 on POST /v1/auth/token
+      and 500 on PUT /v1/abc_testnet/
+    - no examples on response schemas
+    - no top-level tags[] declaration although every operation is tagged

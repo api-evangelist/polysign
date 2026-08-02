@@ -1,0 +1,64 @@
+generated: '2026-08-02'
+method: derived
+source: openapi/*.json + https://docs.polynet.sandbox.polysign.io/
+versioning:
+  scheme: uri-path
+  current: v1
+  docs: https://docs.polynet.sandbox.polysign.io/
+  note: Every path in all three documents is rooted at /v1. The info.version of each document is a git commit SHA
+    rather than a semantic version, so the spec revision is traceable but not orderable.
+document_versions:
+- api: AtomicNet API Server
+  file: openapi/polysign-atomicnet-api-server-openapi.json
+  info_version: 5ba508e7771507febd8e2056c369fffd575b4272
+- api: AtomicNet Merchant Gate Node
+  file: openapi/polysign-merchant-gate-openapi.json
+  info_version: e2c3a7d25004060113ed412d225d18c00741b125
+- api: AtomicNet ABC Proxy Service
+  file: openapi/polysign-abc-proxy-service-openapi.json
+  info_version: 5fddf272a23655e1582a8a157a8d0ac8e0d517e2
+message_versioning:
+  field: schema_version
+  type: integer
+  note: Every AtomicNet record type carries its own schema_version integer, so the message schema is versioned independently
+    of the URI path.
+deprecation:
+  policy_url: null
+  sunset_header: false
+  deprecated_operations: []
+  note: 'No deprecation or sunset policy is published, no operation is marked deprecated: true, and no Sunset/Deprecation
+    response headers are declared. No Deprecation pointer wired.'
+sla:
+  url: null
+  uptime_target: null
+status_page: null
+health_endpoints:
+  note: The APIs ship their own liveness surface in place of a hosted status page.
+  operations:
+  - GET /v1/system/ping
+  - GET /v1/system/deep_ping
+  - GET /v1/system/version
+  - GET /v1/system/circuit_breakers
+  present_in:
+  - atomicnet-api-server
+  - merchant-gate
+  - abc-proxy-service
+company_events:
+- date: '2022-06-28'
+  event: PolySign, Inc. closed a $53M Series C led by Cowen Digital with Brevan Howard and GSR participating, plus
+    a $25M credit facility with Boathouse Capital.
+  source: https://www.businesswire.com/news/home/20220628005141/en
+- date: '2024-02-13'
+  event: Ripple announced the acquisition of PolySign subsidiary Standard Custody & Trust Company.
+  source: https://markets.financialcontent.com/stocks/article/bizwire-2024-2-13-ripple-announces-acquisition-of-standard-custody-and-trust-company-expands-its-portfolio-of-regulatory-licenses
+- date: 2024-06
+  event: Ripple closed the Standard Custody & Trust Company acquisition.
+  source: https://www.theblock.co/post/277202/ripple-plans-to-acquire-digital-asset-platform-standard-custody
+observed:
+  date: '2026-08-02'
+  docs_host_live: true
+  api_host_resolves: false
+  note: docs.polynet.sandbox.polysign.io serves the three specs (HTTP 200). No AtomicNet node host resolves in DNS
+    (polynet.sandbox.polysign.io and seven sibling candidates all NXDOMAIN), so the documented sandbox deployment
+    is not currently reachable. www.polysign.io still serves a 2021-copyright marketing site with no product or
+    developer navigation.

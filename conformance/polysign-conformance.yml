@@ -1,0 +1,55 @@
+generated: '2026-08-02'
+method: derived
+source: openapi/polysign-atomicnet-api-server-openapi.json, openapi/polysign-merchant-gate-openapi.json, openapi/polysign-abc-proxy-service-openapi.json
+standards:
+- id: openapi-3.0.3
+  conforms: true
+  evidence: 'all three published documents declare openapi: 3.0.3'
+- id: oauth2
+  conforms: true
+  evidence: 'components.securitySchemes.OAuth2 type oauth2, clientCredentials flow, tokenUrl /v1/auth/token, applied
+    globally via security: [{OAuth2: [participant]}]'
+- id: rfc6749-client-credentials
+  conforms: true
+  evidence: POST /v1/auth/token accepts application/x-www-form-urlencoded grant_type=client_credentials&scope=participant
+    and returns access_token/token_type/expires_in/scope
+- id: rfc6750-bearer-token
+  conforms: true
+  evidence: token response returns token_type; OAuth2 bearer credentials issued by the PolySign-hosted token endpoint
+- id: rfc6749-error-response
+  conforms: true
+  evidence: 401 on POST /v1/auth/token returns the OAuth 2.0 {error, error_description} envelope
+- id: openidconnect
+  conforms: false
+  evidence: no openIdConnect security scheme and no /.well-known/openid-configuration (404 on both hosts); an optional
+    id_token field appears in the token response but no OIDC discovery is published
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: no application/problem+json media type in any of the three documents
+- id: rfc9116-security-txt
+  conforms: false
+  evidence: /.well-known/security.txt returned 404 on www.polysign.io and docs.polynet.sandbox.polysign.io
+- id: rfc8594-sunset-header
+  conforms: false
+  evidence: no Sunset or Deprecation response headers declared
+- id: rfc8615-well-known
+  conforms: false
+  evidence: no /.well-known/ document served on any PolySign host
+- id: idempotency-key
+  conforms: false
+  evidence: no Idempotency-Key header parameter in any operation; state-changing writes use PUT with a client-supplied
+    record identifier instead
+- id: pagination
+  conforms: false
+  evidence: list operations expose status/role filters only — no limit/offset/cursor/page parameters and no pagination
+    envelope
+- id: asyncapi
+  conforms: false
+  evidence: no event, webhook or streaming surface documented; status changes are polled via the *_status_updates
+    operations
+- id: nydfs-part200
+  conforms: null
+  evidence: PolySign subsidiary Standard Custody & Trust Company held a NYDFS limited purpose trust charter; this
+    is a corporate licence claim, not a property of the published API contracts. Not asserted here.
+note: Derived from the harvested specs and live probes only. No compliance/certification program (SOC 2, ISO 27001,
+  PCI DSS) is published on a PolySign host, so no Compliance pointer is wired.

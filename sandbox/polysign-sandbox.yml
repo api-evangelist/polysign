@@ -1,0 +1,42 @@
+generated: '2026-08-02'
+method: searched
+source: https://docs.polynet.sandbox.polysign.io/abc-service.html + openapi/polysign-abc-proxy-service-openapi.json
+summary: PolySign publishes its AtomicNet documentation from a sandbox-named host and ships an ABC testnet surface
+  (account creation plus a faucet) inside the ABC Proxy Service. There are no published test credentials, test keys
+  or magic values.
+environments:
+- name: sandbox
+  docs: https://docs.polynet.sandbox.polysign.io/
+  api_host: null
+  reachable: false
+  note: The docs host resolves and serves all three specs (HTTP 200) but no AtomicNet node host under polynet.sandbox.polysign.io
+    resolves in DNS as of 2026-08-02, so the sandbox API itself could not be reached.
+testnet:
+  ledger: ABC
+  operations:
+  - method: PUT
+    path: /v1/abc_testnet/
+    summary: Create an account on ABC testnet.
+    spec: openapi/polysign-abc-proxy-service-openapi.json
+  - method: GET
+    path: /v1/abc_testnet/faucet/{abc_account_id}
+    summary: Faucet an account on ABC testnet.
+    spec: openapi/polysign-abc-proxy-service-openapi.json
+test_credentials:
+  published: false
+  note: No test client_id/secret, no key prefixes distinguishing test from live, no magic identifiers and no fixture
+    tooling are published. Access is obtained by contacting PolySign (hello@polysign.io); nothing is invented here.
+health_checks:
+- GET /v1/system/ping
+- GET /v1/system/deep_ping
+- GET /v1/system/version
+- GET /v1/system/circuit_breakers
+utilities:
+- method: GET
+  path: /v1/utils/atomicnet_uid
+  summary: Get an AtomicNet UID.
+  note: Useful for seeding record identifiers when testing.
+- method: GET
+  path: /v1/utils/canonicalize
+  summary: Canonicalize an AtomicNet object record.
+  note: Reproduces the canonical form a record is signed over.

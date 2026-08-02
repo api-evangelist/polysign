@@ -1,0 +1,87 @@
+generated: '2026-08-02'
+method: derived
+source: openapi/polysign-atomicnet-api-server-openapi.json, openapi/polysign-merchant-gate-openapi.json, openapi/polysign-abc-proxy-service-openapi.json,
+  https://docs.polynet.sandbox.polysign.io/
+authentication:
+  style: oauth2-client-credentials
+  token_endpoint: /v1/auth/token
+  token_request: 'POST application/x-www-form-urlencoded, grant_type=client_credentials&scope=participant, with
+    an authorization: Basic <base64 client_id:secret> header'
+  scopes:
+  - participant
+  applied: globally via the document-level security requirement
+  see: authentication/polysign-authentication.yml
+idempotency:
+  supported: false
+  evidence: No Idempotency-Key (or equivalent) header parameter appears in any of the 78 operations, and no idempotency
+    contract is documented.
+  partial_mitigation: Writes are modelled as PUT with a client-supplied record identifier (asset_id, order_id, escrow_auth_id,
+    beneficiary_auth_id, settlement_id, book_transfer_id) inside the request body record, which makes republishing
+    the same record naturally idempotent at the ledger level — but this is a data-model property, not a published
+    idempotency contract.
+  note: No Idempotency pointer is wired in apis.yml because PolySign publishes no idempotency contract.
+http_method_semantics:
+  PUT: used for create/publish/approve/release, not just replace (e.g. PUT /v1/assets/, PUT /v1/orders/, PUT /v1/settlements/)
+  POST: used only for token issuance and for the two authorization request operations
+  GET: reads and list operations
+pagination:
+  supported: false
+  evidence: The /list operations take no limit, offset, cursor or page parameter and return a bare array wrapper
+    (OrderList.orders, AssetList.assets, ...).
+  filters:
+  - param: status
+    in: query
+    used_by: 13
+    note: filters list operations by record status
+  - param: role
+    in: query
+    used_by: 2
+    note: filters escrow/beneficiary authorization lists by the caller role
+  locality: Several list operations have a /list/local sibling that scopes results to records the calling node is
+    involved in.
+request_tracing:
+  header: null
+  field: metadata.request_id
+  note: Correlation is carried in the record body as metadata.request_id, not in an HTTP header. Data-sync requests
+    are tracked with their own request_id path parameter (GET /v1/data_sync/{request_id}).
+metadata:
+  schema: Metadata
+  fields:
+  - request_id
+  - status
+  - expired
+  - commission
+  - exchange_id
+  - book_operator_id
+  - trade_portal_id
+  - real_investor_id
+  - investor_ids
+  note: Every record type carries the same Metadata envelope alongside the signed record.
+record_envelope:
+  shape: '{ record, metadata, signature, schema_version, ...execution fields }'
+  signature: AbcSignature — {abc_account_id, digest, digest_type, signature}
+  note: The record is the signed payload; metadata and execution_status are node-local state around it.
+privacy:
+  one_time_investor_ids: 'Investor identity is pseudonymized on the network: GET /v1/investors/real_investor_id/{real_investor_id}
+    mints a one-time investor ID, and OnetimeIdMap maps one_time_id to real_id only on the nodes entitled to see
+    it.'
+error_envelope:
+  oauth2: '{error, error_description} on 401 from the token endpoint'
+  api: not documented — see errors/polysign-problem-types.yml
+  rfc9457: false
+rate_limiting:
+  documented: false
+  headers: []
+  note: No rate-limit headers or policy are published. GET /v1/system/circuit_breakers exposes server-side circuit-breaker
+    state, which is a load-shedding signal rather than a per-client quota.
+versioning:
+  see: lifecycle/polysign-lifecycle.yml
+  uri: /v1
+  message: schema_version integer per record
+cross_links:
+  authentication: authentication/polysign-authentication.yml
+  scopes: scopes/polysign-scopes.yml
+  errors: errors/polysign-problem-types.yml
+  lifecycle: lifecycle/polysign-lifecycle.yml
+  data_model: data-model/polysign-data-model.yml
+  sandbox: sandbox/polysign-sandbox.yml

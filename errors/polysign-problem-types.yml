@@ -1,0 +1,47 @@
+generated: '2026-08-02'
+method: derived
+source: openapi/polysign-atomicnet-api-server-openapi.json, openapi/polysign-merchant-gate-openapi.json, openapi/polysign-abc-proxy-service-openapi.json
+format: oauth2-error
+rfc9457: false
+coverage:
+  operations_total: 78
+  operations_with_a_documented_4xx_or_5xx: 4
+  documented_status_codes:
+  - 200
+  - 401
+  - 500
+  note: 74 of 78 operations document a 200 response only. There is no published API-level error reference on docs.polynet.sandbox.polysign.io,
+    so no error catalog could be searched to enrich this derivation.
+problems:
+- status: 401
+  title: HTTP 401 Unauthorized
+  format: oauth2-error
+  media_type: application/json;charset=UTF-8
+  schema:
+    error: string (required)
+    error_description: string (required)
+  source_operation: openapi/polysign-atomicnet-api-server-openapi.json#POST /v1/auth/token
+  also_in:
+  - openapi/polysign-merchant-gate-openapi.json#POST /v1/auth/token
+  - openapi/polysign-abc-proxy-service-openapi.json#POST /v1/auth/token
+  note: The RFC 6749 error envelope, not RFC 9457. Returned when the Basic-encoded client_id:secret is rejected
+    or the requested scope is not granted.
+- status: 500
+  title: Failed to create the ABC testnet account
+  format: undocumented-body
+  source_operation: openapi/polysign-abc-proxy-service-openapi.json#PUT /v1/abc_testnet/
+  note: The only 5xx documented anywhere in the three specs; no response schema is attached.
+in_band_status:
+  note: AtomicNet carries workflow failure in-band rather than as HTTP errors. Records expose execution_status (Order,
+    EscrowAuth, BookTransfer), metadata.status and metadata.expired, and each entity has a *_status_updates operation
+    returning dated status transitions.
+  fields:
+  - execution_status
+  - metadata.status
+  - metadata.expired
+  status_update_operations:
+  - GET /v1/order_status_updates/{order_id}
+  - GET /v1/escrow_status_updates/{escrow_auth_id}
+  - GET /v1/beneficiary_status_updates/{beneficiary_auth_id}
+  - GET /v1/settlement_status_updates/{settlement_id}
+  - GET /v1/settlement_confirmation_status_updates/{give_order_id}/{take_order_id}

@@ -1,0 +1,21 @@
+generated: '2026-08-02'
+method: derived
+source: openapi/polysign-abc-proxy-service-openapi.json, openapi/polysign-atomicnet-api-server-openapi.json,
+  openapi/polysign-merchant-gate-openapi.json
+summary:
+  types:
+  - oauth2
+  oauth2_flows:
+  - clientCredentials
+schemes:
+- name: OAuth2
+  type: oauth2
+  flows:
+  - flow: clientCredentials
+    tokenUrl: /v1/auth/token
+    scopes: 1
+  description: OAuth 2.0 with the client credentials grant flow.
+  sources:
+  - openapi/polysign-abc-proxy-service-openapi.json
+  - openapi/polysign-atomicnet-api-server-openapi.json
+  - openapi/polysign-merchant-gate-openapi.json
