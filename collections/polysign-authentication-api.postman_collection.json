@@ -1,0 +1,280 @@
+{
+  "item": [
+    {
+      "id": "80736ee3-d83c-4e7c-88db-fb740968ac77",
+      "name": "authentication",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "cc3a05cb-d584-4609-8aa6-1e650348abfb",
+          "name": "Get access token.",
+          "request": {
+            "name": "Get access token.",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "auth",
+                "token"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Cache or not.",
+                "key": "cache-control",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "grant_type",
+                  "value": "<string>",
+                  "description": "(Required) Grant type"
+                },
+                {
+                  "disabled": false,
+                  "key": "scope",
+                  "value": "<string>",
+                  "description": "(Required) At least one custom scope"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "62e10d63-8f13-4837-baed-be4e53de83e2",
+              "name": "The access token.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "auth",
+                    "token"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Base64 encode the client ID and secret.",
+                    "key": "authorization",
+                    "value": "Basic <Base64 encoded 'client_id:secret'>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Response format.",
+                    "key": "accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Cache or not.",
+                    "key": "cache-control",
+                    "value": "no-cache"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Grant type",
+                        "type": "text/plain"
+                      },
+                      "key": "grant_type",
+                      "value": "client_credentials"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) At least one custom scope",
+                        "type": "text/plain"
+                      },
+                      "key": "scope",
+                      "value": "participant"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"access_token\": \"string\",\n  \"token_type\": \"string\",\n  \"expires_in\": 7230,\n  \"scope\": \"string\",\n  \"refresh_token\": \"string\",\n  \"id_token\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f86fd618-1206-4323-a050-7a034d69d647",
+              "name": "HTTP 401 Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "auth",
+                    "token"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Base64 encode the client ID and secret.",
+                    "key": "authorization",
+                    "value": "Basic <Base64 encoded 'client_id:secret'>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Response format.",
+                    "key": "accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Cache or not.",
+                    "key": "cache-control",
+                    "value": "no-cache"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json;charset=UTF-8"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Grant type",
+                        "type": "text/plain"
+                      },
+                      "key": "grant_type",
+                      "value": "client_credentials"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) At least one custom scope",
+                        "type": "text/plain"
+                      },
+                      "key": "scope",
+                      "value": "participant"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json;charset=UTF-8"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"error_description\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "participant"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "/v1/auth/token"
+      },
+      {
+        "key": "grant_type",
+        "value": "client_credentials"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "2c5587d3-72d5-4f60-98ae-ab62260de1d6",
+    "name": "Polysign Authentication API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Operations tagged authentication across 3 of this provider's published API definitions: polysign-abc-proxy-service-openapi.json, polysign-atomicnet-api-server-openapi.json, polysign-merchant-gate-openapi.json. Each path carries the servers of the definition it was published in.",
+      "type": "text/plain"
+    }
+  }
+}

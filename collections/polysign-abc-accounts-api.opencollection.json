@@ -1,0 +1,82 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "AtomicNet ABC Proxy Service ABC Accounts API",
+    "version": "5fddf272a23655e1582a8a157a8d0ac8e0d517e2"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "client_credentials",
+      "accessTokenUrl": "/v1/auth/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "ABC Accounts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get registered ABC account details by AtomicNet ID.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/abc_accounts/:atomicnet_id",
+            "params": [
+              {
+                "name": "atomicnet_id",
+                "value": "",
+                "type": "path",
+                "description": "Identifier of the AtomicNet Participant."
+              }
+            ]
+          },
+          "docs": "Get registered ABC account details by AtomicNet ID."
+        },
+        {
+          "info": {
+            "name": "Get ABC account information.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/abc_accounts/info/:abc_account_id",
+            "params": [
+              {
+                "name": "abc_account_id",
+                "value": "",
+                "type": "path",
+                "description": "Identifier of the ABC account."
+              }
+            ]
+          },
+          "docs": "Get ABC account information."
+        },
+        {
+          "info": {
+            "name": "Register an abc account.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1/abc_accounts/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Register an abc account."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

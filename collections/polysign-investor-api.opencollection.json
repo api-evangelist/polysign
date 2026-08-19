@@ -1,0 +1,67 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "AtomicNet API Server Investor API",
+    "version": "5ba508e7771507febd8e2056c369fffd575b4272"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "client_credentials",
+      "accessTokenUrl": "/v1/auth/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "investor",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Generate a one time investor ID for the real investor ID.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/investors/real_investor_id/:real_investor_id",
+            "params": [
+              {
+                "name": "real_investor_id",
+                "value": "",
+                "type": "path",
+                "description": "The real investor ID of the investor."
+              }
+            ]
+          },
+          "docs": "Generate a one time investor ID for the real investor ID."
+        },
+        {
+          "info": {
+            "name": "Get the detail of an investor involved by this node by its one time investor id.\n",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/investors/one_time_investor_id/:one_time_investor_id",
+            "params": [
+              {
+                "name": "one_time_investor_id",
+                "value": "",
+                "type": "path",
+                "description": "The one time identifier of the investor."
+              }
+            ]
+          },
+          "docs": "Get the detail of an investor involved by this node by its one time investor id.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

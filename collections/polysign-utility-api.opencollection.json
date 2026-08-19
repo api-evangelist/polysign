@@ -1,0 +1,108 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "AtomicNet API Server Utility API",
+    "version": "5ba508e7771507febd8e2056c369fffd575b4272"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "client_credentials",
+      "accessTokenUrl": "/v1/auth/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "utility",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get an AtomicNet UID.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/utils/atomicnet_uid"
+          },
+          "docs": "Get an AtomicNet UID."
+        },
+        {
+          "info": {
+            "name": "Canonicalize a AtomicNet object record.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/utils/canonicalize",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Canonicalize a AtomicNet object record."
+        },
+        {
+          "info": {
+            "name": "Trigger the data synchronization.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1/data_sync/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Trigger the data synchronization."
+        },
+        {
+          "info": {
+            "name": "Get the status details of sync request by its id.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/data_sync/:request_id",
+            "params": [
+              {
+                "name": "request_id",
+                "value": "",
+                "type": "path",
+                "description": "The identifier of the data sync request."
+              }
+            ]
+          },
+          "docs": "Get the status details of sync request by its id."
+        },
+        {
+          "info": {
+            "name": "Get the list of data sync requests.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/data_sync/list",
+            "params": [
+              {
+                "name": "status",
+                "value": "open",
+                "type": "query",
+                "description": "The specified status to be filtered on."
+              }
+            ]
+          },
+          "docs": "Get the list of data sync requests."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

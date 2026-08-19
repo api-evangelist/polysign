@@ -1,0 +1,243 @@
+{
+  "item": [
+    {
+      "id": "389ed1b0-8f7c-4d07-8f4f-23824742dd92",
+      "name": "investor",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "3170e29e-491b-42be-b67d-c2862f3bceae",
+          "name": "Generate a one time investor ID for the real investor ID.",
+          "request": {
+            "name": "Generate a one time investor ID for the real investor ID.",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "investors",
+                "real_investor_id",
+                ":real_investor_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "real_investor_id",
+                  "description": "(Required) The real investor ID of the investor."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3024a09a-908f-4533-93ec-3a0c6f0753b7",
+              "name": "The mapping of the investor ID.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "investors",
+                    "real_investor_id",
+                    ":real_investor_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "real_investor_id",
+                      "description": "(Required) The real investor ID of the investor."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"one_time_id\": \"string\",\n  \"real_id\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "51d2d682-76df-4b94-b666-90151e771e80",
+          "name": "Get the detail of an investor involved by this node by its one time investor id.\n",
+          "request": {
+            "name": "Get the detail of an investor involved by this node by its one time investor id.\n",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "investors",
+                "one_time_investor_id",
+                ":one_time_investor_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "one_time_investor_id",
+                  "description": "(Required) The one time identifier of the investor."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "bfd84081-d9ff-4b67-9c23-e663d5a3b657",
+              "name": "The investor.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "investors",
+                    "one_time_investor_id",
+                    ":one_time_investor_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "one_time_investor_id",
+                      "description": "(Required) The one time identifier of the investor."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"one_time_investor_ids\": [\n    \"string\",\n    \"string\"\n  ],\n  \"real_investor_id\": \"string\",\n  \"schema_version\": 1\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "participant"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "/v1/auth/token"
+      },
+      {
+        "key": "grant_type",
+        "value": "client_credentials"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "b3590740-e887-4bbe-b7c2-e793465e53b0",
+    "name": "AtomicNet API Server Investor API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The API Server as the interface to interact with AtomicNet",
+      "type": "text/plain"
+    }
+  }
+}

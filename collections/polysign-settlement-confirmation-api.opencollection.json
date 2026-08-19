@@ -1,0 +1,151 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "AtomicNet API Server settlement confirmation API",
+    "version": "5ba508e7771507febd8e2056c369fffd575b4272"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "client_credentials",
+      "accessTokenUrl": "/v1/auth/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "settlement confirmation",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get all settlement confirmations for a settlement_id in AtomicNet.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/settlement_confirmations/:settlement_id",
+            "params": [
+              {
+                "name": "settlement_id",
+                "value": "",
+                "type": "path",
+                "description": "The identifier of the settlement."
+              }
+            ]
+          },
+          "docs": "Get all settlement confirmations for a settlement_id in AtomicNet."
+        },
+        {
+          "info": {
+            "name": "Get the detail of a settlement confirmation on AtomicNet.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/settlement_confirmations/:give_order_id/:take_order_id",
+            "params": [
+              {
+                "name": "give_order_id",
+                "value": "",
+                "type": "path",
+                "description": "The identifier of the give order."
+              },
+              {
+                "name": "take_order_id",
+                "value": "",
+                "type": "path",
+                "description": "The identifier of the take order."
+              }
+            ]
+          },
+          "docs": "Get the detail of a settlement confirmation on AtomicNet."
+        },
+        {
+          "info": {
+            "name": "Get the detail of all settlement confirmations on AtomicNet.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/settlement_confirmations/list",
+            "params": [
+              {
+                "name": "status",
+                "value": "pending",
+                "type": "query",
+                "description": "The specified status to be filtered on."
+              }
+            ]
+          },
+          "docs": "Get the detail of all settlement confirmations on AtomicNet."
+        },
+        {
+          "info": {
+            "name": "Get the detail of all settlement confirmations involved by this node on\nAtomicNet.\n",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/settlement_confirmations/list/local",
+            "params": [
+              {
+                "name": "status",
+                "value": "pending",
+                "type": "query",
+                "description": "The specified status to be filtered on."
+              }
+            ]
+          },
+          "docs": "Get the detail of all settlement confirmations involved by this node on\nAtomicNet.\n"
+        },
+        {
+          "info": {
+            "name": "Release a settlement confirmation on execution after being memorialized on ABC.\n",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1/settlement_confirmations/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Release a settlement confirmation on execution after being memorialized on ABC.\n"
+        },
+        {
+          "info": {
+            "name": "Get all status updates associated with a settlement confirmation by its id.\n",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/settlement_confirmation_status_updates/:give_order_id/:take_order_id",
+            "params": [
+              {
+                "name": "give_order_id",
+                "value": "",
+                "type": "path",
+                "description": "The identifier of the give order."
+              },
+              {
+                "name": "take_order_id",
+                "value": "",
+                "type": "path",
+                "description": "The identifier of the take order."
+              }
+            ]
+          },
+          "docs": "Get all status updates associated with a settlement confirmation by its id.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

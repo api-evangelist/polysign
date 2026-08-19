@@ -1,0 +1,63 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "AtomicNet ABC Proxy Service ABC Memorials API",
+    "version": "5fddf272a23655e1582a8a157a8d0ac8e0d517e2"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "client_credentials",
+      "accessTokenUrl": "/v1/auth/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "ABC Memorials",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Memorialize a digest using abc account for the given AtomicNet id.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1/abc_memorials/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Memorialize a digest using abc account for the given AtomicNet id."
+        },
+        {
+          "info": {
+            "name": "Verify if the digest is memorialized to ABC.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/abc_memorials/:digest",
+            "params": [
+              {
+                "name": "digest",
+                "value": "",
+                "type": "path",
+                "description": "The digest to be checked"
+              }
+            ]
+          },
+          "docs": "Verify if the digest is memorialized to ABC."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

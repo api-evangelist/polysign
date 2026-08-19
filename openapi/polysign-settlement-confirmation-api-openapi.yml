@@ -1,0 +1,383 @@
+openapi: 3.2.0
+info:
+  description: The API Server as the interface to interact with AtomicNet
+  license:
+    name: PolySign License
+    url: https://polysign.io/licenses/LICENSE-1.0
+  title: AtomicNet API Server settlement confirmation API
+  version: 5ba508e7771507febd8e2056c369fffd575b4272
+security:
+- OAuth2:
+  - participant
+tags:
+- name: settlement confirmation
+paths:
+  /v1/settlement_confirmations/{settlement_id}:
+    get:
+      summary: Get all settlement confirmations for a settlement_id in AtomicNet.
+      tags:
+      - settlement confirmation
+      parameters:
+      - name: settlement_id
+        in: path
+        description: The identifier of the settlement.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: The settlement confirmations.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SettlementConfirmationList'
+  /v1/settlement_confirmations/{give_order_id}/{take_order_id}:
+    get:
+      summary: Get the detail of a settlement confirmation on AtomicNet.
+      tags:
+      - settlement confirmation
+      parameters:
+      - name: give_order_id
+        in: path
+        description: The identifier of the give order.
+        required: true
+        schema:
+          type: string
+      - name: take_order_id
+        in: path
+        description: The identifier of the take order.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: The settlement confirmation.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SettlementConfirmation'
+  /v1/settlement_confirmations/list:
+    get:
+      summary: Get the detail of all settlement confirmations on AtomicNet.
+      tags:
+      - settlement confirmation
+      parameters:
+      - name: status
+        in: query
+        description: The specified status to be filtered on.
+        example: pending
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A list of settlement confirmations.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SettlementConfirmationList'
+  /v1/settlement_confirmations/list/local:
+    get:
+      summary: 'Get the detail of all settlement confirmations involved by this node on
+
+        AtomicNet.
+
+        '
+      tags:
+      - settlement confirmation
+      parameters:
+      - name: status
+        in: query
+        description: The specified status to be filtered on.
+        example: pending
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A list of settlement confirmations.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SettlementConfirmationList'
+  /v1/settlement_confirmations/:
+    put:
+      summary: 'Release a settlement confirmation on execution after being memorialized on ABC.
+
+        '
+      tags:
+      - settlement confirmation
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SettlementConfirmation'
+      responses:
+        '200':
+          description: The settlement confirmation.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SettlementConfirmation'
+  /v1/settlement_confirmation_status_updates/{give_order_id}/{take_order_id}:
+    get:
+      summary: 'Get all status updates associated with a settlement confirmation by its id.
+
+        '
+      tags:
+      - settlement confirmation
+      parameters:
+      - name: give_order_id
+        in: path
+        description: The identifier of the give order.
+        required: true
+        schema:
+          type: string
+      - name: take_order_id
+        in: path
+        description: The identifier of the take order.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A list of settlement confirmation status updates.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SettlementConfirmationStatusUpdateList'
+components:
+  schemas:
+    SettlementConfirmationStatusUpdateList:
+      type: object
+      properties:
+        settlement_confirmation_status_updates:
+          type: array
+          items:
+            $ref: '#/components/schemas/SettlementConfirmationStatusUpdate'
+      required:
+      - settlement_confirmation_status_updates
+      description: List of settlement confirmation status update objects.
+    SettlementConfirmationRecord:
+      type: object
+      properties:
+        settlement_id:
+          type: string
+          format: uuid
+          description: Identifier of the settlement this confirmation involved.
+        asset_quantity:
+          type: number
+          description: The quantity of the asset to be traded.
+        beneficiary_auth_id:
+          type: string
+          format: uuid
+          description: Identifier of the beneficiary authorization of the taken order.
+        take_order_id:
+          type: string
+          format: uuid
+          description: Identifier of the taken order.
+        give_order_id:
+          type: string
+          format: uuid
+          description: Identifier of the given order.
+        asset_id:
+          type: string
+          description: Identifier of the asset to be traded.
+        escrow_auth_id:
+          type: string
+          format: uuid
+          description: Identifier of the escrow authorization of the given order.
+      required:
+      - asset_id
+      - asset_quantity
+      - beneficiary_auth_id
+      - escrow_auth_id
+      - give_order_id
+      - settlement_id
+      - take_order_id
+    AbcSignature5:
+      type: object
+      properties:
+        digest_type:
+          type: string
+          description: The ABC digest type.
+        abc_account_id:
+          type: string
+          description: Identifier of the ABC account.
+        signature:
+          type: string
+          description: Signature of the digest.
+        digest:
+          type: string
+          description: The digest to be signed.
+        schema_version:
+          type:
+          - integer
+          - 'null'
+          default: 1
+          description: Version for the message schema.
+      required:
+      - abc_account_id
+      - digest
+      - digest_type
+      - signature
+    OnetimeIdMapList5:
+      type: object
+      properties:
+        id_maps:
+          type: array
+          description: The list of ID mappings.
+          items:
+            $ref: '#/components/schemas/OnetimeIdMap5'
+      description: List of ID mappings.
+    SettlementConfirmation:
+      type: object
+      properties:
+        abc_memorial_digest:
+          type:
+          - string
+          - 'null'
+          default: null
+          description: The digest been memorialized in ABC.
+        metadata:
+          description: Metadata for the associated record object.
+          allOf:
+          - $ref: '#/components/schemas/Metadata5'
+        schema_version:
+          type: integer
+          default: 1
+          description: Version for the message schema.
+        signature:
+          default: null
+          description: Signature for the associated record object.
+          allOf:
+          - $ref: '#/components/schemas/AbcSignature5'
+        abc_memorialization_block:
+          type:
+          - integer
+          - 'null'
+          default: null
+          description: The block height the memorialization localed.
+        record:
+          description: The record object for the settlement confirmation.
+          allOf:
+          - $ref: '#/components/schemas/SettlementConfirmationRecord'
+      required:
+      - record
+    SettlementConfirmationList:
+      type: object
+      properties:
+        settlement_confirmations:
+          type: array
+          items:
+            $ref: '#/components/schemas/SettlementConfirmation'
+      required:
+      - settlement_confirmations
+    OnetimeIdMap5:
+      type: object
+      properties:
+        one_time_id:
+          type: string
+          description: The one time ID.
+        real_id:
+          type: string
+          description: The real ID.
+      required:
+      - one_time_id
+      - real_id
+      description: ID mapping.
+    SettlementConfirmationStatusUpdate:
+      type: object
+      properties:
+        status:
+          type: string
+          description: The most recently updated settlement confirmation status.
+        settlement_confirmation_status_update_id:
+          type: string
+          format: uuid
+          description: Identifier of the settlement confirmation status update.
+        take_order_id:
+          type: string
+          format: uuid
+          description: Identifier of the order providing the credited side of the transfer
+        give_order_id:
+          type: string
+          format: uuid
+          description: Identifier of the order providing the debited side of the transfer
+        last_updated:
+          type: string
+          format: date-time
+          description: ISO formatted timestamp for settlement confirmation last status update.
+      required:
+      - give_order_id
+      - last_updated
+      - settlement_confirmation_status_update_id
+      - status
+      - take_order_id
+      description: Settlement confirmation status update object.
+    Metadata5:
+      type: object
+      properties:
+        investor_ids:
+          default: null
+          description: The investor id mappings.
+          allOf:
+          - $ref: '#/components/schemas/OnetimeIdMapList5'
+        book_operator_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          default: null
+          description: Identifier for the associated Book Operator node.
+        request_id:
+          type:
+          - string
+          - 'null'
+          default: null
+          description: Unique identifier for the request.
+        exchange_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          default: null
+          description: Identifier for the associated Exchange node.
+        status:
+          type:
+          - string
+          - 'null'
+          default: null
+          description: State status for the record object.
+        trade_portal_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          default: null
+          description: Identifier for the associated Trade Portal node.
+        commission:
+          type:
+          - number
+          - 'null'
+          default: null
+          description: Order commissison.
+        real_investor_id:
+          type:
+          - string
+          - 'null'
+          default: null
+          description: Original identifier for the investor.
+        expired:
+          type:
+          - boolean
+          - 'null'
+          default: false
+          description: Expiry status for the record object.
+  securitySchemes:
+    OAuth2:
+      type: oauth2
+      description: OAuth 2.0 with the client credentials grant flow.
+      flows:
+        clientCredentials:
+          tokenUrl: /v1/auth/token
+          scopes:
+            participant: Grants access to participant.

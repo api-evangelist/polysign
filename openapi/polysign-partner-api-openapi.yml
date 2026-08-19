@@ -1,0 +1,142 @@
+openapi: 3.2.0
+info:
+  description: The API Server as the interface to interact with AtomicNet
+  license:
+    name: PolySign License
+    url: https://polysign.io/licenses/LICENSE-1.0
+  title: AtomicNet API Server Partner API
+  version: 5ba508e7771507febd8e2056c369fffd575b4272
+security:
+- OAuth2:
+  - participant
+tags:
+- name: partner
+paths:
+  /v1/partners/{atomicnet_id}:
+    get:
+      summary: Get the detail of a partner registered on this node by its id.
+      tags:
+      - partner
+      parameters:
+      - name: atomicnet_id
+        in: path
+        description: The identifier of the partner.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: The partner.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Partner'
+  /v1/partners/list:
+    get:
+      summary: Get the detail of all partners registered on this node.
+      tags:
+      - partner
+      responses:
+        '200':
+          description: The partners.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PartnerList'
+    put:
+      summary: Register a list of new partners to this node.
+      tags:
+      - partner
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PartnerList'
+      responses:
+        '200':
+          description: Empty
+  /v1/partners/:
+    put:
+      summary: Register a new partner to this node.
+      tags:
+      - partner
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Partner'
+      responses:
+        '200':
+          description: Empty
+components:
+  schemas:
+    Partner:
+      type: object
+      properties:
+        role:
+          type:
+          - string
+          - 'null'
+          default: null
+          description: Partner ABC account role.
+        private_key:
+          type:
+          - string
+          - 'null'
+          default: null
+          description: Partner ABC account private key.
+        public_key:
+          type:
+          - string
+          - 'null'
+          default: null
+          description: Partner ABC account piblic key.
+        status:
+          type:
+          - string
+          - 'null'
+          default: null
+          description: Partner status.
+        abc_account_id:
+          type:
+          - string
+          - 'null'
+          default: null
+          description: Partner ABC account ID.
+        atomicnet_id:
+          type: string
+          format: uuid
+          description: Identifier of the partner.
+        partner_name:
+          type:
+          - string
+          - 'null'
+          default: null
+          description: Partner name.
+        schema_version:
+          type: integer
+          default: 1
+          description: Version for the message schema.
+      required:
+      - atomicnet_id
+      description: Partner object.
+    PartnerList:
+      type: object
+      properties:
+        partners:
+          type: array
+          description: The list of partners.
+          items:
+            $ref: '#/components/schemas/Partner'
+      required:
+      - partners
+      description: List of partner registration object.
+  securitySchemes:
+    OAuth2:
+      type: oauth2
+      description: OAuth 2.0 with the client credentials grant flow.
+      flows:
+        clientCredentials:
+          tokenUrl: /v1/auth/token
+          scopes:
+            participant: Grants access to participant.

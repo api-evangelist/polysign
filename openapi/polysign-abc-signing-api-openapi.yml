@@ -1,0 +1,141 @@
+openapi: 3.2.0
+info:
+  description: This document lists all AtomicNet ABC Proxy Service APIs for development use.
+  license:
+    name: PolySign License
+    url: https://polysign.io/licenses/LICENSE-1.0
+  title: AtomicNet ABC Proxy Service ABC Signing API
+  version: 5fddf272a23655e1582a8a157a8d0ac8e0d517e2
+security:
+- OAuth2:
+  - participant
+tags:
+- name: ABC Signing
+paths:
+  /v1/abc_signing/:
+    put:
+      summary: Sign a digest using ABC account for the given AtomicNet id.
+      tags:
+      - ABC Signing
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AbcSigningRequest'
+      responses:
+        '200':
+          description: The signature for the request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AbcSignature1'
+    get:
+      summary: Verify the signature.
+      tags:
+      - ABC Signing
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ABCVerifySignatureRequest'
+      responses:
+        '200':
+          description: Empty
+components:
+  schemas:
+    ABCVerifySignatureRequest:
+      type: object
+      properties:
+        digest:
+          type: string
+          description: The expected data digest that was signed.
+        signature:
+          description: Signature for the associated digest.
+          allOf:
+          - $ref: '#/components/schemas/AbcSignature'
+        atomicnet_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          default: null
+          description: Identifier of the AtomicNet Participant. If specified, will be checked to belong to the ABC account id.
+      required:
+      - digest
+      - signature
+      description: Dataclass for ABC verify signature request schema.
+    AbcSignature1:
+      type: object
+      properties:
+        schema_version:
+          type:
+          - integer
+          - 'null'
+          default: 1
+          description: Version for the message schema.
+        digest_type:
+          type: string
+          description: The ABC digest type.
+        signature:
+          type: string
+          description: Signature of the digest.
+        digest:
+          type: string
+          description: The digest to be signed.
+        abc_account_id:
+          type: string
+          description: Identifier of the ABC account.
+      required:
+      - abc_account_id
+      - digest
+      - digest_type
+      - signature
+    AbcSigningRequest:
+      type: object
+      properties:
+        digest:
+          type: string
+          description: The data digest to be signed.
+        atomicnet_id:
+          type: string
+          format: uuid
+          description: Identifier of the AtomicNet node.
+      required:
+      - atomicnet_id
+      - digest
+      description: ABC digest signing request object.
+    AbcSignature:
+      type: object
+      properties:
+        schema_version:
+          type:
+          - integer
+          - 'null'
+          default: 1
+          description: Version for the message schema.
+        digest_type:
+          type: string
+          description: The ABC digest type.
+        signature:
+          type: string
+          description: Signature of the digest.
+        digest:
+          type: string
+          description: The digest to be signed.
+        abc_account_id:
+          type: string
+          description: Identifier of the ABC account.
+      required:
+      - abc_account_id
+      - digest
+      - digest_type
+      - signature
+  securitySchemes:
+    OAuth2:
+      type: oauth2
+      description: OAuth 2.0 with the client credentials grant flow.
+      flows:
+        clientCredentials:
+          tokenUrl: /v1/auth/token
+          scopes:
+            participant: Grants access to participant.

@@ -1,0 +1,650 @@
+{
+  "item": [
+    {
+      "id": "eefd0797-2447-48b7-9f34-9c2d71ade7ae",
+      "name": "settlement confirmation",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "86d4ea6d-c38d-4a0d-85fb-58bee906d389",
+          "name": "Get all settlement confirmations for a settlement_id in AtomicNet.",
+          "request": {
+            "name": "Get all settlement confirmations for a settlement_id in AtomicNet.",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "settlement_confirmations",
+                ":settlement_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "settlement_id",
+                  "description": "(Required) The identifier of the settlement."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "cd8fb4b8-5678-46eb-bd52-e9fbff9cc62a",
+              "name": "The settlement confirmations.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "settlement_confirmations",
+                    ":settlement_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "settlement_id",
+                      "description": "(Required) The identifier of the settlement."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"settlement_confirmations\": [\n    {\n      \"record\": {\n        \"asset_id\": \"string\",\n        \"asset_quantity\": 6854.354324725539,\n        \"beneficiary_auth_id\": \"f57bb3e5-60e9-5672-fc2d-6723fde50f78\",\n        \"escrow_auth_id\": \"14d9683c-806b-20d8-a810-e4edc433aeda\",\n        \"give_order_id\": \"2dbe4936-2585-c619-32dd-dc56e3f62b8a\",\n        \"settlement_id\": \"05670d73-f713-a8e9-00c6-10671ab8243a\",\n        \"take_order_id\": \"12b2338e-fc66-dc21-6c9b-7dd4d0eba6fe\"\n      },\n      \"abc_memorial_digest\": null,\n      \"metadata\": {\n        \"investor_ids\": null,\n        \"book_operator_id\": null,\n        \"request_id\": null,\n        \"exchange_id\": null,\n        \"status\": null,\n        \"trade_portal_id\": null,\n        \"commission\": null,\n        \"real_investor_id\": null,\n        \"expired\": false\n      },\n      \"schema_version\": 1,\n      \"signature\": null,\n      \"abc_memorialization_block\": null\n    },\n    {\n      \"record\": {\n        \"asset_id\": \"string\",\n        \"asset_quantity\": 4899.727109333811,\n        \"beneficiary_auth_id\": \"1b7c199b-2456-499f-0d74-9c53e01db313\",\n        \"escrow_auth_id\": \"b9ccb330-008e-724c-a51d-0519d2622371\",\n        \"give_order_id\": \"5805ff2f-ccd5-f9a9-e2ae-083d46a4bd67\",\n        \"settlement_id\": \"be47b6c2-e540-7bc6-4bf3-e9b81e3c9b2f\",\n        \"take_order_id\": \"a90a8570-175d-2c83-232c-97738fd3d077\"\n      },\n      \"abc_memorial_digest\": null,\n      \"metadata\": {\n        \"investor_ids\": null,\n        \"book_operator_id\": null,\n        \"request_id\": null,\n        \"exchange_id\": null,\n        \"status\": null,\n        \"trade_portal_id\": null,\n        \"commission\": null,\n        \"real_investor_id\": null,\n        \"expired\": false\n      },\n      \"schema_version\": 1,\n      \"signature\": null,\n      \"abc_memorialization_block\": null\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "873edc01-a35e-445d-ad11-fc9e03654734",
+          "name": "Get the detail of a settlement confirmation on AtomicNet.",
+          "request": {
+            "name": "Get the detail of a settlement confirmation on AtomicNet.",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "settlement_confirmations",
+                ":give_order_id",
+                ":take_order_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "give_order_id",
+                  "description": "(Required) The identifier of the give order."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "take_order_id",
+                  "description": "(Required) The identifier of the take order."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d2e3a7f6-1031-486c-b6af-855d5bcb0a03",
+              "name": "The settlement confirmation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "settlement_confirmations",
+                    ":give_order_id",
+                    ":take_order_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "give_order_id",
+                      "description": "(Required) The identifier of the give order."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "take_order_id",
+                      "description": "(Required) The identifier of the take order."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"record\": {\n    \"asset_id\": \"string\",\n    \"asset_quantity\": 8486.30781845251,\n    \"beneficiary_auth_id\": \"ce888880-044f-6650-c9e0-e6938ad61551\",\n    \"escrow_auth_id\": \"57aeab69-54fd-3c48-2a60-e338c26903d6\",\n    \"give_order_id\": \"b6fc260f-2742-9c67-08f8-6fec9cd4cf6f\",\n    \"settlement_id\": \"e772f58a-a584-d7a7-3fc2-7553de880fda\",\n    \"take_order_id\": \"48462305-9253-d17d-571a-c391d3b2c7df\"\n  },\n  \"abc_memorial_digest\": null,\n  \"metadata\": {\n    \"investor_ids\": null,\n    \"book_operator_id\": null,\n    \"request_id\": null,\n    \"exchange_id\": null,\n    \"status\": null,\n    \"trade_portal_id\": null,\n    \"commission\": null,\n    \"real_investor_id\": null,\n    \"expired\": false\n  },\n  \"schema_version\": 1,\n  \"signature\": null,\n  \"abc_memorialization_block\": null\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "26f026fa-3c20-4937-af61-f581dbbd3a2e",
+          "name": "Get the detail of all settlement confirmations on AtomicNet.",
+          "request": {
+            "name": "Get the detail of all settlement confirmations on AtomicNet.",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "settlement_confirmations",
+                "list"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "The specified status to be filtered on."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "69f66e18-2979-4201-aad1-2619103fb4aa",
+              "name": "A list of settlement confirmations.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "settlement_confirmations",
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "pending"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"settlement_confirmations\": [\n    {\n      \"record\": {\n        \"asset_id\": \"string\",\n        \"asset_quantity\": 3474.200913506784,\n        \"beneficiary_auth_id\": \"2e0b00f8-29de-5759-d138-8becad3b727c\",\n        \"escrow_auth_id\": \"ac1e36ed-cd83-9c6a-4804-235ddbb64e48\",\n        \"give_order_id\": \"03084010-dd83-dc6d-0160-7cdd49b058b2\",\n        \"settlement_id\": \"216cca51-fc62-93d9-da1d-14025b84097a\",\n        \"take_order_id\": \"49de903e-a670-e8c5-0334-e26a29102ba8\"\n      },\n      \"abc_memorial_digest\": null,\n      \"metadata\": {\n        \"investor_ids\": null,\n        \"book_operator_id\": null,\n        \"request_id\": null,\n        \"exchange_id\": null,\n        \"status\": null,\n        \"trade_portal_id\": null,\n        \"commission\": null,\n        \"real_investor_id\": null,\n        \"expired\": false\n      },\n      \"schema_version\": 1,\n      \"signature\": null,\n      \"abc_memorialization_block\": null\n    },\n    {\n      \"record\": {\n        \"asset_id\": \"string\",\n        \"asset_quantity\": 7209.746074192575,\n        \"beneficiary_auth_id\": \"655c88d8-4e40-f85c-0344-515c56f0b8c2\",\n        \"escrow_auth_id\": \"9181bc62-2dc0-987a-a468-b46a3c84b154\",\n        \"give_order_id\": \"ff0452b5-1fa2-02f2-103b-5b9cee46dfdd\",\n        \"settlement_id\": \"d8327ffa-e9eb-5ba8-cab5-c26dbb5ee2ac\",\n        \"take_order_id\": \"18f2d01a-ae19-60d2-d334-7583b8163296\"\n      },\n      \"abc_memorial_digest\": null,\n      \"metadata\": {\n        \"investor_ids\": null,\n        \"book_operator_id\": null,\n        \"request_id\": null,\n        \"exchange_id\": null,\n        \"status\": null,\n        \"trade_portal_id\": null,\n        \"commission\": null,\n        \"real_investor_id\": null,\n        \"expired\": false\n      },\n      \"schema_version\": 1,\n      \"signature\": null,\n      \"abc_memorialization_block\": null\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "810829e5-d7e7-4615-a5ed-ed16ec5e0ddb",
+          "name": "Get the detail of all settlement confirmations involved by this node on\nAtomicNet.\n",
+          "request": {
+            "name": "Get the detail of all settlement confirmations involved by this node on\nAtomicNet.\n",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "settlement_confirmations",
+                "list",
+                "local"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "The specified status to be filtered on."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7c75a262-ca2c-4184-b1f6-c0a14276e5e5",
+              "name": "A list of settlement confirmations.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "settlement_confirmations",
+                    "list",
+                    "local"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "pending"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"settlement_confirmations\": [\n    {\n      \"record\": {\n        \"asset_id\": \"string\",\n        \"asset_quantity\": 3474.200913506784,\n        \"beneficiary_auth_id\": \"2e0b00f8-29de-5759-d138-8becad3b727c\",\n        \"escrow_auth_id\": \"ac1e36ed-cd83-9c6a-4804-235ddbb64e48\",\n        \"give_order_id\": \"03084010-dd83-dc6d-0160-7cdd49b058b2\",\n        \"settlement_id\": \"216cca51-fc62-93d9-da1d-14025b84097a\",\n        \"take_order_id\": \"49de903e-a670-e8c5-0334-e26a29102ba8\"\n      },\n      \"abc_memorial_digest\": null,\n      \"metadata\": {\n        \"investor_ids\": null,\n        \"book_operator_id\": null,\n        \"request_id\": null,\n        \"exchange_id\": null,\n        \"status\": null,\n        \"trade_portal_id\": null,\n        \"commission\": null,\n        \"real_investor_id\": null,\n        \"expired\": false\n      },\n      \"schema_version\": 1,\n      \"signature\": null,\n      \"abc_memorialization_block\": null\n    },\n    {\n      \"record\": {\n        \"asset_id\": \"string\",\n        \"asset_quantity\": 7209.746074192575,\n        \"beneficiary_auth_id\": \"655c88d8-4e40-f85c-0344-515c56f0b8c2\",\n        \"escrow_auth_id\": \"9181bc62-2dc0-987a-a468-b46a3c84b154\",\n        \"give_order_id\": \"ff0452b5-1fa2-02f2-103b-5b9cee46dfdd\",\n        \"settlement_id\": \"d8327ffa-e9eb-5ba8-cab5-c26dbb5ee2ac\",\n        \"take_order_id\": \"18f2d01a-ae19-60d2-d334-7583b8163296\"\n      },\n      \"abc_memorial_digest\": null,\n      \"metadata\": {\n        \"investor_ids\": null,\n        \"book_operator_id\": null,\n        \"request_id\": null,\n        \"exchange_id\": null,\n        \"status\": null,\n        \"trade_portal_id\": null,\n        \"commission\": null,\n        \"real_investor_id\": null,\n        \"expired\": false\n      },\n      \"schema_version\": 1,\n      \"signature\": null,\n      \"abc_memorialization_block\": null\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "404b95d1-797b-4e7a-8133-a31b748aa07d",
+          "name": "Release a settlement confirmation on execution after being memorialized on ABC.\n",
+          "request": {
+            "name": "Release a settlement confirmation on execution after being memorialized on ABC.\n",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "settlement_confirmations",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"record\": {\n    \"asset_id\": \"<string>\",\n    \"asset_quantity\": \"<number>\",\n    \"beneficiary_auth_id\": \"<uuid>\",\n    \"escrow_auth_id\": \"<uuid>\",\n    \"give_order_id\": \"<uuid>\",\n    \"settlement_id\": \"<uuid>\",\n    \"take_order_id\": \"<uuid>\"\n  },\n  \"abc_memorial_digest\": null,\n  \"metadata\": {\n    \"investor_ids\": null,\n    \"book_operator_id\": null,\n    \"request_id\": null,\n    \"exchange_id\": null,\n    \"status\": null,\n    \"trade_portal_id\": null,\n    \"commission\": null,\n    \"real_investor_id\": null,\n    \"expired\": false\n  },\n  \"schema_version\": 1,\n  \"signature\": null,\n  \"abc_memorialization_block\": null\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d037feb4-f644-438c-b243-579253711795",
+              "name": "The settlement confirmation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "settlement_confirmations",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"record\": {\n    \"asset_id\": \"<string>\",\n    \"asset_quantity\": \"<number>\",\n    \"beneficiary_auth_id\": \"<uuid>\",\n    \"escrow_auth_id\": \"<uuid>\",\n    \"give_order_id\": \"<uuid>\",\n    \"settlement_id\": \"<uuid>\",\n    \"take_order_id\": \"<uuid>\"\n  },\n  \"abc_memorial_digest\": null,\n  \"metadata\": {\n    \"investor_ids\": null,\n    \"book_operator_id\": null,\n    \"request_id\": null,\n    \"exchange_id\": null,\n    \"status\": null,\n    \"trade_portal_id\": null,\n    \"commission\": null,\n    \"real_investor_id\": null,\n    \"expired\": false\n  },\n  \"schema_version\": 1,\n  \"signature\": null,\n  \"abc_memorialization_block\": null\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"record\": {\n    \"asset_id\": \"<string>\",\n    \"asset_quantity\": \"<number>\",\n    \"beneficiary_auth_id\": \"<uuid>\",\n    \"escrow_auth_id\": \"<uuid>\",\n    \"give_order_id\": \"<uuid>\",\n    \"settlement_id\": \"<uuid>\",\n    \"take_order_id\": \"<uuid>\"\n  },\n  \"abc_memorial_digest\": null,\n  \"metadata\": {\n    \"investor_ids\": null,\n    \"book_operator_id\": null,\n    \"request_id\": null,\n    \"exchange_id\": null,\n    \"status\": null,\n    \"trade_portal_id\": null,\n    \"commission\": null,\n    \"real_investor_id\": null,\n    \"expired\": false\n  },\n  \"schema_version\": 1,\n  \"signature\": null,\n  \"abc_memorialization_block\": null\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c9ba607f-5b62-4052-a3d4-40f5a7425a35",
+          "name": "Get all status updates associated with a settlement confirmation by its id.\n",
+          "request": {
+            "name": "Get all status updates associated with a settlement confirmation by its id.\n",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "settlement_confirmation_status_updates",
+                ":give_order_id",
+                ":take_order_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "give_order_id",
+                  "description": "(Required) The identifier of the give order."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "take_order_id",
+                  "description": "(Required) The identifier of the take order."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b1ab3980-4393-43eb-b8f1-3b6a361d5250",
+              "name": "A list of settlement confirmation status updates.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "settlement_confirmation_status_updates",
+                    ":give_order_id",
+                    ":take_order_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "give_order_id",
+                      "description": "(Required) The identifier of the give order."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "take_order_id",
+                      "description": "(Required) The identifier of the take order."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"settlement_confirmation_status_updates\": [\n    {\n      \"give_order_id\": \"c0b60c1e-c4a9-0938-6a48-a1f05cc7a5db\",\n      \"last_updated\": \"1968-10-04T20:15:35.011Z\",\n      \"settlement_confirmation_status_update_id\": \"51b9fd4f-30c2-6f6c-fea7-9d4166ded823\",\n      \"status\": \"string\",\n      \"take_order_id\": \"07a50a5e-588b-1c78-202d-92cfa6511ae6\"\n    },\n    {\n      \"give_order_id\": \"d8ed8b21-f802-8133-d8c6-15075f32d204\",\n      \"last_updated\": \"2020-11-15T03:51:19.439Z\",\n      \"settlement_confirmation_status_update_id\": \"0baefa7e-8063-d1a5-8a6b-70b19e2cc24f\",\n      \"status\": \"string\",\n      \"take_order_id\": \"51585fe0-a61b-5cfa-49ba-7488e98659d4\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "participant"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "/v1/auth/token"
+      },
+      {
+        "key": "grant_type",
+        "value": "client_credentials"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "454f901f-bfb6-4c81-ab8e-766f60ed9477",
+    "name": "AtomicNet API Server settlement confirmation API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The API Server as the interface to interact with AtomicNet",
+      "type": "text/plain"
+    }
+  }
+}

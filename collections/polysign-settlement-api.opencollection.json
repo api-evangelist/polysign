@@ -1,0 +1,120 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "AtomicNet API Server Settlement API",
+    "version": "5ba508e7771507febd8e2056c369fffd575b4272"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "client_credentials",
+      "accessTokenUrl": "/v1/auth/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "settlement",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Publish a settlement to AtomicNet after being memorialized on ABC.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1/settlements/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Publish a settlement to AtomicNet after being memorialized on ABC."
+        },
+        {
+          "info": {
+            "name": "Get the detail of a settlement on AtomicNet by its id.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/settlements/:settlement_id",
+            "params": [
+              {
+                "name": "settlement_id",
+                "value": "",
+                "type": "path",
+                "description": "The identifier of the settlement."
+              }
+            ]
+          },
+          "docs": "Get the detail of a settlement on AtomicNet by its id."
+        },
+        {
+          "info": {
+            "name": "Get The detail of all settlements on AtomicNet.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/settlements/list",
+            "params": [
+              {
+                "name": "status",
+                "value": "pending",
+                "type": "query",
+                "description": "The specified status to be filtered on."
+              }
+            ]
+          },
+          "docs": "Get The detail of all settlements on AtomicNet."
+        },
+        {
+          "info": {
+            "name": "Get The detail of all settlements for an order on AtomicNet.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/settlements/order/:order_id",
+            "params": [
+              {
+                "name": "order_id",
+                "value": "",
+                "type": "path",
+                "description": "The identifier of the order."
+              }
+            ]
+          },
+          "docs": "Get The detail of all settlements for an order on AtomicNet."
+        },
+        {
+          "info": {
+            "name": "Get all status updates associated with a settlement by its id.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/settlement_status_updates/:settlement_id",
+            "params": [
+              {
+                "name": "settlement_id",
+                "value": "",
+                "type": "path",
+                "description": "The identifier of the settlement."
+              }
+            ]
+          },
+          "docs": "Get all status updates associated with a settlement by its id."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

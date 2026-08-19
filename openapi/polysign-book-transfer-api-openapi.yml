@@ -1,0 +1,399 @@
+openapi: 3.2.0
+info:
+  title: Polysign book transfer API
+  license:
+    name: PolySign License
+    url: https://polysign.io/licenses/LICENSE-1.0
+  version: '1.0'
+  description: 'Operations tagged book transfer across 2 of this provider''s published API definitions: polysign-atomicnet-api-server-openapi.json, polysign-merchant-gate-openapi.json. Each path carries the servers of the definition it was published in.'
+security:
+- OAuth2:
+  - participant
+tags:
+- name: book transfer
+paths:
+  /v1/book_transfers/:
+    put:
+      summary: 'Publish a new book transfer to AtomicNet.
+
+        The authorizations will be acquired if not provided before publishing.
+
+        '
+      tags:
+      - book transfer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BookTransfer'
+      responses:
+        '200':
+          description: The book transfer.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BookTransfer'
+  /v1/book_transfers/{book_transfer_id}:
+    get:
+      summary: Get the detail of a book transfer on AtomicNet by its id.
+      tags:
+      - book transfer
+      parameters:
+      - name: book_transfer_id
+        in: path
+        description: The identifier of the book transfer.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: The book transfer.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BookTransfer'
+  /v1/book_transfers/list:
+    get:
+      summary: Get the detail of all book transfers on AtomicNet.
+      tags:
+      - book transfer
+      parameters:
+      - name: status
+        in: query
+        description: The specified status to be filtered on.
+        example: pending
+        schema:
+          type: string
+      - name: role
+        in: query
+        description: 'The specified role to be filtered on.
+
+          AtomicNet node will determine if a book transfer is local by the role it is
+
+          playing.
+
+          '
+        example: trade_portal
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A list of book transfers.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BookTransferList'
+  /v1/book_transfers/list/local:
+    get:
+      summary: 'Get the detail of all book transfers involved by this node on
+
+        AtomicNet.
+
+        '
+      tags:
+      - book transfer
+      parameters:
+      - name: status
+        in: query
+        description: The specified status to be filtered on.
+        example: pending
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A list of book transfers.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BookTransferList'
+  /v1/book_transfers/submit:
+    put:
+      summary: 'Submit book transfer to AtomicNet node.
+
+        '
+      tags:
+      - book transfer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BookTransfer_2'
+      responses:
+        '200':
+          description: The order.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BookTransfer_2'
+components:
+  schemas:
+    BookTransfer:
+      type: object
+      properties:
+        execution_status:
+          type:
+          - string
+          - 'null'
+          default: null
+          description: Execution status for the book_transfer object.
+        metadata:
+          description: Metadata for the associated record object.
+          allOf:
+          - $ref: '#/components/schemas/Metadata6'
+        schema_version:
+          type: integer
+          default: 1
+          description: Version for the message schema.
+        beneficiary_auth_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          default: null
+          description: Identifier of the pre-approved beneficiary authorization.
+        signature:
+          default: null
+          description: Signature for the associated record object.
+          allOf:
+          - $ref: '#/components/schemas/AbcSignature6'
+        record:
+          description: BookTransfer record.
+          allOf:
+          - $ref: '#/components/schemas/BookTransferRecord'
+        escrow_auth_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          default: null
+          description: Identifier of the pre-approved escrow authorization.
+      required:
+      - record
+    OnetimeIdMap7:
+      type: object
+      properties:
+        one_time_id:
+          type: string
+          description: The one time ID.
+        real_id:
+          type: string
+          description: The real ID.
+      required:
+      - one_time_id
+      - real_id
+      description: ID mapping.
+    Metadata6:
+      type: object
+      properties:
+        investor_ids:
+          default: null
+          description: The investor id mappings.
+          allOf:
+          - $ref: '#/components/schemas/OnetimeIdMapList6'
+        book_operator_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          default: null
+          description: Identifier for the associated Book Operator node.
+        request_id:
+          type:
+          - string
+          - 'null'
+          default: null
+          description: Unique identifier for the request.
+        exchange_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          default: null
+          description: Identifier for the associated Exchange node.
+        status:
+          type:
+          - string
+          - 'null'
+          default: null
+          description: State status for the record object.
+        trade_portal_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          default: null
+          description: Identifier for the associated Trade Portal node.
+        commission:
+          type:
+          - number
+          - 'null'
+          default: null
+          description: Order commissison.
+        real_investor_id:
+          type:
+          - string
+          - 'null'
+          default: null
+          description: Original identifier for the investor.
+        expired:
+          type:
+          - boolean
+          - 'null'
+          default: false
+          description: Expiry status for the record object.
+    BookTransferList:
+      type: object
+      properties:
+        book_transfers:
+          type: array
+          items:
+            $ref: '#/components/schemas/BookTransfer'
+      required:
+      - book_transfers
+      description: List of complete book_transfers object.
+    AbcSignature:
+      type: object
+      properties:
+        schema_version:
+          type:
+          - integer
+          - 'null'
+          default: 1
+          description: Version for the message schema.
+        abc_account_id:
+          type: string
+          description: Identifier of the ABC account.
+        signature:
+          type: string
+          description: Signature of the digest.
+        digest_type:
+          type: string
+          description: The ABC digest type.
+        digest:
+          type: string
+          description: The digest to be signed.
+      required:
+      - abc_account_id
+      - digest
+      - digest_type
+      - signature
+    BookTransferRecord:
+      type: object
+      properties:
+        book_transfer_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          default: null
+          description: Identifier of the book_transfer.
+        quantity:
+          type: number
+          description: Quantity of the asset to transfer.
+        take_investor_id:
+          type: string
+          description: Identifier of the investor taking the asset.
+        asset_id:
+          type: string
+          description: Identifier of the asset to transfer.
+        give_investor_id:
+          type: string
+          description: Identifier of the investor giving the asset.
+      required:
+      - asset_id
+      - give_investor_id
+      - quantity
+      - take_investor_id
+    OnetimeIdMapList6:
+      type: object
+      properties:
+        id_maps:
+          type: array
+          description: The list of ID mappings.
+          items:
+            $ref: '#/components/schemas/OnetimeIdMap7'
+      description: List of ID mappings.
+    AbcSignature6:
+      type: object
+      properties:
+        digest_type:
+          type: string
+          description: The ABC digest type.
+        abc_account_id:
+          type: string
+          description: Identifier of the ABC account.
+        signature:
+          type: string
+          description: Signature of the digest.
+        digest:
+          type: string
+          description: The digest to be signed.
+        schema_version:
+          type:
+          - integer
+          - 'null'
+          default: 1
+          description: Version for the message schema.
+      required:
+      - abc_account_id
+      - digest
+      - digest_type
+      - signature
+    BookTransfer_2:
+      type: object
+      properties:
+        record:
+          description: BookTransfer record.
+          allOf:
+          - $ref: '#/components/schemas/BookTransferRecord_2'
+        signature:
+          default: null
+          description: Signature for the associated record object. Not required to submit a book transfer.
+          allOf:
+          - $ref: '#/components/schemas/AbcSignature'
+        escrow_auth_id:
+          type:
+          - string
+          - 'null'
+          default: null
+          description: UUID of the pre-approved escrow authorization.
+      required:
+      - record
+    BookTransferRecord_2:
+      type: object
+      properties:
+        asset_id:
+          type: string
+          description: Identifier of the asset to transfer.
+        quantity:
+          type: string
+          description: Quantity of the asset to transfer.
+        book_transfer_id:
+          type:
+          - string
+          - 'null'
+          default: null
+          description: UUID of the boot transfer. Not required to submit a book transfer.
+        take_investor_id:
+          type: string
+          description: Identifier of the investor taking the asset.
+        give_investor_id:
+          type: string
+          description: Identifier of the investor giving the asset.
+      required:
+      - asset_id
+      - give_investor_id
+      - quantity
+      - take_investor_id
+  securitySchemes:
+    OAuth2:
+      type: oauth2
+      description: OAuth 2.0 with the client credentials grant flow.
+      flows:
+        clientCredentials:
+          tokenUrl: /v1/auth/token
+          scopes:
+            participant: Grants access to participant.
+x-refined-from:
+- polysign-atomicnet-api-server-openapi.json
+- polysign-merchant-gate-openapi.json

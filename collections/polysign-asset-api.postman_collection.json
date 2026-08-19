@@ -1,0 +1,591 @@
+{
+  "item": [
+    {
+      "id": "4df7290d-b702-4137-98b7-f230c74502d8",
+      "name": "asset",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e47a2c24-13f7-403f-ace1-188a8e3a9c38",
+          "name": "Get the detail of the registered asset on AtomicNet by its id.",
+          "request": {
+            "name": "Get the detail of the registered asset on AtomicNet by its id.",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "assets",
+                ":asset_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "asset_id",
+                  "description": "(Required) The identifier of the asset."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5ca8baa1-decd-44a0-abe7-67323a59df39",
+              "name": "The registered asset.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "assets",
+                    ":asset_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "asset_id",
+                      "description": "(Required) The identifier of the asset."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"record\": {\n    \"asset_id\": \"string\",\n    \"book_operator_id\": \"4a7a07cc-51d6-90a8-eb59-47f5f655fab2\",\n    \"exchange_id\": \"5e493f96-3877-c7a3-e09b-43e317b842a4\",\n    \"precision\": 4218,\n    \"status\": \"string\"\n  },\n  \"metadata\": {\n    \"investor_ids\": null,\n    \"book_operator_id\": null,\n    \"request_id\": null,\n    \"exchange_id\": null,\n    \"status\": null,\n    \"trade_portal_id\": null,\n    \"commission\": null,\n    \"real_investor_id\": null,\n    \"expired\": false\n  },\n  \"partner_asset_id\": null,\n  \"signature\": null,\n  \"schema_version\": 1\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7a4bcdec-381c-4567-98cc-9e034c79acda",
+          "name": "Get the detail of all registered assets on AtomicNet.",
+          "request": {
+            "name": "Get the detail of all registered assets on AtomicNet.",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "assets",
+                "list"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e7cd5578-247a-4d7f-ad89-7ccfe41d9cf7",
+              "name": "A list of registered assets.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "assets",
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"assets\": [\n    {\n      \"record\": {\n        \"asset_id\": \"string\",\n        \"book_operator_id\": \"12b79997-f222-f4bd-4fa7-ef47d580d948\",\n        \"exchange_id\": \"520e680b-e1a8-c58f-b96f-b2ac208f6031\",\n        \"precision\": 842,\n        \"status\": \"string\"\n      },\n      \"metadata\": {\n        \"investor_ids\": null,\n        \"book_operator_id\": null,\n        \"request_id\": null,\n        \"exchange_id\": null,\n        \"status\": null,\n        \"trade_portal_id\": null,\n        \"commission\": null,\n        \"real_investor_id\": null,\n        \"expired\": false\n      },\n      \"partner_asset_id\": null,\n      \"signature\": null,\n      \"schema_version\": 1\n    },\n    {\n      \"record\": {\n        \"asset_id\": \"string\",\n        \"book_operator_id\": \"71072833-059d-93ec-f3f0-a700be7c5ef3\",\n        \"exchange_id\": \"c08d11a7-90d9-f8b9-fc0a-8897d37de764\",\n        \"precision\": 4752,\n        \"status\": \"string\"\n      },\n      \"metadata\": {\n        \"investor_ids\": null,\n        \"book_operator_id\": null,\n        \"request_id\": null,\n        \"exchange_id\": null,\n        \"status\": null,\n        \"trade_portal_id\": null,\n        \"commission\": null,\n        \"real_investor_id\": null,\n        \"expired\": false\n      },\n      \"partner_asset_id\": null,\n      \"signature\": null,\n      \"schema_version\": 1\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "91ee263b-b351-4362-8289-bb7888f4d41c",
+          "name": "Register a list of new assets and publish to the AtomicNet.",
+          "request": {
+            "name": "Register a list of new assets and publish to the AtomicNet.",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "assets",
+                "list"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"assets\": [\n    {\n      \"record\": {\n        \"asset_id\": \"<string>\",\n        \"book_operator_id\": \"<uuid>\",\n        \"exchange_id\": \"<uuid>\",\n        \"precision\": \"<integer>\",\n        \"status\": \"<string>\"\n      },\n      \"metadata\": {\n        \"investor_ids\": null,\n        \"book_operator_id\": null,\n        \"request_id\": null,\n        \"exchange_id\": null,\n        \"status\": null,\n        \"trade_portal_id\": null,\n        \"commission\": null,\n        \"real_investor_id\": null,\n        \"expired\": false\n      },\n      \"partner_asset_id\": null,\n      \"signature\": null,\n      \"schema_version\": 1\n    },\n    {\n      \"record\": {\n        \"asset_id\": \"<string>\",\n        \"book_operator_id\": \"<uuid>\",\n        \"exchange_id\": \"<uuid>\",\n        \"precision\": \"<integer>\",\n        \"status\": \"<string>\"\n      },\n      \"metadata\": {\n        \"investor_ids\": null,\n        \"book_operator_id\": null,\n        \"request_id\": null,\n        \"exchange_id\": null,\n        \"status\": null,\n        \"trade_portal_id\": null,\n        \"commission\": null,\n        \"real_investor_id\": null,\n        \"expired\": false\n      },\n      \"partner_asset_id\": null,\n      \"signature\": null,\n      \"schema_version\": 1\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f49913c2-8a62-43c4-ab4e-2db4d55b115d",
+              "name": "Empty",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "assets",
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"assets\": [\n    {\n      \"record\": {\n        \"asset_id\": \"<string>\",\n        \"book_operator_id\": \"<uuid>\",\n        \"exchange_id\": \"<uuid>\",\n        \"precision\": \"<integer>\",\n        \"status\": \"<string>\"\n      },\n      \"metadata\": {\n        \"investor_ids\": null,\n        \"book_operator_id\": null,\n        \"request_id\": null,\n        \"exchange_id\": null,\n        \"status\": null,\n        \"trade_portal_id\": null,\n        \"commission\": null,\n        \"real_investor_id\": null,\n        \"expired\": false\n      },\n      \"partner_asset_id\": null,\n      \"signature\": null,\n      \"schema_version\": 1\n    },\n    {\n      \"record\": {\n        \"asset_id\": \"<string>\",\n        \"book_operator_id\": \"<uuid>\",\n        \"exchange_id\": \"<uuid>\",\n        \"precision\": \"<integer>\",\n        \"status\": \"<string>\"\n      },\n      \"metadata\": {\n        \"investor_ids\": null,\n        \"book_operator_id\": null,\n        \"request_id\": null,\n        \"exchange_id\": null,\n        \"status\": null,\n        \"trade_portal_id\": null,\n        \"commission\": null,\n        \"real_investor_id\": null,\n        \"expired\": false\n      },\n      \"partner_asset_id\": null,\n      \"signature\": null,\n      \"schema_version\": 1\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "23046399-95d5-4337-845b-900c8d0e13ae",
+          "name": "Register a new asset and publish to the AtomicNet.",
+          "request": {
+            "name": "Register a new asset and publish to the AtomicNet.",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "assets",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"record\": {\n    \"asset_id\": \"<string>\",\n    \"book_operator_id\": \"<uuid>\",\n    \"exchange_id\": \"<uuid>\",\n    \"precision\": \"<integer>\",\n    \"status\": \"<string>\"\n  },\n  \"metadata\": {\n    \"investor_ids\": null,\n    \"book_operator_id\": null,\n    \"request_id\": null,\n    \"exchange_id\": null,\n    \"status\": null,\n    \"trade_portal_id\": null,\n    \"commission\": null,\n    \"real_investor_id\": null,\n    \"expired\": false\n  },\n  \"partner_asset_id\": null,\n  \"signature\": null,\n  \"schema_version\": 1\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "9c4ad612-8542-469b-9d39-4ac6dcc6b4b8",
+              "name": "Empty",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "assets",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"record\": {\n    \"asset_id\": \"<string>\",\n    \"book_operator_id\": \"<uuid>\",\n    \"exchange_id\": \"<uuid>\",\n    \"precision\": \"<integer>\",\n    \"status\": \"<string>\"\n  },\n  \"metadata\": {\n    \"investor_ids\": null,\n    \"book_operator_id\": null,\n    \"request_id\": null,\n    \"exchange_id\": null,\n    \"status\": null,\n    \"trade_portal_id\": null,\n    \"commission\": null,\n    \"real_investor_id\": null,\n    \"expired\": false\n  },\n  \"partner_asset_id\": null,\n  \"signature\": null,\n  \"schema_version\": 1\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d411b2f1-da01-4578-9b2b-8c9f53338021",
+          "name": "Update the partner asset id mapping on this node for a single asset.",
+          "request": {
+            "name": "Update the partner asset id mapping on this node for a single asset.",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "assets",
+                "update_asset_mapping"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"asset_id\": \"<string>\",\n  \"partner_asset_id\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b1c853a9-aa87-4be6-8612-b4131552d4a5",
+              "name": "Empty",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "assets",
+                    "update_asset_mapping"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"asset_id\": \"<string>\",\n  \"partner_asset_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4999d815-cf0a-48d8-bf1d-c20ab96f175e",
+          "name": "Register assets to AtomicNet node.",
+          "request": {
+            "name": "Register assets to AtomicNet node.",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "assets",
+                "register"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"assets\": [\n    {\n      \"record\": {\n        \"asset_id\": \"<string>\",\n        \"book_operator_id\": \"<uuid>\",\n        \"exchange_id\": \"<uuid>\",\n        \"precision\": \"<integer>\",\n        \"status\": \"<string>\"\n      },\n      \"metadata\": {\n        \"investor_ids\": null,\n        \"book_operator_id\": null,\n        \"request_id\": null,\n        \"exchange_id\": null,\n        \"status\": null,\n        \"trade_portal_id\": null,\n        \"commission\": null,\n        \"real_investor_id\": null,\n        \"expired\": false\n      },\n      \"partner_asset_id\": null,\n      \"signature\": null,\n      \"schema_version\": 1\n    },\n    {\n      \"record\": {\n        \"asset_id\": \"<string>\",\n        \"book_operator_id\": \"<uuid>\",\n        \"exchange_id\": \"<uuid>\",\n        \"precision\": \"<integer>\",\n        \"status\": \"<string>\"\n      },\n      \"metadata\": {\n        \"investor_ids\": null,\n        \"book_operator_id\": null,\n        \"request_id\": null,\n        \"exchange_id\": null,\n        \"status\": null,\n        \"trade_portal_id\": null,\n        \"commission\": null,\n        \"real_investor_id\": null,\n        \"expired\": false\n      },\n      \"partner_asset_id\": null,\n      \"signature\": null,\n      \"schema_version\": 1\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "560c9e0f-81be-46c7-9016-af495c525890",
+              "name": "Empty",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "assets",
+                    "register"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"assets\": [\n    {\n      \"record\": {\n        \"asset_id\": \"<string>\",\n        \"book_operator_id\": \"<uuid>\",\n        \"exchange_id\": \"<uuid>\",\n        \"precision\": \"<integer>\",\n        \"status\": \"<string>\"\n      },\n      \"metadata\": {\n        \"investor_ids\": null,\n        \"book_operator_id\": null,\n        \"request_id\": null,\n        \"exchange_id\": null,\n        \"status\": null,\n        \"trade_portal_id\": null,\n        \"commission\": null,\n        \"real_investor_id\": null,\n        \"expired\": false\n      },\n      \"partner_asset_id\": null,\n      \"signature\": null,\n      \"schema_version\": 1\n    },\n    {\n      \"record\": {\n        \"asset_id\": \"<string>\",\n        \"book_operator_id\": \"<uuid>\",\n        \"exchange_id\": \"<uuid>\",\n        \"precision\": \"<integer>\",\n        \"status\": \"<string>\"\n      },\n      \"metadata\": {\n        \"investor_ids\": null,\n        \"book_operator_id\": null,\n        \"request_id\": null,\n        \"exchange_id\": null,\n        \"status\": null,\n        \"trade_portal_id\": null,\n        \"commission\": null,\n        \"real_investor_id\": null,\n        \"expired\": false\n      },\n      \"partner_asset_id\": null,\n      \"signature\": null,\n      \"schema_version\": 1\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "participant"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "/v1/auth/token"
+      },
+      {
+        "key": "grant_type",
+        "value": "client_credentials"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "e9d57a51-ac80-4210-82fd-b9372fa26f6e",
+    "name": "Polysign Asset API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Operations tagged asset across 2 of this provider's published API definitions: polysign-atomicnet-api-server-openapi.json, polysign-merchant-gate-openapi.json. Each path carries the servers of the definition it was published in.",
+      "type": "text/plain"
+    }
+  }
+}

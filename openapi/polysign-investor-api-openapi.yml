@@ -1,0 +1,97 @@
+openapi: 3.2.0
+info:
+  description: The API Server as the interface to interact with AtomicNet
+  license:
+    name: PolySign License
+    url: https://polysign.io/licenses/LICENSE-1.0
+  title: AtomicNet API Server Investor API
+  version: 5ba508e7771507febd8e2056c369fffd575b4272
+security:
+- OAuth2:
+  - participant
+tags:
+- name: investor
+paths:
+  /v1/investors/real_investor_id/{real_investor_id}:
+    get:
+      summary: Generate a one time investor ID for the real investor ID.
+      tags:
+      - investor
+      parameters:
+      - name: real_investor_id
+        in: path
+        description: The real investor ID of the investor.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: The mapping of the investor ID.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OnetimeIdMap6'
+  /v1/investors/one_time_investor_id/{one_time_investor_id}:
+    get:
+      summary: 'Get the detail of an investor involved by this node by its one time investor id.
+
+        '
+      tags:
+      - investor
+      parameters:
+      - name: one_time_investor_id
+        in: path
+        description: The one time identifier of the investor.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: The investor.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Investor'
+components:
+  schemas:
+    OnetimeIdMap6:
+      type: object
+      properties:
+        one_time_id:
+          type: string
+          description: The one time ID.
+        real_id:
+          type: string
+          description: The real ID.
+      required:
+      - one_time_id
+      - real_id
+      description: ID mapping.
+    Investor:
+      type: object
+      properties:
+        real_investor_id:
+          type: string
+          description: The real identifier of the investor.
+        one_time_investor_ids:
+          type: array
+          description: The list of one time identifier of the investor.
+          items:
+            type: string
+        schema_version:
+          type: integer
+          default: 1
+          description: Version for the message schema.
+      required:
+      - one_time_investor_ids
+      - real_investor_id
+      description: Investor object.
+  securitySchemes:
+    OAuth2:
+      type: oauth2
+      description: OAuth 2.0 with the client credentials grant flow.
+      flows:
+        clientCredentials:
+          tokenUrl: /v1/auth/token
+          scopes:
+            participant: Grants access to participant.

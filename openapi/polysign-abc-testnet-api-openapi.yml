@@ -1,0 +1,82 @@
+openapi: 3.2.0
+info:
+  description: This document lists all AtomicNet ABC Proxy Service APIs for development use.
+  license:
+    name: PolySign License
+    url: https://polysign.io/licenses/LICENSE-1.0
+  title: AtomicNet ABC Proxy Service ABC Testnet API
+  version: 5fddf272a23655e1582a8a157a8d0ac8e0d517e2
+security:
+- OAuth2:
+  - participant
+tags:
+- name: ABC Testnet
+paths:
+  /v1/abc_testnet/:
+    put:
+      summary: Create an account on ABC testnet.
+      tags:
+      - ABC Testnet
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ABCCreateAccountRequest'
+      responses:
+        '200':
+          description: The created account.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ABCCreateAccountResponse'
+        '500':
+          description: Account could not be created on the ABC
+  /v1/abc_testnet/faucet/{abc_account_id}:
+    get:
+      summary: Faucet an account on ABC testnet.
+      tags:
+      - ABC Testnet
+      parameters:
+      - name: abc_account_id
+        in: path
+        description: Identifier of the ABC account.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Empty
+components:
+  schemas:
+    ABCCreateAccountRequest:
+      type: object
+      properties:
+        role:
+          type: string
+          description: Role of the account.
+        atomicnet_id:
+          type: string
+          format: uuid
+          description: Identifier of the AtomicNet Participant.
+      required:
+      - atomicnet_id
+      - role
+      description: ABC create testnet account request schema.
+    ABCCreateAccountResponse:
+      type: object
+      properties:
+        account_id:
+          type: string
+          description: Account id of the created abc account.
+      required:
+      - account_id
+      description: ABC create testnet account response schema.
+  securitySchemes:
+    OAuth2:
+      type: oauth2
+      description: OAuth 2.0 with the client credentials grant flow.
+      flows:
+        clientCredentials:
+          tokenUrl: /v1/auth/token
+          scopes:
+            participant: Grants access to participant.

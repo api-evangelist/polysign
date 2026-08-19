@@ -1,0 +1,135 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "AtomicNet API Server escrow authorization API",
+    "version": "5ba508e7771507febd8e2056c369fffd575b4272"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "client_credentials",
+      "accessTokenUrl": "/v1/auth/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "escrow authorization",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get the detail of a escrow authorization on AtomicNet by its id.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/escrow_authorizations/:escrow_auth_id",
+            "params": [
+              {
+                "name": "escrow_auth_id",
+                "value": "",
+                "type": "path",
+                "description": "The identifier of the escrow authorization."
+              }
+            ]
+          },
+          "docs": "Get the detail of a escrow authorization on AtomicNet by its id."
+        },
+        {
+          "info": {
+            "name": "Get the detail of all escrow authorizations on AtomicNet.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/escrow_authorizations/list",
+            "params": [
+              {
+                "name": "status",
+                "value": "pending",
+                "type": "query",
+                "description": "The specified status to be filtered on."
+              }
+            ]
+          },
+          "docs": "Get the detail of all escrow authorizations on AtomicNet."
+        },
+        {
+          "info": {
+            "name": "Get the detail of all escrow authorizations involved by this node.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/escrow_authorizations/list/local",
+            "params": [
+              {
+                "name": "status",
+                "value": "pending",
+                "type": "query",
+                "description": "The specified status to be filtered on."
+              }
+            ]
+          },
+          "docs": "Get the detail of all escrow authorizations involved by this node."
+        },
+        {
+          "info": {
+            "name": "Request a new escrow authorization.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/escrow_authorizations/request",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Request a new escrow authorization."
+        },
+        {
+          "info": {
+            "name": "Approve an escrow authorization.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1/escrow_authorizations/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Approve an escrow authorization."
+        },
+        {
+          "info": {
+            "name": "Get all status updates associated with an escrow authorization by its id.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/escrow_status_updates/:escrow_auth_id",
+            "params": [
+              {
+                "name": "escrow_auth_id",
+                "value": "",
+                "type": "path",
+                "description": "The identifier of the escrow authorization."
+              }
+            ]
+          },
+          "docs": "Get all status updates associated with an escrow authorization by its id."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

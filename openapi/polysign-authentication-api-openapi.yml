@@ -1,0 +1,110 @@
+openapi: 3.2.0
+info:
+  title: Polysign Authentication API
+  license:
+    name: PolySign License
+    url: https://polysign.io/licenses/LICENSE-1.0
+  version: '1.0'
+  description: 'Operations tagged authentication across 3 of this provider''s published API definitions: polysign-abc-proxy-service-openapi.json, polysign-atomicnet-api-server-openapi.json, polysign-merchant-gate-openapi.json. Each path carries the servers of the definition it was published in.'
+security:
+- OAuth2:
+  - participant
+tags:
+- name: authentication
+paths:
+  /v1/auth/token:
+    post:
+      tags:
+      - authentication
+      summary: Get access token.
+      parameters:
+      - in: header
+        name: authorization
+        description: Base64 encode the client ID and secret.
+        schema:
+          type: string
+        required: true
+        example: Basic <Base64 encoded 'client_id:secret'>
+      - in: header
+        name: accept
+        description: Response format.
+        schema:
+          type: string
+        example: application/json
+      - in: header
+        name: cache-control
+        description: Cache or not.
+        schema:
+          type: string
+        example: no-cache
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+              - grant_type
+              - scope
+              properties:
+                grant_type:
+                  description: Grant type
+                  type: string
+                  example: client_credentials
+                scope:
+                  description: At least one custom scope
+                  type: string
+                  example: participant
+              example: grant_type=client_credentials&scope=participant
+      responses:
+        '200':
+          description: The access token.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - access_token
+                - token_type
+                - expires_in
+                - scope
+                properties:
+                  access_token:
+                    type: string
+                  token_type:
+                    type: string
+                  expires_in:
+                    type: integer
+                  scope:
+                    type: string
+                  refresh_token:
+                    type: string
+                  id_token:
+                    type: string
+        '401':
+          description: HTTP 401 Unauthorized.
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                type: object
+                required:
+                - error
+                - error_description
+                properties:
+                  error:
+                    type: string
+                  error_description:
+                    type: string
+components:
+  securitySchemes:
+    OAuth2:
+      type: oauth2
+      description: OAuth 2.0 with the client credentials grant flow.
+      flows:
+        clientCredentials:
+          tokenUrl: /v1/auth/token
+          scopes:
+            participant: Grants access to participant.
+x-refined-from:
+- polysign-abc-proxy-service-openapi.json
+- polysign-atomicnet-api-server-openapi.json
+- polysign-merchant-gate-openapi.json

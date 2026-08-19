@@ -1,0 +1,100 @@
+openapi: 3.2.0
+info:
+  description: This document lists all AtomicNet ABC Proxy Service APIs for development use.
+  license:
+    name: PolySign License
+    url: https://polysign.io/licenses/LICENSE-1.0
+  title: AtomicNet ABC Proxy Service ABC Accounts API
+  version: 5fddf272a23655e1582a8a157a8d0ac8e0d517e2
+security:
+- OAuth2:
+  - participant
+tags:
+- name: ABC Accounts
+paths:
+  /v1/abc_accounts/{atomicnet_id}:
+    get:
+      summary: Get registered ABC account details by AtomicNet ID.
+      tags:
+      - ABC Accounts
+      parameters:
+      - name: atomicnet_id
+        in: path
+        description: Identifier of the AtomicNet Participant.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ABC account details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ABCAccount'
+  /v1/abc_accounts/info/{abc_account_id}:
+    get:
+      summary: Get ABC account information.
+      tags:
+      - ABC Accounts
+      parameters:
+      - name: abc_account_id
+        in: path
+        description: Identifier of the ABC account.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ABCAccountInfo
+  /v1/abc_accounts/:
+    put:
+      summary: Register an abc account.
+      tags:
+      - ABC Accounts
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ABCAccount'
+      responses:
+        '200':
+          description: Empty
+components:
+  schemas:
+    ABCAccount:
+      type: object
+      properties:
+        public_key:
+          type: string
+          description: The ABC account public key.
+        role:
+          type: string
+          description: Role of the AtomicNet node in the protocol.
+        private_key:
+          type:
+          - string
+          - 'null'
+          default: null
+          description: The ABC account private key.
+        account_id:
+          type: string
+          description: Identifier of the ABC account.
+        atomicnet_id:
+          type: string
+          format: uuid
+          description: Identifier of the AtomicNet Participant.
+      required:
+      - account_id
+      - atomicnet_id
+      - public_key
+      - role
+      description: Dataclass for ABC account schema.
+  securitySchemes:
+    OAuth2:
+      type: oauth2
+      description: OAuth 2.0 with the client credentials grant flow.
+      flows:
+        clientCredentials:
+          tokenUrl: /v1/auth/token
+          scopes:
+            participant: Grants access to participant.

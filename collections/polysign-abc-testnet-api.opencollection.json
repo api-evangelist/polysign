@@ -1,0 +1,63 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "AtomicNet ABC Proxy Service ABC Testnet API",
+    "version": "5fddf272a23655e1582a8a157a8d0ac8e0d517e2"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "client_credentials",
+      "accessTokenUrl": "/v1/auth/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "ABC Testnet",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create an account on ABC testnet.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1/abc_testnet/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create an account on ABC testnet."
+        },
+        {
+          "info": {
+            "name": "Faucet an account on ABC testnet.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/abc_testnet/faucet/:abc_account_id",
+            "params": [
+              {
+                "name": "abc_account_id",
+                "value": "",
+                "type": "path",
+                "description": "Identifier of the ABC account."
+              }
+            ]
+          },
+          "docs": "Faucet an account on ABC testnet."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

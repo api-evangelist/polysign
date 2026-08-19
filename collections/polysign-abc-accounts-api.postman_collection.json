@@ -1,0 +1,323 @@
+{
+  "item": [
+    {
+      "id": "802fd440-700d-41c8-8069-c2bbb14ff12f",
+      "name": "ABC Accounts",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "1311ab72-0173-4cc9-9df2-38c748be9e37",
+          "name": "Get registered ABC account details by AtomicNet ID.",
+          "request": {
+            "name": "Get registered ABC account details by AtomicNet ID.",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "abc_accounts",
+                ":atomicnet_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "atomicnet_id",
+                  "description": "(Required) Identifier of the AtomicNet Participant."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c38fbbc5-f219-4eb1-a790-9d2240f41068",
+              "name": "ABC account details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "abc_accounts",
+                    ":atomicnet_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "atomicnet_id",
+                      "description": "(Required) Identifier of the AtomicNet Participant."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"account_id\": \"string\",\n  \"atomicnet_id\": \"e9bafb6c-c441-9322-85db-4143fd8b89ae\",\n  \"public_key\": \"string\",\n  \"role\": \"string\",\n  \"private_key\": null\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ba72b956-74b7-4df1-8f3c-5344ecf8c35d",
+          "name": "Get ABC account information.",
+          "request": {
+            "name": "Get ABC account information.",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "abc_accounts",
+                "info",
+                ":abc_account_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "abc_account_id",
+                  "description": "(Required) Identifier of the ABC account."
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e3a5d008-6b61-4427-96dd-f5727162226b",
+              "name": "ABCAccountInfo",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "abc_accounts",
+                    "info",
+                    ":abc_account_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "abc_account_id",
+                      "description": "(Required) Identifier of the ABC account."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fa925ca6-605c-442b-852d-d41ad4994de9",
+          "name": "Register an abc account.",
+          "request": {
+            "name": "Register an abc account.",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "abc_accounts",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"account_id\": \"<string>\",\n  \"atomicnet_id\": \"<uuid>\",\n  \"public_key\": \"<string>\",\n  \"role\": \"<string>\",\n  \"private_key\": null\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "5011e73b-bc16-4cd2-bd55-66f4b7b64d85",
+              "name": "Empty",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "abc_accounts",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"account_id\": \"<string>\",\n  \"atomicnet_id\": \"<uuid>\",\n  \"public_key\": \"<string>\",\n  \"role\": \"<string>\",\n  \"private_key\": null\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "participant"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "/v1/auth/token"
+      },
+      {
+        "key": "grant_type",
+        "value": "client_credentials"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "88ef9a36-b1f0-424c-b374-c0cfca2e7bde",
+    "name": "AtomicNet ABC Proxy Service ABC Accounts API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "This document lists all AtomicNet ABC Proxy Service APIs for development use.",
+      "type": "text/plain"
+    }
+  }
+}

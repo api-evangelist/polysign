@@ -1,0 +1,428 @@
+{
+  "item": [
+    {
+      "id": "576b7d3b-cf34-4107-8ff9-3c27d0d2341a",
+      "name": "book transfer confirmation",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "52481209-150b-4e68-a292-96eb8ae57c2d",
+          "name": "Get the detail of a book transfer confirmation on AtomicNet.",
+          "request": {
+            "name": "Get the detail of a book transfer confirmation on AtomicNet.",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "book_transfer_confirmations",
+                ":book_transfer_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "book_transfer_id",
+                  "description": "(Required) The identifier of the book transfer."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8b986e5e-4cef-45cf-bb6e-c147ae23e408",
+              "name": "The book transfer confirmation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "book_transfer_confirmations",
+                    ":book_transfer_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "book_transfer_id",
+                      "description": "(Required) The identifier of the book transfer."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"record\": {\n    \"asset_id\": \"string\",\n    \"asset_quantity\": 7524.010434989531,\n    \"beneficiary_auth_id\": \"10d75e63-e50d-d41f-6fb3-e6d7b64ff3ff\",\n    \"book_transfer_id\": \"5f7fd2dd-0fe6-80cb-b394-99cacda9bd09\",\n    \"escrow_auth_id\": \"43271fe3-be88-089c-9a91-752b58ce233b\"\n  },\n  \"abc_memorial_digest\": null,\n  \"metadata\": {\n    \"investor_ids\": null,\n    \"book_operator_id\": null,\n    \"request_id\": null,\n    \"exchange_id\": null,\n    \"status\": null,\n    \"trade_portal_id\": null,\n    \"commission\": null,\n    \"real_investor_id\": null,\n    \"expired\": false\n  },\n  \"schema_version\": 1,\n  \"signature\": null,\n  \"abc_memorialization_block\": null\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "42613d37-fa84-43c7-9aed-da8b12fbf07e",
+          "name": "Get the detail of all book transfer confirmations on AtomicNet.",
+          "request": {
+            "name": "Get the detail of all book transfer confirmations on AtomicNet.",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "book_transfer_confirmations",
+                "list"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "The specified status to be filtered on."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "41bc4a90-d954-45f7-9298-462dbcab6738",
+              "name": "A list of book transfer confirmations.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "book_transfer_confirmations",
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "pending"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"book_transfer_confirmations\": [\n    {\n      \"record\": {\n        \"asset_id\": \"string\",\n        \"asset_quantity\": 4303.540154449213,\n        \"beneficiary_auth_id\": \"687661ed-594c-ec8d-b179-6b1b0d2a48a9\",\n        \"book_transfer_id\": \"4d9077de-5da1-a27c-3451-c7f049ff15a9\",\n        \"escrow_auth_id\": \"6a694386-b005-d2a1-260a-d9f25496e39e\"\n      },\n      \"abc_memorial_digest\": null,\n      \"metadata\": {\n        \"investor_ids\": null,\n        \"book_operator_id\": null,\n        \"request_id\": null,\n        \"exchange_id\": null,\n        \"status\": null,\n        \"trade_portal_id\": null,\n        \"commission\": null,\n        \"real_investor_id\": null,\n        \"expired\": false\n      },\n      \"schema_version\": 1,\n      \"signature\": null,\n      \"abc_memorialization_block\": null\n    },\n    {\n      \"record\": {\n        \"asset_id\": \"string\",\n        \"asset_quantity\": 2715.756556312451,\n        \"beneficiary_auth_id\": \"d20c1abe-862b-2c19-fb06-5cb39e89dd17\",\n        \"book_transfer_id\": \"4fda15cd-c9a5-4f68-b677-6f6794304691\",\n        \"escrow_auth_id\": \"28b8fa43-540e-69af-4f9e-f78a3ddadaaf\"\n      },\n      \"abc_memorial_digest\": null,\n      \"metadata\": {\n        \"investor_ids\": null,\n        \"book_operator_id\": null,\n        \"request_id\": null,\n        \"exchange_id\": null,\n        \"status\": null,\n        \"trade_portal_id\": null,\n        \"commission\": null,\n        \"real_investor_id\": null,\n        \"expired\": false\n      },\n      \"schema_version\": 1,\n      \"signature\": null,\n      \"abc_memorialization_block\": null\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b466e98a-9ec0-40f5-b04d-2b67a59b1ba0",
+          "name": "Get the detail of all book transfer confirmations involved by this node on\nAtomicNet.\n",
+          "request": {
+            "name": "Get the detail of all book transfer confirmations involved by this node on\nAtomicNet.\n",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "book_transfer_confirmations",
+                "list",
+                "local"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "The specified status to be filtered on."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3b53b070-6de9-4ded-af2a-bb95201d47da",
+              "name": "A list of book transfer confirmations.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "book_transfer_confirmations",
+                    "list",
+                    "local"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "pending"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"book_transfer_confirmations\": [\n    {\n      \"record\": {\n        \"asset_id\": \"string\",\n        \"asset_quantity\": 6157.7825114906755,\n        \"beneficiary_auth_id\": \"a7b2ae55-6b07-8464-1701-0040ad7bdc53\",\n        \"book_transfer_id\": \"7fcb7ca2-5bc7-ac52-b957-cea65026310c\",\n        \"escrow_auth_id\": \"c7f93083-4721-3bfc-bce2-64524b7595f0\"\n      },\n      \"abc_memorial_digest\": null,\n      \"metadata\": {\n        \"investor_ids\": null,\n        \"book_operator_id\": null,\n        \"request_id\": null,\n        \"exchange_id\": null,\n        \"status\": null,\n        \"trade_portal_id\": null,\n        \"commission\": null,\n        \"real_investor_id\": null,\n        \"expired\": false\n      },\n      \"schema_version\": 1,\n      \"signature\": null,\n      \"abc_memorialization_block\": null\n    },\n    {\n      \"record\": {\n        \"asset_id\": \"string\",\n        \"asset_quantity\": 7172.775072793418,\n        \"beneficiary_auth_id\": \"cfe14d70-c800-52cb-ed78-9dfe6b6102c9\",\n        \"book_transfer_id\": \"0786ad78-fde9-28d9-579b-07a6503bd458\",\n        \"escrow_auth_id\": \"81d42923-98b7-55c4-8f64-969261210ae4\"\n      },\n      \"abc_memorial_digest\": null,\n      \"metadata\": {\n        \"investor_ids\": null,\n        \"book_operator_id\": null,\n        \"request_id\": null,\n        \"exchange_id\": null,\n        \"status\": null,\n        \"trade_portal_id\": null,\n        \"commission\": null,\n        \"real_investor_id\": null,\n        \"expired\": false\n      },\n      \"schema_version\": 1,\n      \"signature\": null,\n      \"abc_memorialization_block\": null\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0a567156-65a1-407a-bea7-1090a280db9b",
+          "name": "Release a book transfer confirmation on execution after\nbeing memorialized on ABC.\n",
+          "request": {
+            "name": "Release a book transfer confirmation on execution after\nbeing memorialized on ABC.\n",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "book_transfer_confirmations",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"record\": {\n    \"asset_id\": \"<string>\",\n    \"asset_quantity\": \"<number>\",\n    \"beneficiary_auth_id\": \"<uuid>\",\n    \"book_transfer_id\": \"<uuid>\",\n    \"escrow_auth_id\": \"<uuid>\"\n  },\n  \"abc_memorial_digest\": null,\n  \"metadata\": {\n    \"investor_ids\": null,\n    \"book_operator_id\": null,\n    \"request_id\": null,\n    \"exchange_id\": null,\n    \"status\": null,\n    \"trade_portal_id\": null,\n    \"commission\": null,\n    \"real_investor_id\": null,\n    \"expired\": false\n  },\n  \"schema_version\": 1,\n  \"signature\": null,\n  \"abc_memorialization_block\": null\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e283f5ee-f591-4140-ae0d-46a192383d42",
+              "name": "The book transfer confirmation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "book_transfer_confirmations",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"record\": {\n    \"asset_id\": \"<string>\",\n    \"asset_quantity\": \"<number>\",\n    \"beneficiary_auth_id\": \"<uuid>\",\n    \"book_transfer_id\": \"<uuid>\",\n    \"escrow_auth_id\": \"<uuid>\"\n  },\n  \"abc_memorial_digest\": null,\n  \"metadata\": {\n    \"investor_ids\": null,\n    \"book_operator_id\": null,\n    \"request_id\": null,\n    \"exchange_id\": null,\n    \"status\": null,\n    \"trade_portal_id\": null,\n    \"commission\": null,\n    \"real_investor_id\": null,\n    \"expired\": false\n  },\n  \"schema_version\": 1,\n  \"signature\": null,\n  \"abc_memorialization_block\": null\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"record\": {\n    \"asset_id\": \"<string>\",\n    \"asset_quantity\": \"<number>\",\n    \"beneficiary_auth_id\": \"<uuid>\",\n    \"book_transfer_id\": \"<uuid>\",\n    \"escrow_auth_id\": \"<uuid>\"\n  },\n  \"abc_memorial_digest\": null,\n  \"metadata\": {\n    \"investor_ids\": null,\n    \"book_operator_id\": null,\n    \"request_id\": null,\n    \"exchange_id\": null,\n    \"status\": null,\n    \"trade_portal_id\": null,\n    \"commission\": null,\n    \"real_investor_id\": null,\n    \"expired\": false\n  },\n  \"schema_version\": 1,\n  \"signature\": null,\n  \"abc_memorialization_block\": null\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "participant"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "/v1/auth/token"
+      },
+      {
+        "key": "grant_type",
+        "value": "client_credentials"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "0df6a3c0-54a6-4465-ade5-40f5135bae51",
+    "name": "AtomicNet API Server book transfer confirmation API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The API Server as the interface to interact with AtomicNet",
+      "type": "text/plain"
+    }
+  }
+}

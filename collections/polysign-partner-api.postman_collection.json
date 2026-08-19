@@ -1,0 +1,407 @@
+{
+  "item": [
+    {
+      "id": "292ea83f-b096-4383-86b6-c6d35572c298",
+      "name": "partner",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "715f43f4-7f49-4ff4-9f4f-c8c0415d203a",
+          "name": "Get the detail of a partner registered on this node by its id.",
+          "request": {
+            "name": "Get the detail of a partner registered on this node by its id.",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "partners",
+                ":atomicnet_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "atomicnet_id",
+                  "description": "(Required) The identifier of the partner."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "32692a53-a901-4c16-9eac-bbfa9dc55403",
+              "name": "The partner.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "partners",
+                    ":atomicnet_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "atomicnet_id",
+                      "description": "(Required) The identifier of the partner."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"atomicnet_id\": \"57cbcd95-7f89-61f4-70cd-528d41abed81\",\n  \"role\": null,\n  \"private_key\": null,\n  \"public_key\": null,\n  \"status\": null,\n  \"abc_account_id\": null,\n  \"partner_name\": null,\n  \"schema_version\": 1\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a417a564-d7c4-49b9-9b43-1a1469575965",
+          "name": "Get the detail of all partners registered on this node.",
+          "request": {
+            "name": "Get the detail of all partners registered on this node.",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "partners",
+                "list"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "58f2f38a-cf21-42cd-bffa-d927c3654b0c",
+              "name": "The partners.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "partners",
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"partners\": [\n    {\n      \"atomicnet_id\": \"bfbe03d5-c60c-ea07-4b10-fa4c3dd27be9\",\n      \"role\": null,\n      \"private_key\": null,\n      \"public_key\": null,\n      \"status\": null,\n      \"abc_account_id\": null,\n      \"partner_name\": null,\n      \"schema_version\": 1\n    },\n    {\n      \"atomicnet_id\": \"090bfb98-2ec6-ddfd-daec-0ebf28e5b647\",\n      \"role\": null,\n      \"private_key\": null,\n      \"public_key\": null,\n      \"status\": null,\n      \"abc_account_id\": null,\n      \"partner_name\": null,\n      \"schema_version\": 1\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "25189eff-0ba8-4536-b37c-b57ebe234b77",
+          "name": "Register a list of new partners to this node.",
+          "request": {
+            "name": "Register a list of new partners to this node.",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "partners",
+                "list"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"partners\": [\n    {\n      \"atomicnet_id\": \"<uuid>\",\n      \"role\": null,\n      \"private_key\": null,\n      \"public_key\": null,\n      \"status\": null,\n      \"abc_account_id\": null,\n      \"partner_name\": null,\n      \"schema_version\": 1\n    },\n    {\n      \"atomicnet_id\": \"<uuid>\",\n      \"role\": null,\n      \"private_key\": null,\n      \"public_key\": null,\n      \"status\": null,\n      \"abc_account_id\": null,\n      \"partner_name\": null,\n      \"schema_version\": 1\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e32ee7d2-3f3a-47a5-9657-37cfc1b3fdf9",
+              "name": "Empty",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "partners",
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"partners\": [\n    {\n      \"atomicnet_id\": \"<uuid>\",\n      \"role\": null,\n      \"private_key\": null,\n      \"public_key\": null,\n      \"status\": null,\n      \"abc_account_id\": null,\n      \"partner_name\": null,\n      \"schema_version\": 1\n    },\n    {\n      \"atomicnet_id\": \"<uuid>\",\n      \"role\": null,\n      \"private_key\": null,\n      \"public_key\": null,\n      \"status\": null,\n      \"abc_account_id\": null,\n      \"partner_name\": null,\n      \"schema_version\": 1\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d5b08a3a-f9c5-4a16-bcbd-79eb8c5f57c5",
+          "name": "Register a new partner to this node.",
+          "request": {
+            "name": "Register a new partner to this node.",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "partners",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"atomicnet_id\": \"<uuid>\",\n  \"role\": null,\n  \"private_key\": null,\n  \"public_key\": null,\n  \"status\": null,\n  \"abc_account_id\": null,\n  \"partner_name\": null,\n  \"schema_version\": 1\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f7454ee8-634a-45f8-b141-4cfe30541056",
+              "name": "Empty",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "partners",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"atomicnet_id\": \"<uuid>\",\n  \"role\": null,\n  \"private_key\": null,\n  \"public_key\": null,\n  \"status\": null,\n  \"abc_account_id\": null,\n  \"partner_name\": null,\n  \"schema_version\": 1\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "participant"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "/v1/auth/token"
+      },
+      {
+        "key": "grant_type",
+        "value": "client_credentials"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "312bff94-c976-4048-859b-3c1f80b1fa94",
+    "name": "AtomicNet API Server Partner API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The API Server as the interface to interact with AtomicNet",
+      "type": "text/plain"
+    }
+  }
+}

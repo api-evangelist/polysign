@@ -1,0 +1,339 @@
+openapi: 3.2.0
+info:
+  description: The API Server as the interface to interact with AtomicNet
+  license:
+    name: PolySign License
+    url: https://polysign.io/licenses/LICENSE-1.0
+  title: AtomicNet API Server Settlement API
+  version: 5ba508e7771507febd8e2056c369fffd575b4272
+security:
+- OAuth2:
+  - participant
+tags:
+- name: settlement
+paths:
+  /v1/settlements/:
+    put:
+      summary: Publish a settlement to AtomicNet after being memorialized on ABC.
+      tags:
+      - settlement
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Settlement'
+      responses:
+        '200':
+          description: The settlement.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Settlement'
+  /v1/settlements/{settlement_id}:
+    get:
+      summary: Get the detail of a settlement on AtomicNet by its id.
+      tags:
+      - settlement
+      parameters:
+      - name: settlement_id
+        in: path
+        description: The identifier of the settlement.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: The settlement.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Settlement'
+  /v1/settlements/list:
+    get:
+      summary: Get The detail of all settlements on AtomicNet.
+      tags:
+      - settlement
+      parameters:
+      - name: status
+        in: query
+        description: The specified status to be filtered on.
+        example: pending
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A list of settlements.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SettlementList'
+  /v1/settlements/order/{order_id}:
+    get:
+      summary: Get The detail of all settlements for an order on AtomicNet.
+      tags:
+      - settlement
+      parameters:
+      - name: order_id
+        in: path
+        description: The identifier of the order.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A list of settlements.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SettlementList'
+  /v1/settlement_status_updates/{settlement_id}:
+    get:
+      summary: Get all status updates associated with a settlement by its id.
+      tags:
+      - settlement
+      parameters:
+      - name: settlement_id
+        in: path
+        description: The identifier of the settlement.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A list of settlement status updates.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SettlementStatusUpdateList'
+components:
+  schemas:
+    OnetimeIdMapList3:
+      type: object
+      properties:
+        id_maps:
+          type: array
+          description: The list of ID mappings.
+          items:
+            $ref: '#/components/schemas/OnetimeIdMap3'
+      description: List of ID mappings.
+    SettlementRecord:
+      type: object
+      properties:
+        left_order_id:
+          type: string
+          format: uuid
+          description: Identifier of the left order.
+        right_order_id:
+          type: string
+          format: uuid
+          description: Identifier of the right order.
+        left_order_give_quantity:
+          type: number
+          description: The quantity which the left order to give for the left order given asset.
+        right_order_commission:
+          type: number
+          description: The commission for the right order in order to execute this settlement.
+        settlement_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          default: null
+          description: Identifier of the settlement.
+        left_order_commission:
+          type: number
+          description: The commission for the left order in order to execute this settlement.
+        right_order_give_quantity:
+          type: number
+          description: The quantity which the right order to give for the right order given asset.
+      required:
+      - left_order_commission
+      - left_order_give_quantity
+      - left_order_id
+      - right_order_commission
+      - right_order_give_quantity
+      - right_order_id
+    Metadata3:
+      type: object
+      properties:
+        investor_ids:
+          default: null
+          description: The investor id mappings.
+          allOf:
+          - $ref: '#/components/schemas/OnetimeIdMapList3'
+        book_operator_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          default: null
+          description: Identifier for the associated Book Operator node.
+        request_id:
+          type:
+          - string
+          - 'null'
+          default: null
+          description: Unique identifier for the request.
+        exchange_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          default: null
+          description: Identifier for the associated Exchange node.
+        status:
+          type:
+          - string
+          - 'null'
+          default: null
+          description: State status for the record object.
+        trade_portal_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          default: null
+          description: Identifier for the associated Trade Portal node.
+        commission:
+          type:
+          - number
+          - 'null'
+          default: null
+          description: Order commissison.
+        real_investor_id:
+          type:
+          - string
+          - 'null'
+          default: null
+          description: Original identifier for the investor.
+        expired:
+          type:
+          - boolean
+          - 'null'
+          default: false
+          description: Expiry status for the record object.
+    SettlementStatusUpdate:
+      type: object
+      properties:
+        settlement_id:
+          type: string
+          format: uuid
+          description: Identifier of the settlement.
+        last_updated:
+          type: string
+          format: date-time
+          description: ISO formatted timestamp for settlement last status update.
+        settlement_status_update_id:
+          type: string
+          format: uuid
+          description: Identifier of the settlement status update.
+        status:
+          type: string
+          description: The most recently updated settlement status.
+      required:
+      - last_updated
+      - settlement_id
+      - settlement_status_update_id
+      - status
+      description: Settlement status update object.
+    AbcSignature3:
+      type: object
+      properties:
+        digest_type:
+          type: string
+          description: The ABC digest type.
+        abc_account_id:
+          type: string
+          description: Identifier of the ABC account.
+        signature:
+          type: string
+          description: Signature of the digest.
+        digest:
+          type: string
+          description: The digest to be signed.
+        schema_version:
+          type:
+          - integer
+          - 'null'
+          default: 1
+          description: Version for the message schema.
+      required:
+      - abc_account_id
+      - digest
+      - digest_type
+      - signature
+    Settlement:
+      type: object
+      properties:
+        abc_memorial_digest:
+          type:
+          - string
+          - 'null'
+          default: null
+          description: The digest been memorialized in ABC.
+        metadata:
+          description: Metadata for the associated record object.
+          allOf:
+          - $ref: '#/components/schemas/Metadata3'
+        schema_version:
+          type: integer
+          default: 1
+          description: Version for the message schema.
+        signature:
+          default: null
+          description: Signature for the associated record object.
+          allOf:
+          - $ref: '#/components/schemas/AbcSignature3'
+        abc_memorialization_block:
+          type:
+          - integer
+          - 'null'
+          default: null
+          description: The block height the memorialization localed.
+        record:
+          description: The record object for the settlement.
+          allOf:
+          - $ref: '#/components/schemas/SettlementRecord'
+      required:
+      - record
+    SettlementStatusUpdateList:
+      type: object
+      properties:
+        settlement_status_updates:
+          type: array
+          items:
+            $ref: '#/components/schemas/SettlementStatusUpdate'
+      required:
+      - settlement_status_updates
+      description: List of settlement status update objects.
+    OnetimeIdMap3:
+      type: object
+      properties:
+        one_time_id:
+          type: string
+          description: The one time ID.
+        real_id:
+          type: string
+          description: The real ID.
+      required:
+      - one_time_id
+      - real_id
+      description: ID mapping.
+    SettlementList:
+      type: object
+      properties:
+        settlements:
+          type: array
+          items:
+            $ref: '#/components/schemas/Settlement'
+      required:
+      - settlements
+  securitySchemes:
+    OAuth2:
+      type: oauth2
+      description: OAuth 2.0 with the client credentials grant flow.
+      flows:
+        clientCredentials:
+          tokenUrl: /v1/auth/token
+          scopes:
+            participant: Grants access to participant.

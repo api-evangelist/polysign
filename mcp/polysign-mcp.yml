@@ -1,7 +1,8 @@
 generated: '2026-08-02'
 method: derived
 status: candidate
-source: openapi/polysign-atomicnet-api-server-openapi.json, openapi/polysign-merchant-gate-openapi.json, openapi/polysign-abc-proxy-service-openapi.json
+source: openapi/polysign-atomicnet-api-server-openapi.json, openapi/polysign-merchant-gate-openapi.json,
+  openapi/polysign-abc-proxy-service-openapi.json
 searched:
   date: '2026-08-02'
   result: none — PolySign publishes no hosted or remote MCP server
@@ -16,10 +17,10 @@ server:
   name: polysign-atomicnet
   transport: http
   url: null
-note: This is a CANDIDATE tool surface derived from the three published OpenAPI documents so an implementer can
-  see what an AtomicNet MCP server would expose. It is NOT a PolySign product. No MCPServer pointer is wired into
-  apis.yml, because wiring one would assert a server that does not exist. The upstream specs declare no operationId,
-  so each tool is bound to its backing operation by method+path.
+note: This is a CANDIDATE tool surface derived from the three published OpenAPI documents so an implementer
+  can see what an AtomicNet MCP server would expose. It is NOT a PolySign product. No MCPServer pointer
+  is wired into apis.yml, because wiring one would assert a server that does not exist. The upstream specs
+  declare no operationId, so each tool is bound to its backing operation by method+path.
 tools:
 - name: get_order
   description: Get the detail of an order on AtomicNet by its id.
@@ -108,3 +109,9 @@ tools:
 - name: node_health
   description: Deep health check of the AtomicNet node.
   source_operation: openapi/polysign-atomicnet-api-server-openapi.json#GET /v1/system/deep_ping
+deployment:
+  mode: none
+  verified: derived
+  tools: 29
+  checked: '2026-08-12'
+  source: catalog MCP census

@@ -1,0 +1,119 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Polysign Asset API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "client_credentials",
+      "accessTokenUrl": "/v1/auth/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "asset",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get the detail of the registered asset on AtomicNet by its id.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/assets/:asset_id",
+            "params": [
+              {
+                "name": "asset_id",
+                "value": "",
+                "type": "path",
+                "description": "The identifier of the asset."
+              }
+            ]
+          },
+          "docs": "Get the detail of the registered asset on AtomicNet by its id."
+        },
+        {
+          "info": {
+            "name": "Get the detail of all registered assets on AtomicNet.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/assets/list"
+          },
+          "docs": "Get the detail of all registered assets on AtomicNet."
+        },
+        {
+          "info": {
+            "name": "Register a list of new assets and publish to the AtomicNet.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1/assets/list",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Register a list of new assets and publish to the AtomicNet."
+        },
+        {
+          "info": {
+            "name": "Register a new asset and publish to the AtomicNet.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1/assets/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Register a new asset and publish to the AtomicNet."
+        },
+        {
+          "info": {
+            "name": "Update the partner asset id mapping on this node for a single asset.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1/assets/update_asset_mapping",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update the partner asset id mapping on this node for a single asset."
+        },
+        {
+          "info": {
+            "name": "Register assets to AtomicNet node.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1/assets/register",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Register assets to AtomicNet node."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

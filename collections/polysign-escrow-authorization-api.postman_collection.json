@@ -1,0 +1,623 @@
+{
+  "item": [
+    {
+      "id": "19e85601-0fd1-4a68-b7b5-32e98d16cb99",
+      "name": "escrow authorization",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f6c784d1-7bec-4f67-8a6e-aa4932196cf1",
+          "name": "Get the detail of a escrow authorization on AtomicNet by its id.",
+          "request": {
+            "name": "Get the detail of a escrow authorization on AtomicNet by its id.",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "escrow_authorizations",
+                ":escrow_auth_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "escrow_auth_id",
+                  "description": "(Required) The identifier of the escrow authorization."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c47294c2-4541-42e5-bde4-40071c8b806e",
+              "name": "The escrow authorization.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "escrow_authorizations",
+                    ":escrow_auth_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "escrow_auth_id",
+                      "description": "(Required) The identifier of the escrow authorization."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"record\": {\n    \"asset_id\": \"string\",\n    \"asset_quantity\": 6928.468919779632,\n    \"escrow_auth_id\": \"38568706-03b7-a174-0827-bb481419138f\",\n    \"expiration\": \"2007-12-19T08:40:30.544Z\",\n    \"investor_id\": \"string\"\n  },\n  \"execution_status\": null,\n  \"metadata\": {\n    \"investor_ids\": null,\n    \"book_operator_id\": null,\n    \"request_id\": null,\n    \"exchange_id\": null,\n    \"status\": null,\n    \"trade_portal_id\": null,\n    \"commission\": null,\n    \"real_investor_id\": null,\n    \"expired\": false\n  },\n  \"schema_version\": 1,\n  \"signature\": null,\n  \"remaining_quantity\": null\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b38df1eb-7489-4975-bb7b-edca26a5d594",
+          "name": "Get the detail of all escrow authorizations on AtomicNet.",
+          "request": {
+            "name": "Get the detail of all escrow authorizations on AtomicNet.",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "escrow_authorizations",
+                "list"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "The specified status to be filtered on."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5b22bca2-b99b-4afe-8a6e-23415a33b318",
+              "name": "A list of escrow authorizations.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "escrow_authorizations",
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "pending"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"escrow_auths\": [\n    {\n      \"record\": {\n        \"asset_id\": \"string\",\n        \"asset_quantity\": 5774.6010858968175,\n        \"escrow_auth_id\": \"71ae8e8c-9252-e440-3d09-5c2ffc3c837c\",\n        \"expiration\": \"1950-07-27T22:08:06.100Z\",\n        \"investor_id\": \"string\"\n      },\n      \"execution_status\": null,\n      \"metadata\": {\n        \"investor_ids\": null,\n        \"book_operator_id\": null,\n        \"request_id\": null,\n        \"exchange_id\": null,\n        \"status\": null,\n        \"trade_portal_id\": null,\n        \"commission\": null,\n        \"real_investor_id\": null,\n        \"expired\": false\n      },\n      \"schema_version\": 1,\n      \"signature\": null,\n      \"remaining_quantity\": null\n    },\n    {\n      \"record\": {\n        \"asset_id\": \"string\",\n        \"asset_quantity\": 4034.225679800901,\n        \"escrow_auth_id\": \"58a26aca-d5b9-3553-2c37-e08cec757c03\",\n        \"expiration\": \"1986-08-03T18:19:12.131Z\",\n        \"investor_id\": \"string\"\n      },\n      \"execution_status\": null,\n      \"metadata\": {\n        \"investor_ids\": null,\n        \"book_operator_id\": null,\n        \"request_id\": null,\n        \"exchange_id\": null,\n        \"status\": null,\n        \"trade_portal_id\": null,\n        \"commission\": null,\n        \"real_investor_id\": null,\n        \"expired\": false\n      },\n      \"schema_version\": 1,\n      \"signature\": null,\n      \"remaining_quantity\": null\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "96a4b943-1cbb-4d04-b9e1-a78fc976d3cb",
+          "name": "Get the detail of all escrow authorizations involved by this node.",
+          "request": {
+            "name": "Get the detail of all escrow authorizations involved by this node.",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "escrow_authorizations",
+                "list",
+                "local"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "The specified status to be filtered on."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "31d25bce-e8fd-4e7b-b546-40006d5b3a8d",
+              "name": "A list of escrow authorizations.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "escrow_authorizations",
+                    "list",
+                    "local"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "pending"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"escrow_auths\": [\n    {\n      \"record\": {\n        \"asset_id\": \"string\",\n        \"asset_quantity\": 7325.117384791817,\n        \"escrow_auth_id\": \"c1a25509-3c8d-2116-beb7-01c6790c789d\",\n        \"expiration\": \"1980-01-13T19:08:44.685Z\",\n        \"investor_id\": \"string\"\n      },\n      \"execution_status\": null,\n      \"metadata\": {\n        \"investor_ids\": null,\n        \"book_operator_id\": null,\n        \"request_id\": null,\n        \"exchange_id\": null,\n        \"status\": null,\n        \"trade_portal_id\": null,\n        \"commission\": null,\n        \"real_investor_id\": null,\n        \"expired\": false\n      },\n      \"schema_version\": 1,\n      \"signature\": null,\n      \"remaining_quantity\": null\n    },\n    {\n      \"record\": {\n        \"asset_id\": \"string\",\n        \"asset_quantity\": 5245.44776568365,\n        \"escrow_auth_id\": \"adadb866-4651-3cbf-1518-e0aafb3d53ef\",\n        \"expiration\": \"1958-10-03T18:09:08.520Z\",\n        \"investor_id\": \"string\"\n      },\n      \"execution_status\": null,\n      \"metadata\": {\n        \"investor_ids\": null,\n        \"book_operator_id\": null,\n        \"request_id\": null,\n        \"exchange_id\": null,\n        \"status\": null,\n        \"trade_portal_id\": null,\n        \"commission\": null,\n        \"real_investor_id\": null,\n        \"expired\": false\n      },\n      \"schema_version\": 1,\n      \"signature\": null,\n      \"remaining_quantity\": null\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "085ea60f-6116-4d38-9ad1-82d5c066b567",
+          "name": "Request a new escrow authorization.",
+          "request": {
+            "name": "Request a new escrow authorization.",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "escrow_authorizations",
+                "request"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"record\": {\n    \"asset_id\": \"<string>\",\n    \"asset_quantity\": \"<number>\",\n    \"escrow_auth_id\": \"<uuid>\",\n    \"expiration\": \"<dateTime>\",\n    \"investor_id\": \"<string>\"\n  },\n  \"execution_status\": null,\n  \"metadata\": {\n    \"investor_ids\": null,\n    \"book_operator_id\": null,\n    \"request_id\": null,\n    \"exchange_id\": null,\n    \"status\": null,\n    \"trade_portal_id\": null,\n    \"commission\": null,\n    \"real_investor_id\": null,\n    \"expired\": false\n  },\n  \"schema_version\": 1,\n  \"signature\": null,\n  \"remaining_quantity\": null\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "6c484f68-4961-4d8e-8461-ca62e5e17108",
+              "name": "The escrow authorization.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "escrow_authorizations",
+                    "request"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"record\": {\n    \"asset_id\": \"<string>\",\n    \"asset_quantity\": \"<number>\",\n    \"escrow_auth_id\": \"<uuid>\",\n    \"expiration\": \"<dateTime>\",\n    \"investor_id\": \"<string>\"\n  },\n  \"execution_status\": null,\n  \"metadata\": {\n    \"investor_ids\": null,\n    \"book_operator_id\": null,\n    \"request_id\": null,\n    \"exchange_id\": null,\n    \"status\": null,\n    \"trade_portal_id\": null,\n    \"commission\": null,\n    \"real_investor_id\": null,\n    \"expired\": false\n  },\n  \"schema_version\": 1,\n  \"signature\": null,\n  \"remaining_quantity\": null\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"record\": {\n    \"asset_id\": \"<string>\",\n    \"asset_quantity\": \"<number>\",\n    \"escrow_auth_id\": \"<uuid>\",\n    \"expiration\": \"<dateTime>\",\n    \"investor_id\": \"<string>\"\n  },\n  \"execution_status\": null,\n  \"metadata\": {\n    \"investor_ids\": null,\n    \"book_operator_id\": null,\n    \"request_id\": null,\n    \"exchange_id\": null,\n    \"status\": null,\n    \"trade_portal_id\": null,\n    \"commission\": null,\n    \"real_investor_id\": null,\n    \"expired\": false\n  },\n  \"schema_version\": 1,\n  \"signature\": null,\n  \"remaining_quantity\": null\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1ecc1852-58d2-475b-a83f-ca5a7d805530",
+          "name": "Approve an escrow authorization.",
+          "request": {
+            "name": "Approve an escrow authorization.",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "escrow_authorizations",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"record\": {\n    \"asset_id\": \"<string>\",\n    \"asset_quantity\": \"<number>\",\n    \"escrow_auth_id\": \"<uuid>\",\n    \"expiration\": \"<dateTime>\",\n    \"investor_id\": \"<string>\"\n  },\n  \"execution_status\": null,\n  \"metadata\": {\n    \"investor_ids\": null,\n    \"book_operator_id\": null,\n    \"request_id\": null,\n    \"exchange_id\": null,\n    \"status\": null,\n    \"trade_portal_id\": null,\n    \"commission\": null,\n    \"real_investor_id\": null,\n    \"expired\": false\n  },\n  \"schema_version\": 1,\n  \"signature\": null,\n  \"remaining_quantity\": null\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "2285d2a7-0a03-46a4-ac50-96804c9436d5",
+              "name": "The escrow authorization.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "escrow_authorizations",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"record\": {\n    \"asset_id\": \"<string>\",\n    \"asset_quantity\": \"<number>\",\n    \"escrow_auth_id\": \"<uuid>\",\n    \"expiration\": \"<dateTime>\",\n    \"investor_id\": \"<string>\"\n  },\n  \"execution_status\": null,\n  \"metadata\": {\n    \"investor_ids\": null,\n    \"book_operator_id\": null,\n    \"request_id\": null,\n    \"exchange_id\": null,\n    \"status\": null,\n    \"trade_portal_id\": null,\n    \"commission\": null,\n    \"real_investor_id\": null,\n    \"expired\": false\n  },\n  \"schema_version\": 1,\n  \"signature\": null,\n  \"remaining_quantity\": null\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"record\": {\n    \"asset_id\": \"<string>\",\n    \"asset_quantity\": \"<number>\",\n    \"escrow_auth_id\": \"<uuid>\",\n    \"expiration\": \"<dateTime>\",\n    \"investor_id\": \"<string>\"\n  },\n  \"execution_status\": null,\n  \"metadata\": {\n    \"investor_ids\": null,\n    \"book_operator_id\": null,\n    \"request_id\": null,\n    \"exchange_id\": null,\n    \"status\": null,\n    \"trade_portal_id\": null,\n    \"commission\": null,\n    \"real_investor_id\": null,\n    \"expired\": false\n  },\n  \"schema_version\": 1,\n  \"signature\": null,\n  \"remaining_quantity\": null\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3c179dfb-e960-4ef6-b4d5-5d8eb079a72e",
+          "name": "Get all status updates associated with an escrow authorization by its id.",
+          "request": {
+            "name": "Get all status updates associated with an escrow authorization by its id.",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "escrow_status_updates",
+                ":escrow_auth_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "escrow_auth_id",
+                  "description": "(Required) The identifier of the escrow authorization."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9cf170ad-d086-4b87-bfdf-2cc350d2d6d0",
+              "name": "A list of escrow authorization status updates.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "escrow_status_updates",
+                    ":escrow_auth_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "escrow_auth_id",
+                      "description": "(Required) The identifier of the escrow authorization."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"escrow_auth_status_updates\": [\n    {\n      \"escrow_auth_id\": \"d979d28f-c72b-a944-ebee-01aee4866434\",\n      \"escrow_auth_status_update_id\": \"8b3f2e55-1a7a-ab6b-2e4a-f3acdd795230\",\n      \"last_updated\": \"1958-10-16T01:11:16.310Z\",\n      \"status\": \"string\"\n    },\n    {\n      \"escrow_auth_id\": \"76b58af6-7188-f843-4a7b-6b42d708e50b\",\n      \"escrow_auth_status_update_id\": \"b45ca2c8-9d1a-3210-1b5f-c7298a1e238f\",\n      \"last_updated\": \"2004-02-15T07:03:02.927Z\",\n      \"status\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "participant"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "/v1/auth/token"
+      },
+      {
+        "key": "grant_type",
+        "value": "client_credentials"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "c6c9159c-8df2-4d6c-a62f-008fd67e11c9",
+    "name": "AtomicNet API Server escrow authorization API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The API Server as the interface to interact with AtomicNet",
+      "type": "text/plain"
+    }
+  }
+}

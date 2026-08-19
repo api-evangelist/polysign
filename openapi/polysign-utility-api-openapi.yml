@@ -1,0 +1,315 @@
+openapi: 3.2.0
+info:
+  description: The API Server as the interface to interact with AtomicNet
+  license:
+    name: PolySign License
+    url: https://polysign.io/licenses/LICENSE-1.0
+  title: AtomicNet API Server Utility API
+  version: 5ba508e7771507febd8e2056c369fffd575b4272
+security:
+- OAuth2:
+  - participant
+tags:
+- name: utility
+paths:
+  /v1/utils/atomicnet_uid:
+    get:
+      summary: Get an AtomicNet UID.
+      tags:
+      - utility
+      responses:
+        '200':
+          description: AtomicNet UID.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AtomicNetUID'
+  /v1/utils/canonicalize:
+    get:
+      summary: Canonicalize a AtomicNet object record.
+      tags:
+      - utility
+      requestBody:
+        description: "Requests must describe the relevant schema in the message type field.\nSupported schemas:\n  OrderRecord\n  BeneficiaryAuthRecord\n  EscrowAuthRecord\n  SettlementConfirmationRecord\n  SettlementRecord\n  AssetRecord\n  BookTransferRecord\n  BookTransferConfirmationRecord\n"
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CanonicalizeReq'
+      responses:
+        '200':
+          description: The serialized data in json-formatted string, and it's digest.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CanonicalizeResp'
+  /v1/data_sync/:
+    put:
+      summary: Trigger the data synchronization.
+      tags:
+      - utility
+      requestBody:
+        description: The response body.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DataSyncViewRequest'
+      responses:
+        '200':
+          description: The response body.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataSyncViewResponse'
+  /v1/data_sync/{request_id}:
+    get:
+      summary: Get the status details of sync request by its id.
+      tags:
+      - utility
+      parameters:
+      - name: request_id
+        in: path
+        description: The identifier of the data sync request.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: The requests details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataSyncStatus'
+  /v1/data_sync/list:
+    get:
+      summary: Get the list of data sync requests.
+      tags:
+      - utility
+      parameters:
+      - name: status
+        in: query
+        description: The specified status to be filtered on.
+        example: open
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A list of sync request status objects.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataSyncStatusList'
+components:
+  schemas:
+    DataSyncEntityStatus:
+      type: object
+      properties:
+        entity:
+          type: string
+          description: Sync target.
+        status:
+          type: string
+          description: Sync status for this entity.
+        source_node:
+          type: string
+          format: uuid
+          description: The UUID of the data source node.
+      required:
+      - entity
+      - source_node
+      - status
+    DataSyncViewResponse:
+      type: object
+      properties:
+        request_id:
+          type: string
+          format: uuid
+          description: The identifier for this request.
+        schema_version:
+          type: integer
+          default: 1
+          description: Version for the message schema.
+      required:
+      - request_id
+    DataSyncStatus:
+      type: object
+      properties:
+        entities:
+          type: array
+          items:
+            $ref: '#/components/schemas/DataSyncEntityStatus'
+        sync_request:
+          description: The sync request.
+          allOf:
+          - $ref: '#/components/schemas/DataSyncRequestStatus'
+        schema_version:
+          type: integer
+          default: 1
+          description: Version for the message schema.
+      required:
+      - entities
+      - sync_request
+    DataSyncViewRequest:
+      type: object
+      properties:
+        target_types:
+          type: array
+          description: The list of types to sync.
+          items:
+            type: string
+        schema_version:
+          type: integer
+          default: 1
+          description: Version for the message schema.
+        options:
+          description: The options corresponding to this request.
+          allOf:
+          - $ref: '#/components/schemas/DataSyncOptions'
+      required:
+      - options
+      - target_types
+    AtomicNetUID:
+      type: object
+      properties:
+        atomicnet_uid:
+          type: string
+          format: uuid
+          description: AtomicNet UID.
+        schema_version:
+          type: integer
+          default: 1
+          description: Version for the message schema.
+      required:
+      - atomicnet_uid
+    CanonicalizeReq:
+      type: object
+      properties:
+        schema_version:
+          type: integer
+          default: 1
+          description: Version for the message schema.
+        message_data:
+          description: Data to be canonicalized.
+      required:
+      - message_data
+      description: Canonicalization request object.
+    CanonicalizeResp:
+      type: object
+      properties:
+        book_transfer_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          default: null
+          description: The PolyNet generated book transfer ID.
+        order_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          default: null
+          description: The PolyNet generated order ID.
+        settlement_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          default: null
+          description: The PolyNet generated settlement ID.
+        digest:
+          type: string
+          description: Digest to validate serialized_message.
+        schema_version:
+          type: integer
+          default: 1
+          description: Version for the message schema.
+        serialized_message:
+          type: string
+          description: Serialized message for sign.
+      required:
+      - digest
+      - serialized_message
+      description: Canonicalization response object.
+    DataSyncRequestStatus:
+      type: object
+      properties:
+        request_id:
+          type: string
+          format: uuid
+          description: The identifier for this request.
+        status:
+          type: string
+          description: Overall sync status for this request.
+        destination_node:
+          type: string
+          format: uuid
+          description: The node's UUID who asks the sync.
+        target_types:
+          type: array
+          description: The list of types reqeusted for sync.
+          items:
+            type: string
+        options:
+          description: The options corresponding to this request.
+          allOf:
+          - $ref: '#/components/schemas/DataSyncOptions'
+      required:
+      - destination_node
+      - options
+      - request_id
+      - status
+      - target_types
+    DataSyncOptions:
+      type: object
+      properties:
+        priority:
+          type:
+          - integer
+          - 'null'
+          default: null
+          description: The priority for the node to provide synchronization service.
+        formats:
+          type:
+          - array
+          - 'null'
+          default: null
+          description: The list of formats for data synchronization.
+          items:
+            type: string
+        time_range_end:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          default: null
+          description: The end time for data synchronization in ISO format.
+        time_range_start:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          default: null
+          description: The start time for data synchronization in ISO format.
+        schema_version:
+          type: integer
+          default: 1
+          description: Version for the message schema.
+    DataSyncStatusList:
+      type: object
+      properties:
+        requests:
+          type: array
+          items:
+            $ref: '#/components/schemas/DataSyncRequestStatus'
+      required:
+      - requests
+      description: List of data sync.
+  securitySchemes:
+    OAuth2:
+      type: oauth2
+      description: OAuth 2.0 with the client credentials grant flow.
+      flows:
+        clientCredentials:
+          tokenUrl: /v1/auth/token
+          scopes:
+            participant: Grants access to participant.

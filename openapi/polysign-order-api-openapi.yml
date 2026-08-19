@@ -1,0 +1,452 @@
+openapi: 3.2.0
+info:
+  title: Polysign Order API
+  license:
+    name: PolySign License
+    url: https://polysign.io/licenses/LICENSE-1.0
+  version: '1.0'
+  description: 'Operations tagged order across 2 of this provider''s published API definitions: polysign-atomicnet-api-server-openapi.json, polysign-merchant-gate-openapi.json. Each path carries the servers of the definition it was published in.'
+security:
+- OAuth2:
+  - participant
+tags:
+- name: order
+paths:
+  /v1/orders/{order_id}:
+    get:
+      summary: Get the detail of an order on AtomicNet by its id.
+      tags:
+      - order
+      parameters:
+      - name: order_id
+        in: path
+        description: The identifier of the order.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: The order.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+  /v1/orders/list:
+    get:
+      summary: Get the detail of all order on AtomicNet.
+      tags:
+      - order
+      parameters:
+      - name: status
+        in: query
+        description: The specified status to be filtered on.
+        example: pending
+        schema:
+          type: string
+      - name: role
+        in: query
+        description: 'The specified role to be filtered on.
+
+          AtomicNet node will determine if an order is local by the role it is
+
+          playing.
+
+          '
+        example: exchange
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A list of orders.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderList'
+  /v1/orders/:
+    put:
+      summary: 'Publish a new order to AtomicNet.
+
+        The authorizations will be acquired if not provided before publishing.
+
+        '
+      tags:
+      - order
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Order'
+      responses:
+        '200':
+          description: The order.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+  /v1/order_status_updates/{order_id}:
+    get:
+      summary: Get all status updates associated with an order by its id.
+      tags:
+      - order
+      parameters:
+      - name: order_id
+        in: path
+        description: The identifier of the order.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A list of order status updates.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderStatusUpdateList'
+  /v1/orders/submit_order:
+    put:
+      summary: 'Submit order to AtomicNet node.
+
+        '
+      tags:
+      - order
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Order_2'
+      responses:
+        '200':
+          description: The order.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order_2'
+components:
+  schemas:
+    Order_2:
+      type: object
+      properties:
+        record:
+          description: Order record.
+          allOf:
+          - $ref: '#/components/schemas/OrderRecord_2'
+        signature:
+          default: null
+          description: Signature for the associated record object. Not required to submit an order.
+          allOf:
+          - $ref: '#/components/schemas/AbcSignature'
+        escrow_auth_id:
+          type:
+          - string
+          - 'null'
+          default: null
+          description: UUID of the pre-approved escrow authorization.
+      required:
+      - record
+    AbcSignature:
+      type: object
+      properties:
+        schema_version:
+          type:
+          - integer
+          - 'null'
+          default: 1
+          description: Version for the message schema.
+        abc_account_id:
+          type: string
+          description: Identifier of the ABC account.
+        signature:
+          type: string
+          description: Signature of the digest.
+        digest_type:
+          type: string
+          description: The ABC digest type.
+        digest:
+          type: string
+          description: The digest to be signed.
+      required:
+      - abc_account_id
+      - digest
+      - digest_type
+      - signature
+    Order:
+      type: object
+      properties:
+        give_remaining:
+          type:
+          - number
+          - 'null'
+          default: null
+          description: Remaining for the give quantity.
+        execution_status:
+          type:
+          - string
+          - 'null'
+          default: null
+          description: Execution status for the order object.
+        metadata:
+          description: Metadata for the associated record object.
+          allOf:
+          - $ref: '#/components/schemas/Metadata2'
+        schema_version:
+          type: integer
+          default: 1
+          description: Version for the message schema.
+        beneficiary_auth_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          default: null
+          description: Identifier of the pre-approved beneficiary authorization.
+        signature:
+          default: null
+          description: Signature for the associated record object.
+          allOf:
+          - $ref: '#/components/schemas/AbcSignature2'
+        record:
+          description: Order record.
+          allOf:
+          - $ref: '#/components/schemas/OrderRecord'
+        escrow_auth_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          default: null
+          description: Identifier of the pre-approved escrow authorization.
+      required:
+      - record
+    OrderStatusUpdateList:
+      type: object
+      properties:
+        order_status_updates:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderStatusUpdate'
+      required:
+      - order_status_updates
+      description: List of order status update objects.
+    OnetimeIdMapList2:
+      type: object
+      properties:
+        id_maps:
+          type: array
+          description: The list of ID mappings.
+          items:
+            $ref: '#/components/schemas/OnetimeIdMap2'
+      description: List of ID mappings.
+    OnetimeIdMap2:
+      type: object
+      properties:
+        one_time_id:
+          type: string
+          description: The one time ID.
+        real_id:
+          type: string
+          description: The real ID.
+      required:
+      - one_time_id
+      - real_id
+      description: ID mapping.
+    AbcSignature2:
+      type: object
+      properties:
+        digest_type:
+          type: string
+          description: The ABC digest type.
+        abc_account_id:
+          type: string
+          description: Identifier of the ABC account.
+        signature:
+          type: string
+          description: Signature of the digest.
+        digest:
+          type: string
+          description: The digest to be signed.
+        schema_version:
+          type:
+          - integer
+          - 'null'
+          default: 1
+          description: Version for the message schema.
+      required:
+      - abc_account_id
+      - digest
+      - digest_type
+      - signature
+    OrderRecord_2:
+      type: object
+      properties:
+        investor_id:
+          type: string
+          description: Identifier of the investor that placed the order.
+        give_quantity:
+          type: string
+          description: Quantity of the asset being offered.
+        take_asset_id:
+          type: string
+          description: Identifier of the asset to receive.
+        give_asset_id:
+          type: string
+          description: Identifier of the asset being offered.
+        take_quantity:
+          type: string
+          description: Quantity of the asset to receive.
+        expiration:
+          type: string
+          description: ISO formatted timestamp for the order expiry.
+        order_id:
+          type:
+          - string
+          - 'null'
+          default: null
+          description: UUID of the order. Not required to submit an order
+      required:
+      - expiration
+      - give_asset_id
+      - give_quantity
+      - investor_id
+      - take_asset_id
+      - take_quantity
+    Metadata2:
+      type: object
+      properties:
+        investor_ids:
+          default: null
+          description: The investor id mappings.
+          allOf:
+          - $ref: '#/components/schemas/OnetimeIdMapList2'
+        book_operator_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          default: null
+          description: Identifier for the associated Book Operator node.
+        request_id:
+          type:
+          - string
+          - 'null'
+          default: null
+          description: Unique identifier for the request.
+        exchange_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          default: null
+          description: Identifier for the associated Exchange node.
+        status:
+          type:
+          - string
+          - 'null'
+          default: null
+          description: State status for the record object.
+        trade_portal_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          default: null
+          description: Identifier for the associated Trade Portal node.
+        commission:
+          type:
+          - number
+          - 'null'
+          default: null
+          description: Order commissison.
+        real_investor_id:
+          type:
+          - string
+          - 'null'
+          default: null
+          description: Original identifier for the investor.
+        expired:
+          type:
+          - boolean
+          - 'null'
+          default: false
+          description: Expiry status for the record object.
+    OrderRecord:
+      type: object
+      properties:
+        give_quantity:
+          type: number
+          description: Quantity of the asset being offered.
+        expiration:
+          type: string
+          format: date-time
+          description: ISO formatted timestamp for the order expiry.
+        order_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          default: null
+          description: Identifier of the order.
+        investor_id:
+          type: string
+          description: Identifier of the investor that placed the order.
+        give_asset_id:
+          type: string
+          description: Identifier of the asset being offered.
+        take_quantity:
+          type: number
+          description: Quantity of the asset to receive.
+        take_asset_id:
+          type: string
+          description: Identifier of the asset to receive.
+      required:
+      - expiration
+      - give_asset_id
+      - give_quantity
+      - investor_id
+      - take_asset_id
+      - take_quantity
+    OrderStatusUpdate:
+      type: object
+      properties:
+        order_id:
+          type: string
+          format: uuid
+          description: Identifier of the order that was updated.
+        order_status_update_id:
+          type: string
+          format: uuid
+          description: Identifier of the order status update.
+        last_updated:
+          type: string
+          format: date-time
+          description: ISO formatted timestamp for order last status update.
+        status:
+          type: string
+          description: The most recently updated order status.
+      required:
+      - last_updated
+      - order_id
+      - order_status_update_id
+      - status
+      description: Order status update object.
+    OrderList:
+      type: object
+      properties:
+        orders:
+          type: array
+          items:
+            $ref: '#/components/schemas/Order'
+      required:
+      - orders
+      description: List of complete orders object.
+  securitySchemes:
+    OAuth2:
+      type: oauth2
+      description: OAuth 2.0 with the client credentials grant flow.
+      flows:
+        clientCredentials:
+          tokenUrl: /v1/auth/token
+          scopes:
+            participant: Grants access to participant.
+x-refined-from:
+- polysign-atomicnet-api-server-openapi.json
+- polysign-merchant-gate-openapi.json

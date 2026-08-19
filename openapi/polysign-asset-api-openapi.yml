@@ -1,0 +1,295 @@
+openapi: 3.2.0
+info:
+  title: Polysign Asset API
+  license:
+    name: PolySign License
+    url: https://polysign.io/licenses/LICENSE-1.0
+  version: '1.0'
+  description: 'Operations tagged asset across 2 of this provider''s published API definitions: polysign-atomicnet-api-server-openapi.json, polysign-merchant-gate-openapi.json. Each path carries the servers of the definition it was published in.'
+security:
+- OAuth2:
+  - participant
+tags:
+- name: asset
+paths:
+  /v1/assets/{asset_id}:
+    get:
+      summary: Get the detail of the registered asset on AtomicNet by its id.
+      tags:
+      - asset
+      parameters:
+      - name: asset_id
+        in: path
+        description: The identifier of the asset.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: The registered asset.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Asset'
+  /v1/assets/list:
+    get:
+      summary: Get the detail of all registered assets on AtomicNet.
+      tags:
+      - asset
+      responses:
+        '200':
+          description: A list of registered assets.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AssetList'
+    put:
+      summary: Register a list of new assets and publish to the AtomicNet.
+      tags:
+      - asset
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AssetList'
+      responses:
+        '200':
+          description: Empty
+  /v1/assets/:
+    put:
+      summary: Register a new asset and publish to the AtomicNet.
+      tags:
+      - asset
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Asset'
+      responses:
+        '200':
+          description: Empty
+  /v1/assets/update_asset_mapping:
+    put:
+      summary: Update the partner asset id mapping on this node for a single asset.
+      tags:
+      - asset
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AssetMapping'
+      responses:
+        '200':
+          description: Empty
+  /v1/assets/register:
+    put:
+      summary: Register assets to AtomicNet node.
+      tags:
+      - asset
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AssetList'
+      responses:
+        '200':
+          description: Empty
+components:
+  schemas:
+    AssetMapping:
+      type: object
+      properties:
+        partner_asset_id:
+          type: string
+          description: Partner's asset ID.
+        asset_id:
+          type: string
+          description: The PolyNet CUSIP asset ID.
+      required:
+      - asset_id
+      - partner_asset_id
+    Metadata:
+      type: object
+      properties:
+        investor_ids:
+          default: null
+          description: The investor id mappings.
+          allOf:
+          - $ref: '#/components/schemas/OnetimeIdMapList'
+        book_operator_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          default: null
+          description: Identifier for the associated Book Operator node.
+        request_id:
+          type:
+          - string
+          - 'null'
+          default: null
+          description: Unique identifier for the request.
+        exchange_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          default: null
+          description: Identifier for the associated Exchange node.
+        status:
+          type:
+          - string
+          - 'null'
+          default: null
+          description: State status for the record object.
+        trade_portal_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          default: null
+          description: Identifier for the associated Trade Portal node.
+        commission:
+          type:
+          - number
+          - 'null'
+          default: null
+          description: Order commissison.
+        real_investor_id:
+          type:
+          - string
+          - 'null'
+          default: null
+          description: Original identifier for the investor.
+        expired:
+          type:
+          - boolean
+          - 'null'
+          default: false
+          description: Expiry status for the record object.
+    AssetRecord:
+      type: object
+      properties:
+        book_operator_id:
+          type: string
+          format: uuid
+          description: Identifier of the Book Operator to process the asset.
+        exchange_id:
+          type: string
+          format: uuid
+          description: Identifier of the Exchange to process the asset.
+        status:
+          type: string
+          description: The activation status of the asset.
+        asset_id:
+          type: string
+          description: Identifier of the asset.
+        precision:
+          type: integer
+          description: Asset precision.
+      required:
+      - asset_id
+      - book_operator_id
+      - exchange_id
+      - precision
+      - status
+      description: Asset record object.
+    AbcSignature:
+      type: object
+      properties:
+        digest_type:
+          type: string
+          description: The ABC digest type.
+        abc_account_id:
+          type: string
+          description: Identifier of the ABC account.
+        signature:
+          type: string
+          description: Signature of the digest.
+        digest:
+          type: string
+          description: The digest to be signed.
+        schema_version:
+          type:
+          - integer
+          - 'null'
+          default: 1
+          description: Version for the message schema.
+      required:
+      - abc_account_id
+      - digest
+      - digest_type
+      - signature
+    Asset:
+      type: object
+      properties:
+        metadata:
+          description: Metadata for the associated record object.
+          allOf:
+          - $ref: '#/components/schemas/Metadata'
+        partner_asset_id:
+          type:
+          - string
+          - 'null'
+          default: null
+          description: Partner's asset ID.
+        signature:
+          default: null
+          description: Signature for the associated record object.
+          allOf:
+          - $ref: '#/components/schemas/AbcSignature'
+        schema_version:
+          type: integer
+          default: 1
+          description: Version for the message schema.
+        record:
+          description: Asset record.
+          allOf:
+          - $ref: '#/components/schemas/AssetRecord'
+      required:
+      - record
+    OnetimeIdMapList:
+      type: object
+      properties:
+        id_maps:
+          type: array
+          description: The list of ID mappings.
+          items:
+            $ref: '#/components/schemas/OnetimeIdMap'
+      description: List of ID mappings.
+    OnetimeIdMap:
+      type: object
+      properties:
+        one_time_id:
+          type: string
+          description: The one time ID.
+        real_id:
+          type: string
+          description: The real ID.
+      required:
+      - one_time_id
+      - real_id
+      description: ID mapping.
+    AssetList:
+      type: object
+      properties:
+        assets:
+          type: array
+          description: The list of assets.
+          items:
+            $ref: '#/components/schemas/Asset'
+      required:
+      - assets
+      description: List of asset registration object.
+  securitySchemes:
+    OAuth2:
+      type: oauth2
+      description: OAuth 2.0 with the client credentials grant flow.
+      flows:
+        clientCredentials:
+          tokenUrl: /v1/auth/token
+          scopes:
+            participant: Grants access to participant.
+x-refined-from:
+- polysign-atomicnet-api-server-openapi.json
+- polysign-merchant-gate-openapi.json

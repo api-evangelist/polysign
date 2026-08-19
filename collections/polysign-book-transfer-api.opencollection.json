@@ -1,0 +1,122 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Polysign book transfer API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "client_credentials",
+      "accessTokenUrl": "/v1/auth/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "book transfer",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Publish a new book transfer to AtomicNet.\nThe authorizations will be acquired if not provided before publishing.\n",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1/book_transfers/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Publish a new book transfer to AtomicNet.\nThe authorizations will be acquired if not provided before publishing.\n"
+        },
+        {
+          "info": {
+            "name": "Get the detail of a book transfer on AtomicNet by its id.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/book_transfers/:book_transfer_id",
+            "params": [
+              {
+                "name": "book_transfer_id",
+                "value": "",
+                "type": "path",
+                "description": "The identifier of the book transfer."
+              }
+            ]
+          },
+          "docs": "Get the detail of a book transfer on AtomicNet by its id."
+        },
+        {
+          "info": {
+            "name": "Get the detail of all book transfers on AtomicNet.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/book_transfers/list",
+            "params": [
+              {
+                "name": "status",
+                "value": "pending",
+                "type": "query",
+                "description": "The specified status to be filtered on."
+              },
+              {
+                "name": "role",
+                "value": "trade_portal",
+                "type": "query",
+                "description": "The specified role to be filtered on.\nAtomicNet node will determine if a book transfer is local by the role it is\nplaying.\n"
+              }
+            ]
+          },
+          "docs": "Get the detail of all book transfers on AtomicNet."
+        },
+        {
+          "info": {
+            "name": "Get the detail of all book transfers involved by this node on\nAtomicNet.\n",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/book_transfers/list/local",
+            "params": [
+              {
+                "name": "status",
+                "value": "pending",
+                "type": "query",
+                "description": "The specified status to be filtered on."
+              }
+            ]
+          },
+          "docs": "Get the detail of all book transfers involved by this node on\nAtomicNet.\n"
+        },
+        {
+          "info": {
+            "name": "Submit book transfer to AtomicNet node.\n",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1/book_transfers/submit",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Submit book transfer to AtomicNet node.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,241 @@
+{
+  "item": [
+    {
+      "id": "12607a9f-8c20-45a4-b506-965991e2bb6b",
+      "name": "ABC Signing",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "4b5faf22-be5b-4730-80d4-fe96c5953652",
+          "name": "Sign a digest using ABC account for the given AtomicNet id.",
+          "request": {
+            "name": "Sign a digest using ABC account for the given AtomicNet id.",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "abc_signing",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"atomicnet_id\": \"<uuid>\",\n  \"digest\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "844a1fe7-d45d-43c3-935d-2d5a82bdefad",
+              "name": "The signature for the request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "abc_signing",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"atomicnet_id\": \"<uuid>\",\n  \"digest\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"abc_account_id\": \"string\",\n  \"digest\": \"string\",\n  \"digest_type\": \"string\",\n  \"signature\": \"string\",\n  \"schema_version\": 1\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c79e871d-88ce-4fca-a04c-5838f56c6f95",
+          "name": "Verify the signature.",
+          "request": {
+            "name": "Verify the signature.",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "abc_signing",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"digest\": \"<string>\",\n  \"signature\": {\n    \"abc_account_id\": \"<string>\",\n    \"digest\": \"<string>\",\n    \"digest_type\": \"<string>\",\n    \"signature\": \"<string>\",\n    \"schema_version\": 1\n  },\n  \"atomicnet_id\": null\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "3a7afe97-5326-4190-a403-30c4d73cda35",
+              "name": "Empty",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "abc_signing",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"digest\": \"<string>\",\n  \"signature\": {\n    \"abc_account_id\": \"<string>\",\n    \"digest\": \"<string>\",\n    \"digest_type\": \"<string>\",\n    \"signature\": \"<string>\",\n    \"schema_version\": 1\n  },\n  \"atomicnet_id\": null\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "participant"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "/v1/auth/token"
+      },
+      {
+        "key": "grant_type",
+        "value": "client_credentials"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "0701b469-b866-4a1d-882f-f2b890612856",
+    "name": "AtomicNet ABC Proxy Service ABC Signing API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "This document lists all AtomicNet ABC Proxy Service APIs for development use.",
+      "type": "text/plain"
+    }
+  }
+}

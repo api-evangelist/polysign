@@ -1,0 +1,99 @@
+openapi: 3.2.0
+info:
+  title: Polysign System API
+  license:
+    name: PolySign License
+    url: https://polysign.io/licenses/LICENSE-1.0
+  version: '1.0'
+  description: 'Operations tagged system across 3 of this provider''s published API definitions: polysign-abc-proxy-service-openapi.json, polysign-atomicnet-api-server-openapi.json, polysign-merchant-gate-openapi.json. Each path carries the servers of the definition it was published in.'
+security:
+- OAuth2:
+  - participant
+tags:
+- name: system
+paths:
+  /v1/system/circuit_breakers:
+    get:
+      summary: Get the status of all circuit breakers on the server.
+      tags:
+      - system
+      responses:
+        '200':
+          description: Map of breakers to their statuses
+          content:
+            application/json:
+              schema:
+                type: object
+  /v1/system/ping:
+    get:
+      summary: Basic health check.
+      tags:
+      - system
+      responses:
+        '200':
+          description: System status
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Ping'
+  /v1/system/version:
+    get:
+      summary: Get the version of the server.
+      tags:
+      - system
+      responses:
+        '200':
+          description: Version
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Version'
+  /v1/system/deep_ping:
+    get:
+      summary: Deep health check.
+      tags:
+      - system
+      responses:
+        '200':
+          description: Deep system status
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeepPing'
+components:
+  schemas:
+    DeepPing:
+      type: object
+      properties:
+        alive:
+          type: boolean
+        database_reachable:
+          type: boolean
+      required:
+      - alive
+      - database_reachable
+    Ping:
+      type: object
+      properties:
+        alive:
+          type: boolean
+    Version:
+      type: object
+      properties:
+        build_time:
+          type: string
+        version:
+          type: string
+  securitySchemes:
+    OAuth2:
+      type: oauth2
+      description: OAuth 2.0 with the client credentials grant flow.
+      flows:
+        clientCredentials:
+          tokenUrl: /v1/auth/token
+          scopes:
+            participant: Grants access to participant.
+x-refined-from:
+- polysign-abc-proxy-service-openapi.json
+- polysign-atomicnet-api-server-openapi.json
+- polysign-merchant-gate-openapi.json

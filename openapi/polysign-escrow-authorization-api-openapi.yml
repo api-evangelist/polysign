@@ -1,0 +1,347 @@
+openapi: 3.2.0
+info:
+  description: The API Server as the interface to interact with AtomicNet
+  license:
+    name: PolySign License
+    url: https://polysign.io/licenses/LICENSE-1.0
+  title: AtomicNet API Server escrow authorization API
+  version: 5ba508e7771507febd8e2056c369fffd575b4272
+security:
+- OAuth2:
+  - participant
+tags:
+- name: escrow authorization
+paths:
+  /v1/escrow_authorizations/{escrow_auth_id}:
+    get:
+      summary: Get the detail of a escrow authorization on AtomicNet by its id.
+      tags:
+      - escrow authorization
+      parameters:
+      - name: escrow_auth_id
+        in: path
+        description: The identifier of the escrow authorization.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: The escrow authorization.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EscrowAuth'
+  /v1/escrow_authorizations/list:
+    get:
+      summary: Get the detail of all escrow authorizations on AtomicNet.
+      tags:
+      - escrow authorization
+      parameters:
+      - name: status
+        in: query
+        description: The specified status to be filtered on.
+        example: pending
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A list of escrow authorizations.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EscrowAuthList'
+  /v1/escrow_authorizations/list/local:
+    get:
+      summary: Get the detail of all escrow authorizations involved by this node.
+      tags:
+      - escrow authorization
+      parameters:
+      - name: status
+        in: query
+        description: The specified status to be filtered on.
+        example: pending
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A list of escrow authorizations.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EscrowAuthList'
+  /v1/escrow_authorizations/request:
+    post:
+      summary: Request a new escrow authorization.
+      tags:
+      - escrow authorization
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EscrowAuth'
+      responses:
+        '200':
+          description: The escrow authorization.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EscrowAuth'
+  /v1/escrow_authorizations/:
+    put:
+      summary: Approve an escrow authorization.
+      tags:
+      - escrow authorization
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EscrowAuth'
+      responses:
+        '200':
+          description: The escrow authorization.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EscrowAuth'
+  /v1/escrow_status_updates/{escrow_auth_id}:
+    get:
+      summary: Get all status updates associated with an escrow authorization by its id.
+      tags:
+      - escrow authorization
+      parameters:
+      - name: escrow_auth_id
+        in: path
+        description: The identifier of the escrow authorization.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A list of escrow authorization status updates.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EscrowAuthStatusUpdateList'
+components:
+  schemas:
+    AbcSignature1:
+      type: object
+      properties:
+        digest_type:
+          type: string
+          description: The ABC digest type.
+        abc_account_id:
+          type: string
+          description: Identifier of the ABC account.
+        signature:
+          type: string
+          description: Signature of the digest.
+        digest:
+          type: string
+          description: The digest to be signed.
+        schema_version:
+          type:
+          - integer
+          - 'null'
+          default: 1
+          description: Version for the message schema.
+      required:
+      - abc_account_id
+      - digest
+      - digest_type
+      - signature
+    EscrowAuth:
+      type: object
+      properties:
+        execution_status:
+          type:
+          - string
+          - 'null'
+          default: null
+          description: Execution status for the escrow authorization object.
+        metadata:
+          description: Metadata for the associated record object.
+          allOf:
+          - $ref: '#/components/schemas/Metadata1'
+        schema_version:
+          type: integer
+          default: 1
+          description: Version for the message schema.
+        signature:
+          default: null
+          description: Signature for the associated record object.
+          allOf:
+          - $ref: '#/components/schemas/AbcSignature1'
+        remaining_quantity:
+          type:
+          - number
+          - 'null'
+          default: null
+          description: Unused quantity of the asset being escrowed
+        record:
+          description: Escrow authorization record.
+          allOf:
+          - $ref: '#/components/schemas/EscrowAuthRecord'
+      required:
+      - record
+      description: Escrow authorization schema.
+    OnetimeIdMapList1:
+      type: object
+      properties:
+        id_maps:
+          type: array
+          description: The list of ID mappings.
+          items:
+            $ref: '#/components/schemas/OnetimeIdMap1'
+      description: List of ID mappings.
+    OnetimeIdMap1:
+      type: object
+      properties:
+        one_time_id:
+          type: string
+          description: The one time ID.
+        real_id:
+          type: string
+          description: The real ID.
+      required:
+      - one_time_id
+      - real_id
+      description: ID mapping.
+    Metadata1:
+      type: object
+      properties:
+        investor_ids:
+          default: null
+          description: The investor id mappings.
+          allOf:
+          - $ref: '#/components/schemas/OnetimeIdMapList1'
+        book_operator_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          default: null
+          description: Identifier for the associated Book Operator node.
+        request_id:
+          type:
+          - string
+          - 'null'
+          default: null
+          description: Unique identifier for the request.
+        exchange_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          default: null
+          description: Identifier for the associated Exchange node.
+        status:
+          type:
+          - string
+          - 'null'
+          default: null
+          description: State status for the record object.
+        trade_portal_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          default: null
+          description: Identifier for the associated Trade Portal node.
+        commission:
+          type:
+          - number
+          - 'null'
+          default: null
+          description: Order commissison.
+        real_investor_id:
+          type:
+          - string
+          - 'null'
+          default: null
+          description: Original identifier for the investor.
+        expired:
+          type:
+          - boolean
+          - 'null'
+          default: false
+          description: Expiry status for the record object.
+    EscrowAuthStatusUpdate:
+      type: object
+      properties:
+        escrow_auth_status_update_id:
+          type: string
+          format: uuid
+          description: Identifier of the escrow auth status update.
+        last_updated:
+          type: string
+          format: date-time
+          description: ISO formatted timestamp for escrow authorization last status update.
+        escrow_auth_id:
+          type: string
+          format: uuid
+          description: Identifier of the escrow authorization denoting permission to receive the asset.
+        status:
+          type: string
+          description: The most recently updated beneficiary auth status.
+      required:
+      - escrow_auth_id
+      - escrow_auth_status_update_id
+      - last_updated
+      - status
+      description: Escrow authorization status update object.
+    EscrowAuthList:
+      type: object
+      properties:
+        escrow_auths:
+          type: array
+          items:
+            $ref: '#/components/schemas/EscrowAuth'
+      required:
+      - escrow_auths
+    EscrowAuthStatusUpdateList:
+      type: object
+      properties:
+        escrow_auth_status_updates:
+          type: array
+          items:
+            $ref: '#/components/schemas/EscrowAuthStatusUpdate'
+      required:
+      - escrow_auth_status_updates
+      description: List of escrow authorization status update objects.
+    EscrowAuthRecord:
+      type: object
+      properties:
+        expiration:
+          type: string
+          format: date-time
+          description: ISO formatted timestamp for the authorization to last.
+        investor_id:
+          type: string
+          description: Identifier of the investor that holds the asset under escrow.
+        asset_quantity:
+          type: number
+          description: Quantity of the asset being escrowed
+        asset_id:
+          type: string
+          description: Identifier of the asset being escrowed.
+        escrow_auth_id:
+          type: string
+          format: uuid
+          description: Identifier of the escrow that holds the assets.
+      required:
+      - asset_id
+      - asset_quantity
+      - escrow_auth_id
+      - expiration
+      - investor_id
+      description: Escrow authorization record object.
+  securitySchemes:
+    OAuth2:
+      type: oauth2
+      description: OAuth 2.0 with the client credentials grant flow.
+      flows:
+        clientCredentials:
+          tokenUrl: /v1/auth/token
+          scopes:
+            participant: Grants access to participant.

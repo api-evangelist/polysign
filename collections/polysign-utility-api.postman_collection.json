@@ -1,0 +1,514 @@
+{
+  "item": [
+    {
+      "id": "8d145f45-7367-4f05-967d-fd6676d39f94",
+      "name": "utility",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "539822a7-8c29-403d-a36a-99343d36f45e",
+          "name": "Get an AtomicNet UID.",
+          "request": {
+            "name": "Get an AtomicNet UID.",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "utils",
+                "atomicnet_uid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a5602d87-b299-446e-a30a-3aaf73668028",
+              "name": "AtomicNet UID.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "utils",
+                    "atomicnet_uid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"atomicnet_uid\": \"9fc32362-d81f-67b9-1cb5-40c70dd11556\",\n  \"schema_version\": 1\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "83eeec91-d893-41d0-9a41-e3a5c26c53d1",
+          "name": "Canonicalize a AtomicNet object record.",
+          "request": {
+            "name": "Canonicalize a AtomicNet object record.",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "utils",
+                "canonicalize"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"message_data\": {},\n  \"schema_version\": 1\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "aaedc43a-7d68-4647-a940-42c631a310a7",
+              "name": "The serialized data in json-formatted string, and it's digest.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "utils",
+                    "canonicalize"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"message_data\": {},\n  \"schema_version\": 1\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"digest\": \"string\",\n  \"serialized_message\": \"string\",\n  \"book_transfer_id\": null,\n  \"order_id\": null,\n  \"settlement_id\": null,\n  \"schema_version\": 1\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6ce682af-a0cb-47e4-9805-41609a60bce9",
+          "name": "Trigger the data synchronization.",
+          "request": {
+            "name": "Trigger the data synchronization.",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "data_sync",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"options\": {\n    \"priority\": null,\n    \"formats\": null,\n    \"time_range_end\": null,\n    \"time_range_start\": null,\n    \"schema_version\": 1\n  },\n  \"target_types\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"schema_version\": 1\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "fb1616fb-3ac7-4b88-b9eb-44a8e592968b",
+              "name": "The response body.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "data_sync",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"options\": {\n    \"priority\": null,\n    \"formats\": null,\n    \"time_range_end\": null,\n    \"time_range_start\": null,\n    \"schema_version\": 1\n  },\n  \"target_types\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"schema_version\": 1\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"request_id\": \"41e836c6-b80a-8179-617d-7a25ba59403b\",\n  \"schema_version\": 1\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "795f31a0-8e41-4843-a101-e44d43b6dc4d",
+          "name": "Get the status details of sync request by its id.",
+          "request": {
+            "name": "Get the status details of sync request by its id.",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "data_sync",
+                ":request_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "request_id",
+                  "description": "(Required) The identifier of the data sync request."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "74c86a3c-a09c-48bb-96c1-24e0742ff3e9",
+              "name": "The requests details.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "data_sync",
+                    ":request_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "request_id",
+                      "description": "(Required) The identifier of the data sync request."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"entities\": [\n    {\n      \"entity\": \"string\",\n      \"source_node\": \"3047dfae-1b32-a9a6-be7a-98d1d2a80c64\",\n      \"status\": \"string\"\n    },\n    {\n      \"entity\": \"string\",\n      \"source_node\": \"42feaafa-6941-600f-8632-e9c1d32143a9\",\n      \"status\": \"string\"\n    }\n  ],\n  \"sync_request\": {\n    \"destination_node\": \"26e30e0e-ea9b-5b1e-4b72-951e4fdd5a9f\",\n    \"options\": {\n      \"priority\": null,\n      \"formats\": null,\n      \"time_range_end\": null,\n      \"time_range_start\": null,\n      \"schema_version\": 1\n    },\n    \"request_id\": \"0139d6f7-5055-aa6e-868d-dc22dda2717d\",\n    \"status\": \"string\",\n    \"target_types\": [\n      \"string\",\n      \"string\"\n    ]\n  },\n  \"schema_version\": 1\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2e5af058-c14d-4e96-bf9d-0a1955756006",
+          "name": "Get the list of data sync requests.",
+          "request": {
+            "name": "Get the list of data sync requests.",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "data_sync",
+                "list"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "The specified status to be filtered on."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "dbe5e335-ab5b-4183-86ee-fc4a9042856f",
+              "name": "A list of sync request status objects.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "data_sync",
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "open"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requests\": [\n    {\n      \"destination_node\": \"22c4e7dd-c2ea-8843-b5f6-aa1f8a992f8c\",\n      \"options\": {\n        \"priority\": null,\n        \"formats\": null,\n        \"time_range_end\": null,\n        \"time_range_start\": null,\n        \"schema_version\": 1\n      },\n      \"request_id\": \"6c966300-0739-8095-3d5d-4291fdfdaf3a\",\n      \"status\": \"string\",\n      \"target_types\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    {\n      \"destination_node\": \"9e0ce787-2dfb-de7b-9353-8347ce090dbe\",\n      \"options\": {\n        \"priority\": null,\n        \"formats\": null,\n        \"time_range_end\": null,\n        \"time_range_start\": null,\n        \"schema_version\": 1\n      },\n      \"request_id\": \"74242c15-64e6-f91b-846e-c88a34910e65\",\n      \"status\": \"string\",\n      \"target_types\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "participant"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "/v1/auth/token"
+      },
+      {
+        "key": "grant_type",
+        "value": "client_credentials"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "b21de2ea-4a3c-4727-bbaf-e7931b63167b",
+    "name": "AtomicNet API Server Utility API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The API Server as the interface to interact with AtomicNet",
+      "type": "text/plain"
+    }
+  }
+}

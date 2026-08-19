@@ -1,0 +1,623 @@
+{
+  "item": [
+    {
+      "id": "042e7413-b309-4a37-80a0-951f66173343",
+      "name": "beneficiary authorization",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c77e8b68-06c6-4fcd-b381-56d7c4a44d8a",
+          "name": "Get all status updates associated with a beneficiary authorization by its id.\n",
+          "request": {
+            "name": "Get all status updates associated with a beneficiary authorization by its id.\n",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "beneficiary_status_updates",
+                ":beneficiary_auth_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "beneficiary_auth_id",
+                  "description": "(Required) The identifier of the beneficiary authorization."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7830647f-b11c-4711-a622-c43c5cd85fad",
+              "name": "A list of beneficiary authorization status updates.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "beneficiary_status_updates",
+                    ":beneficiary_auth_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "beneficiary_auth_id",
+                      "description": "(Required) The identifier of the beneficiary authorization."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"beneficiary_auth_status_updates\": [\n    {\n      \"beneficiary_auth_id\": \"66023249-de69-6cbd-1f7b-f20b170a5901\",\n      \"beneficiary_auth_status_update_id\": \"88556b45-7c85-1cf3-31a4-c203754468d9\",\n      \"last_updated\": \"1987-04-05T16:22:01.072Z\",\n      \"status\": \"string\"\n    },\n    {\n      \"beneficiary_auth_id\": \"02916d65-764a-be75-5232-2b4e1e89b414\",\n      \"beneficiary_auth_status_update_id\": \"c33483bc-e092-1a63-ed11-3f1847b4bb62\",\n      \"last_updated\": \"2016-08-23T10:52:35.785Z\",\n      \"status\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2b536b7b-7b32-4352-af9b-3e73b151fe21",
+          "name": "Get the details of a beneficiary authorization on AtomicNet by its id.",
+          "request": {
+            "name": "Get the details of a beneficiary authorization on AtomicNet by its id.",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "beneficiary_authorizations",
+                ":beneficiary_auth_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "beneficiary_auth_id",
+                  "description": "(Required) The identifier of the beneficiary authorization."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c1e0a08f-22e4-4aa4-b9bf-cf7514d96c59",
+              "name": "The beneficiary authorization.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "beneficiary_authorizations",
+                    ":beneficiary_auth_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "beneficiary_auth_id",
+                      "description": "(Required) The identifier of the beneficiary authorization."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"record\": {\n    \"asset_id\": \"string\",\n    \"beneficiary_auth_id\": \"edcd8c78-a429-99b9-53f8-4e112571a625\",\n    \"expiration\": \"1947-12-06T12:06:45.389Z\",\n    \"investor_id\": \"string\"\n  },\n  \"execution_status\": null,\n  \"metadata\": {\n    \"investor_ids\": null,\n    \"book_operator_id\": null,\n    \"request_id\": null,\n    \"exchange_id\": null,\n    \"status\": null,\n    \"trade_portal_id\": null,\n    \"commission\": null,\n    \"real_investor_id\": null,\n    \"expired\": false\n  },\n  \"schema_version\": 1,\n  \"signature\": null\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "dcf69939-abfc-454d-9db0-31f2708b4523",
+          "name": "Get the detail of all beneficiary authorizations on AtomicNet.",
+          "request": {
+            "name": "Get the detail of all beneficiary authorizations on AtomicNet.",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "beneficiary_authorizations",
+                "list"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "The specified status to be filtered on."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7322ff79-7599-479e-8763-b93fad11cd35",
+              "name": "A list of beneficiary authorizations.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "beneficiary_authorizations",
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "pending"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"beneficiary_auths\": [\n    {\n      \"record\": {\n        \"asset_id\": \"string\",\n        \"beneficiary_auth_id\": \"008b5fc8-76a7-ffbb-6cad-c6aa670702a6\",\n        \"expiration\": \"2003-06-22T02:41:03.751Z\",\n        \"investor_id\": \"string\"\n      },\n      \"execution_status\": null,\n      \"metadata\": {\n        \"investor_ids\": null,\n        \"book_operator_id\": null,\n        \"request_id\": null,\n        \"exchange_id\": null,\n        \"status\": null,\n        \"trade_portal_id\": null,\n        \"commission\": null,\n        \"real_investor_id\": null,\n        \"expired\": false\n      },\n      \"schema_version\": 1,\n      \"signature\": null\n    },\n    {\n      \"record\": {\n        \"asset_id\": \"string\",\n        \"beneficiary_auth_id\": \"c5b9aef4-0de1-d40c-272e-f35df4c35547\",\n        \"expiration\": \"1962-01-27T17:13:31.493Z\",\n        \"investor_id\": \"string\"\n      },\n      \"execution_status\": null,\n      \"metadata\": {\n        \"investor_ids\": null,\n        \"book_operator_id\": null,\n        \"request_id\": null,\n        \"exchange_id\": null,\n        \"status\": null,\n        \"trade_portal_id\": null,\n        \"commission\": null,\n        \"real_investor_id\": null,\n        \"expired\": false\n      },\n      \"schema_version\": 1,\n      \"signature\": null\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "aaac85cd-f685-4980-90f6-c5995b3ff71e",
+          "name": "Get the detail of all beneficiary authorizations involved by this node.",
+          "request": {
+            "name": "Get the detail of all beneficiary authorizations involved by this node.",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "beneficiary_authorizations",
+                "list",
+                "local"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "The specified status to be filtered on."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "12319209-6e5f-4f7a-8a50-4d62a16ac4ba",
+              "name": "A list of beneficiary authorizations.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "beneficiary_authorizations",
+                    "list",
+                    "local"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "pending"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"beneficiary_auths\": [\n    {\n      \"record\": {\n        \"asset_id\": \"string\",\n        \"beneficiary_auth_id\": \"fd7a6796-80cf-e747-7522-68eeb9593f17\",\n        \"expiration\": \"1949-05-21T12:57:15.227Z\",\n        \"investor_id\": \"string\"\n      },\n      \"execution_status\": null,\n      \"metadata\": {\n        \"investor_ids\": null,\n        \"book_operator_id\": null,\n        \"request_id\": null,\n        \"exchange_id\": null,\n        \"status\": null,\n        \"trade_portal_id\": null,\n        \"commission\": null,\n        \"real_investor_id\": null,\n        \"expired\": false\n      },\n      \"schema_version\": 1,\n      \"signature\": null\n    },\n    {\n      \"record\": {\n        \"asset_id\": \"string\",\n        \"beneficiary_auth_id\": \"b51ea480-c016-69bb-994c-529af4b6a92d\",\n        \"expiration\": \"1988-04-18T19:33:07.403Z\",\n        \"investor_id\": \"string\"\n      },\n      \"execution_status\": null,\n      \"metadata\": {\n        \"investor_ids\": null,\n        \"book_operator_id\": null,\n        \"request_id\": null,\n        \"exchange_id\": null,\n        \"status\": null,\n        \"trade_portal_id\": null,\n        \"commission\": null,\n        \"real_investor_id\": null,\n        \"expired\": false\n      },\n      \"schema_version\": 1,\n      \"signature\": null\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d2c51312-6740-4caf-9817-4ce852c1ace4",
+          "name": "Request a new beneficiary authorization.",
+          "request": {
+            "name": "Request a new beneficiary authorization.",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "beneficiary_authorizations",
+                "request"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"record\": {\n    \"asset_id\": \"<string>\",\n    \"beneficiary_auth_id\": \"<uuid>\",\n    \"expiration\": \"<dateTime>\",\n    \"investor_id\": \"<string>\"\n  },\n  \"execution_status\": null,\n  \"metadata\": {\n    \"investor_ids\": null,\n    \"book_operator_id\": null,\n    \"request_id\": null,\n    \"exchange_id\": null,\n    \"status\": null,\n    \"trade_portal_id\": null,\n    \"commission\": null,\n    \"real_investor_id\": null,\n    \"expired\": false\n  },\n  \"schema_version\": 1,\n  \"signature\": null\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a3e09276-47c9-44f4-a6fb-70aabc85f1a3",
+              "name": "The beneficiary authorization.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "beneficiary_authorizations",
+                    "request"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"record\": {\n    \"asset_id\": \"<string>\",\n    \"beneficiary_auth_id\": \"<uuid>\",\n    \"expiration\": \"<dateTime>\",\n    \"investor_id\": \"<string>\"\n  },\n  \"execution_status\": null,\n  \"metadata\": {\n    \"investor_ids\": null,\n    \"book_operator_id\": null,\n    \"request_id\": null,\n    \"exchange_id\": null,\n    \"status\": null,\n    \"trade_portal_id\": null,\n    \"commission\": null,\n    \"real_investor_id\": null,\n    \"expired\": false\n  },\n  \"schema_version\": 1,\n  \"signature\": null\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"record\": {\n    \"asset_id\": \"<string>\",\n    \"beneficiary_auth_id\": \"<uuid>\",\n    \"expiration\": \"<dateTime>\",\n    \"investor_id\": \"<string>\"\n  },\n  \"execution_status\": null,\n  \"metadata\": {\n    \"investor_ids\": null,\n    \"book_operator_id\": null,\n    \"request_id\": null,\n    \"exchange_id\": null,\n    \"status\": null,\n    \"trade_portal_id\": null,\n    \"commission\": null,\n    \"real_investor_id\": null,\n    \"expired\": false\n  },\n  \"schema_version\": 1,\n  \"signature\": null\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6a9948e8-4598-4afd-9b06-9ac4520b06e3",
+          "name": "Approve a beneficiary authorization.",
+          "request": {
+            "name": "Approve a beneficiary authorization.",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "beneficiary_authorizations",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"record\": {\n    \"asset_id\": \"<string>\",\n    \"beneficiary_auth_id\": \"<uuid>\",\n    \"expiration\": \"<dateTime>\",\n    \"investor_id\": \"<string>\"\n  },\n  \"execution_status\": null,\n  \"metadata\": {\n    \"investor_ids\": null,\n    \"book_operator_id\": null,\n    \"request_id\": null,\n    \"exchange_id\": null,\n    \"status\": null,\n    \"trade_portal_id\": null,\n    \"commission\": null,\n    \"real_investor_id\": null,\n    \"expired\": false\n  },\n  \"schema_version\": 1,\n  \"signature\": null\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b16e9ea4-c055-4eac-a8dc-adfc01588fe6",
+              "name": "The beneficiary authorization.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "beneficiary_authorizations",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"record\": {\n    \"asset_id\": \"<string>\",\n    \"beneficiary_auth_id\": \"<uuid>\",\n    \"expiration\": \"<dateTime>\",\n    \"investor_id\": \"<string>\"\n  },\n  \"execution_status\": null,\n  \"metadata\": {\n    \"investor_ids\": null,\n    \"book_operator_id\": null,\n    \"request_id\": null,\n    \"exchange_id\": null,\n    \"status\": null,\n    \"trade_portal_id\": null,\n    \"commission\": null,\n    \"real_investor_id\": null,\n    \"expired\": false\n  },\n  \"schema_version\": 1,\n  \"signature\": null\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"record\": {\n    \"asset_id\": \"<string>\",\n    \"beneficiary_auth_id\": \"<uuid>\",\n    \"expiration\": \"<dateTime>\",\n    \"investor_id\": \"<string>\"\n  },\n  \"execution_status\": null,\n  \"metadata\": {\n    \"investor_ids\": null,\n    \"book_operator_id\": null,\n    \"request_id\": null,\n    \"exchange_id\": null,\n    \"status\": null,\n    \"trade_portal_id\": null,\n    \"commission\": null,\n    \"real_investor_id\": null,\n    \"expired\": false\n  },\n  \"schema_version\": 1,\n  \"signature\": null\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "participant"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "/v1/auth/token"
+      },
+      {
+        "key": "grant_type",
+        "value": "client_credentials"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "f88ef829-4d78-40f3-82cf-5906e747cf90",
+    "name": "AtomicNet API Server beneficiary authorization API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The API Server as the interface to interact with AtomicNet",
+      "type": "text/plain"
+    }
+  }
+}

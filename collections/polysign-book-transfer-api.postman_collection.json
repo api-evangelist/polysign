@@ -1,0 +1,538 @@
+{
+  "item": [
+    {
+      "id": "3a6fa2e9-1d0a-40a8-a82d-6940b0f9c1ba",
+      "name": "book transfer",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "1a190271-e6b0-4e94-90d7-3bda725d074e",
+          "name": "Publish a new book transfer to AtomicNet.\nThe authorizations will be acquired if not provided before publishing.\n",
+          "request": {
+            "name": "Publish a new book transfer to AtomicNet.\nThe authorizations will be acquired if not provided before publishing.\n",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "book_transfers",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"record\": {\n    \"asset_id\": \"<string>\",\n    \"give_investor_id\": \"<string>\",\n    \"quantity\": \"<number>\",\n    \"take_investor_id\": \"<string>\",\n    \"book_transfer_id\": null\n  },\n  \"execution_status\": null,\n  \"metadata\": {\n    \"investor_ids\": null,\n    \"book_operator_id\": null,\n    \"request_id\": null,\n    \"exchange_id\": null,\n    \"status\": null,\n    \"trade_portal_id\": null,\n    \"commission\": null,\n    \"real_investor_id\": null,\n    \"expired\": false\n  },\n  \"schema_version\": 1,\n  \"beneficiary_auth_id\": null,\n  \"signature\": null,\n  \"escrow_auth_id\": null\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c7b0586b-654c-465d-a84d-adb1bba04660",
+              "name": "The book transfer.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "book_transfers",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"record\": {\n    \"asset_id\": \"<string>\",\n    \"give_investor_id\": \"<string>\",\n    \"quantity\": \"<number>\",\n    \"take_investor_id\": \"<string>\",\n    \"book_transfer_id\": null\n  },\n  \"execution_status\": null,\n  \"metadata\": {\n    \"investor_ids\": null,\n    \"book_operator_id\": null,\n    \"request_id\": null,\n    \"exchange_id\": null,\n    \"status\": null,\n    \"trade_portal_id\": null,\n    \"commission\": null,\n    \"real_investor_id\": null,\n    \"expired\": false\n  },\n  \"schema_version\": 1,\n  \"beneficiary_auth_id\": null,\n  \"signature\": null,\n  \"escrow_auth_id\": null\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"record\": {\n    \"asset_id\": \"<string>\",\n    \"give_investor_id\": \"<string>\",\n    \"quantity\": \"<number>\",\n    \"take_investor_id\": \"<string>\",\n    \"book_transfer_id\": null\n  },\n  \"execution_status\": null,\n  \"metadata\": {\n    \"investor_ids\": null,\n    \"book_operator_id\": null,\n    \"request_id\": null,\n    \"exchange_id\": null,\n    \"status\": null,\n    \"trade_portal_id\": null,\n    \"commission\": null,\n    \"real_investor_id\": null,\n    \"expired\": false\n  },\n  \"schema_version\": 1,\n  \"beneficiary_auth_id\": null,\n  \"signature\": null,\n  \"escrow_auth_id\": null\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ffb9b4b7-bc1a-4c0e-9cb5-049a32cb50e4",
+          "name": "Get the detail of a book transfer on AtomicNet by its id.",
+          "request": {
+            "name": "Get the detail of a book transfer on AtomicNet by its id.",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "book_transfers",
+                ":book_transfer_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "book_transfer_id",
+                  "description": "(Required) The identifier of the book transfer."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "72dcdf81-b521-4932-8b84-40846f230344",
+              "name": "The book transfer.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "book_transfers",
+                    ":book_transfer_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "book_transfer_id",
+                      "description": "(Required) The identifier of the book transfer."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"record\": {\n    \"asset_id\": \"<string>\",\n    \"give_investor_id\": \"<string>\",\n    \"quantity\": \"<number>\",\n    \"take_investor_id\": \"<string>\",\n    \"book_transfer_id\": null\n  },\n  \"execution_status\": null,\n  \"metadata\": {\n    \"investor_ids\": null,\n    \"book_operator_id\": null,\n    \"request_id\": null,\n    \"exchange_id\": null,\n    \"status\": null,\n    \"trade_portal_id\": null,\n    \"commission\": null,\n    \"real_investor_id\": null,\n    \"expired\": false\n  },\n  \"schema_version\": 1,\n  \"beneficiary_auth_id\": null,\n  \"signature\": null,\n  \"escrow_auth_id\": null\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6dfc88cd-84f5-46dc-b78e-7e9598c9bbd3",
+          "name": "Get the detail of all book transfers on AtomicNet.",
+          "request": {
+            "name": "Get the detail of all book transfers on AtomicNet.",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "book_transfers",
+                "list"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "The specified status to be filtered on."
+                },
+                {
+                  "disabled": false,
+                  "key": "role",
+                  "value": "<string>",
+                  "description": "The specified role to be filtered on.\nAtomicNet node will determine if a book transfer is local by the role it is\nplaying.\n"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "77125b16-f6bd-4b0c-8342-e0df8f003f1e",
+              "name": "A list of book transfers.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "book_transfers",
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "pending"
+                    },
+                    {
+                      "key": "role",
+                      "value": "trade_portal"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"book_transfers\": [\n    {\n      \"record\": {\n        \"asset_id\": \"<string>\",\n        \"give_investor_id\": \"<string>\",\n        \"quantity\": \"<number>\",\n        \"take_investor_id\": \"<string>\",\n        \"book_transfer_id\": null\n      },\n      \"execution_status\": null,\n      \"metadata\": {\n        \"investor_ids\": null,\n        \"book_operator_id\": null,\n        \"request_id\": null,\n        \"exchange_id\": null,\n        \"status\": null,\n        \"trade_portal_id\": null,\n        \"commission\": null,\n        \"real_investor_id\": null,\n        \"expired\": false\n      },\n      \"schema_version\": 1,\n      \"beneficiary_auth_id\": null,\n      \"signature\": null,\n      \"escrow_auth_id\": null\n    },\n    {\n      \"record\": {\n        \"asset_id\": \"<string>\",\n        \"give_investor_id\": \"<string>\",\n        \"quantity\": \"<number>\",\n        \"take_investor_id\": \"<string>\",\n        \"book_transfer_id\": null\n      },\n      \"execution_status\": null,\n      \"metadata\": {\n        \"investor_ids\": null,\n        \"book_operator_id\": null,\n        \"request_id\": null,\n        \"exchange_id\": null,\n        \"status\": null,\n        \"trade_portal_id\": null,\n        \"commission\": null,\n        \"real_investor_id\": null,\n        \"expired\": false\n      },\n      \"schema_version\": 1,\n      \"beneficiary_auth_id\": null,\n      \"signature\": null,\n      \"escrow_auth_id\": null\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ccfe2a2d-7502-4349-97fa-5c9725834308",
+          "name": "Get the detail of all book transfers involved by this node on\nAtomicNet.\n",
+          "request": {
+            "name": "Get the detail of all book transfers involved by this node on\nAtomicNet.\n",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "book_transfers",
+                "list",
+                "local"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "The specified status to be filtered on."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2567178f-fc8f-46e0-bbdb-e2f8feb8fbf2",
+              "name": "A list of book transfers.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "book_transfers",
+                    "list",
+                    "local"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "pending"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"book_transfers\": [\n    {\n      \"record\": {\n        \"asset_id\": \"<string>\",\n        \"give_investor_id\": \"<string>\",\n        \"quantity\": \"<number>\",\n        \"take_investor_id\": \"<string>\",\n        \"book_transfer_id\": null\n      },\n      \"execution_status\": null,\n      \"metadata\": {\n        \"investor_ids\": null,\n        \"book_operator_id\": null,\n        \"request_id\": null,\n        \"exchange_id\": null,\n        \"status\": null,\n        \"trade_portal_id\": null,\n        \"commission\": null,\n        \"real_investor_id\": null,\n        \"expired\": false\n      },\n      \"schema_version\": 1,\n      \"beneficiary_auth_id\": null,\n      \"signature\": null,\n      \"escrow_auth_id\": null\n    },\n    {\n      \"record\": {\n        \"asset_id\": \"<string>\",\n        \"give_investor_id\": \"<string>\",\n        \"quantity\": \"<number>\",\n        \"take_investor_id\": \"<string>\",\n        \"book_transfer_id\": null\n      },\n      \"execution_status\": null,\n      \"metadata\": {\n        \"investor_ids\": null,\n        \"book_operator_id\": null,\n        \"request_id\": null,\n        \"exchange_id\": null,\n        \"status\": null,\n        \"trade_portal_id\": null,\n        \"commission\": null,\n        \"real_investor_id\": null,\n        \"expired\": false\n      },\n      \"schema_version\": 1,\n      \"beneficiary_auth_id\": null,\n      \"signature\": null,\n      \"escrow_auth_id\": null\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "18a4daee-8da2-484a-ac82-d879c99d75aa",
+          "name": "Submit book transfer to AtomicNet node.\n",
+          "request": {
+            "name": "Submit book transfer to AtomicNet node.\n",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "book_transfers",
+                "submit"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"record\": {\n    \"asset_id\": \"<string>\",\n    \"give_investor_id\": \"<string>\",\n    \"quantity\": \"<string>\",\n    \"take_investor_id\": \"<string>\",\n    \"book_transfer_id\": null\n  },\n  \"signature\": null,\n  \"escrow_auth_id\": null\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ad88a0a4-49c8-4de7-8c4b-edefd9911243",
+              "name": "The order.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "book_transfers",
+                    "submit"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"record\": {\n    \"asset_id\": \"<string>\",\n    \"give_investor_id\": \"<string>\",\n    \"quantity\": \"<string>\",\n    \"take_investor_id\": \"<string>\",\n    \"book_transfer_id\": null\n  },\n  \"signature\": null,\n  \"escrow_auth_id\": null\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"record\": {\n    \"asset_id\": \"<string>\",\n    \"give_investor_id\": \"<string>\",\n    \"quantity\": \"<string>\",\n    \"take_investor_id\": \"<string>\",\n    \"book_transfer_id\": null\n  },\n  \"signature\": null,\n  \"escrow_auth_id\": null\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "participant"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "/v1/auth/token"
+      },
+      {
+        "key": "grant_type",
+        "value": "client_credentials"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "48c08b99-0a25-4e89-aed7-05c56e21e117",
+    "name": "Polysign book transfer API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Operations tagged book transfer across 2 of this provider's published API definitions: polysign-atomicnet-api-server-openapi.json, polysign-merchant-gate-openapi.json. Each path carries the servers of the definition it was published in.",
+      "type": "text/plain"
+    }
+  }
+}
