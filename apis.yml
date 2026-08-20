@@ -20,6 +20,17 @@ specificationVersion: '0.23'
 created: '2026-08-02'
 modified: '2026-08-02'
 tags:
+  - Digital Assets
+  - Blockchain
+  - institutional-custody
+  - Settlement
+  - Escrow
+  - Capital Markets
+  - Payments
+  - Fintech
+  - Distributed Ledger
+  - atomicnet
+tags_raw:
   - digital-assets
   - blockchain
   - institutional-custody
@@ -125,6 +136,8 @@ apis:
   description: The asset API from PolySign — 5 operation(s) for asset.
   humanURL: https://docs.polynet.sandbox.polysign.io/
   tags:
+  - Asset
+  tags_raw:
   - asset
   properties:
   - type: OpenAPI
@@ -146,6 +159,8 @@ apis:
   description: The authentication API from PolySign — 1 operation(s) for authentication.
   humanURL: https://docs.polynet.sandbox.polysign.io/
   tags:
+  - Authentication
+  tags_raw:
   - authentication
   properties:
   - type: OpenAPI
@@ -189,6 +204,8 @@ apis:
   description: The book transfer API from PolySign — 5 operation(s) for book transfer.
   humanURL: https://docs.polynet.sandbox.polysign.io/
   tags:
+  - Book Transfer
+  tags_raw:
   - book transfer
   properties:
   - type: OpenAPI
@@ -253,6 +270,8 @@ apis:
   description: The investor API from PolySign — 2 operation(s) for investor.
   humanURL: https://docs.polynet.sandbox.polysign.io/
   tags:
+  - Investor
+  tags_raw:
   - investor
   properties:
   - type: OpenAPI
@@ -274,6 +293,8 @@ apis:
   description: The order API from PolySign — 5 operation(s) for order.
   humanURL: https://docs.polynet.sandbox.polysign.io/
   tags:
+  - Order
+  tags_raw:
   - order
   properties:
   - type: OpenAPI
@@ -295,6 +316,8 @@ apis:
   description: The partner API from PolySign — 3 operation(s) for partner.
   humanURL: https://docs.polynet.sandbox.polysign.io/
   tags:
+  - Partner
+  tags_raw:
   - partner
   properties:
   - type: OpenAPI
@@ -316,6 +339,8 @@ apis:
   description: The settlement API from PolySign — 5 operation(s) for settlement.
   humanURL: https://docs.polynet.sandbox.polysign.io/
   tags:
+  - Settlement
+  tags_raw:
   - settlement
   properties:
   - type: OpenAPI
@@ -359,6 +384,8 @@ apis:
   description: The system API from PolySign — 4 operation(s) for system.
   humanURL: https://docs.polynet.sandbox.polysign.io/
   tags:
+  - System
+  tags_raw:
   - system
   properties:
   - type: OpenAPI
@@ -380,6 +407,8 @@ apis:
   description: The utility API from PolySign — 5 operation(s) for utility.
   humanURL: https://docs.polynet.sandbox.polysign.io/
   tags:
+  - Utility
+  tags_raw:
   - utility
   properties:
   - type: OpenAPI
