@@ -12,6 +12,17 @@ description: >-
   Merchant Gate Node, and the AtomicNet ABC Proxy Service (account registration, digest
   memorialization, signing and testnet faucet) — all authenticated with OAuth 2.0 client credentials
   issued by a PolySign-hosted token endpoint.
+deliveryModel:
+  model: library
+  open_source: false
+  commercial: false
+  callable_host: false
+  label: Library · distributed through package registries, no callable service
+  confidence: low
+  source:
+  - openapi
+  generated: '2026-08-28'
+  method: derived
 image: https://www.polysign.io/images/logo.png
 url: https://raw.githubusercontent.com/api-evangelist/polysign/refs/heads/main/apis.yml
 x-type: company
