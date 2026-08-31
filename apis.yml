@@ -31,15 +31,15 @@ specificationVersion: '0.23'
 created: '2026-08-02'
 modified: '2026-08-02'
 tags:
-  - Digital Assets
+  - digital-assets
   - Blockchain
-  - institutional-custody
-  - Settlement
-  - Escrow
-  - Capital Markets
+  - Institutional Custody
+  - settlement
+  - escrow
+  - capital-markets
   - Payments
   - Fintech
-  - Distributed Ledger
+  - distributed-ledger
   - atomicnet
 tags_raw:
   - digital-assets
@@ -215,7 +215,7 @@ apis:
   description: The book transfer API from PolySign — 5 operation(s) for book transfer.
   humanURL: https://docs.polynet.sandbox.polysign.io/
   tags:
-  - Book Transfer
+  - book transfer
   tags_raw:
   - book transfer
   properties:
@@ -281,7 +281,7 @@ apis:
   description: The investor API from PolySign — 2 operation(s) for investor.
   humanURL: https://docs.polynet.sandbox.polysign.io/
   tags:
-  - Investor
+  - investor
   tags_raw:
   - investor
   properties:
@@ -304,7 +304,7 @@ apis:
   description: The order API from PolySign — 5 operation(s) for order.
   humanURL: https://docs.polynet.sandbox.polysign.io/
   tags:
-  - Order
+  - order
   tags_raw:
   - order
   properties:
@@ -327,7 +327,7 @@ apis:
   description: The partner API from PolySign — 3 operation(s) for partner.
   humanURL: https://docs.polynet.sandbox.polysign.io/
   tags:
-  - Partner
+  - partner
   tags_raw:
   - partner
   properties:
@@ -350,7 +350,7 @@ apis:
   description: The settlement API from PolySign — 5 operation(s) for settlement.
   humanURL: https://docs.polynet.sandbox.polysign.io/
   tags:
-  - Settlement
+  - settlement
   tags_raw:
   - settlement
   properties:
@@ -437,6 +437,11 @@ apis:
   - type: APIReference
     url: https://docs.polynet.sandbox.polysign.io/abc-service.html
 common:
+  - type: ParentCompany
+    url: https://apis.io/providers/ripple/
+    name: Ripple
+    x-relationship: acquired
+    x-evidence: "Founded by Arthur Britto, David Schwartz and Jack McDonald, PolySign operates a third-generation permissioned blockchain and the AtomicNet settlement network, and was the parent of Standard Custody & Trust Company, the NYDFS-regulated digit"
   - type: MCPServer
     url: mcp/polysign-mcp.yml
   - type: Overlay
