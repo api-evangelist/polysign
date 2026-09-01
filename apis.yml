@@ -31,15 +31,15 @@ specificationVersion: '0.23'
 created: '2026-08-02'
 modified: '2026-08-02'
 tags:
-  - digital-assets
+  - Digital Assets
   - Blockchain
-  - Institutional Custody
-  - settlement
-  - escrow
-  - capital-markets
+  - institutional-custody
+  - Settlement
+  - Escrow
+  - Capital Markets
   - Payments
   - Fintech
-  - distributed-ledger
+  - Distributed Ledger
   - atomicnet
 tags_raw:
   - digital-assets
@@ -215,7 +215,7 @@ apis:
   description: The book transfer API from PolySign — 5 operation(s) for book transfer.
   humanURL: https://docs.polynet.sandbox.polysign.io/
   tags:
-  - book transfer
+  - Book Transfer
   tags_raw:
   - book transfer
   properties:
@@ -281,7 +281,7 @@ apis:
   description: The investor API from PolySign — 2 operation(s) for investor.
   humanURL: https://docs.polynet.sandbox.polysign.io/
   tags:
-  - investor
+  - Investor
   tags_raw:
   - investor
   properties:
@@ -304,7 +304,7 @@ apis:
   description: The order API from PolySign — 5 operation(s) for order.
   humanURL: https://docs.polynet.sandbox.polysign.io/
   tags:
-  - order
+  - Order
   tags_raw:
   - order
   properties:
@@ -327,7 +327,7 @@ apis:
   description: The partner API from PolySign — 3 operation(s) for partner.
   humanURL: https://docs.polynet.sandbox.polysign.io/
   tags:
-  - partner
+  - Partner
   tags_raw:
   - partner
   properties:
@@ -350,7 +350,7 @@ apis:
   description: The settlement API from PolySign — 5 operation(s) for settlement.
   humanURL: https://docs.polynet.sandbox.polysign.io/
   tags:
-  - settlement
+  - Settlement
   tags_raw:
   - settlement
   properties:
