@@ -341,7 +341,7 @@ apis:
   description: The partner API from PolySign — 3 operation(s) for partner.
   humanURL: https://docs.polynet.sandbox.polysign.io/
   tags:
-  - Partner
+  - Partners
   tags_raw:
   - partner
   properties:
