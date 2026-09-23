@@ -14,9 +14,7 @@ tags:
 paths:
   /v1/beneficiary_status_updates/{beneficiary_auth_id}:
     get:
-      summary: 'Get all status updates associated with a beneficiary authorization by its id.
-
-        '
+      summary: Get all status updates associated with a beneficiary authorization by its id
       tags:
       - beneficiary authorization
       parameters:
@@ -33,9 +31,11 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/BeneficiaryAuthStatusUpdateList'
+      operationId: getV1BeneficiaryStatusUpdatesByBeneficiaryAuthId
+      x-operation-id-source: derived
   /v1/beneficiary_authorizations/{beneficiary_auth_id}:
     get:
-      summary: Get the details of a beneficiary authorization on AtomicNet by its id.
+      summary: Get the details of a beneficiary authorization on AtomicNet by its id
       tags:
       - beneficiary authorization
       parameters:
@@ -52,9 +52,11 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/BeneficiaryAuth'
+      operationId: getV1BeneficiaryAuthorizationsByBeneficiaryAuthId
+      x-operation-id-source: derived
   /v1/beneficiary_authorizations/list:
     get:
-      summary: Get the detail of all beneficiary authorizations on AtomicNet.
+      summary: Get the detail of all beneficiary authorizations on AtomicNet
       tags:
       - beneficiary authorization
       parameters:
@@ -71,9 +73,11 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/BeneficiaryAuthList'
+      operationId: getV1BeneficiaryAuthorizationsList
+      x-operation-id-source: derived
   /v1/beneficiary_authorizations/list/local:
     get:
-      summary: Get the detail of all beneficiary authorizations involved by this node.
+      summary: Get the detail of all beneficiary authorizations involved by this node
       tags:
       - beneficiary authorization
       parameters:
@@ -90,9 +94,11 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/BeneficiaryAuthList'
+      operationId: getV1BeneficiaryAuthorizationsListLocal
+      x-operation-id-source: derived
   /v1/beneficiary_authorizations/request:
     post:
-      summary: Request a new beneficiary authorization.
+      summary: Request a new beneficiary authorization
       tags:
       - beneficiary authorization
       requestBody:
@@ -107,9 +113,11 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/BeneficiaryAuth'
+      operationId: postV1BeneficiaryAuthorizationsRequest
+      x-operation-id-source: derived
   /v1/beneficiary_authorizations/:
     put:
-      summary: Approve a beneficiary authorization.
+      summary: Approve a beneficiary authorization
       tags:
       - beneficiary authorization
       requestBody:
@@ -124,8 +132,140 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/BeneficiaryAuth'
+      operationId: putV1BeneficiaryAuthorizations
+      x-operation-id-source: derived
 components:
   schemas:
+    BeneficiaryAuthStatusUpdate:
+      type: object
+      properties:
+        beneficiary_auth_status_update_id:
+          type: string
+          format: uuid
+          description: Identifier of the beneficiary auth status update.
+        last_updated:
+          type: string
+          format: date-time
+          description: ISO formatted timestamp for beneficiary authorization last status update.
+        beneficiary_auth_id:
+          type: string
+          format: uuid
+          description: Identifier of the beneficiary authorization denoting permission to receive the asset.
+        status:
+          type: string
+          description: The most recently updated beneficiary auth status.
+      required:
+      - beneficiary_auth_id
+      - beneficiary_auth_status_update_id
+      - last_updated
+      - status
+      description: Beneficiary authorization status update object.
+    OnetimeIdMapList4:
+      type: object
+      properties:
+        id_maps:
+          type: array
+          description: The list of ID mappings.
+          items:
+            $ref: '#/components/schemas/OnetimeIdMap4'
+      description: List of ID mappings.
+    BeneficiaryAuthList:
+      type: object
+      properties:
+        beneficiary_auths:
+          type: array
+          items:
+            $ref: '#/components/schemas/BeneficiaryAuth'
+      required:
+      - beneficiary_auths
+    AbcSignature4:
+      type: object
+      properties:
+        digest_type:
+          type: string
+          description: The ABC digest type.
+        abc_account_id:
+          type: string
+          description: Identifier of the ABC account.
+        signature:
+          type: string
+          description: Signature of the digest.
+        digest:
+          type: string
+          description: The digest to be signed.
+        schema_version:
+          type:
+          - integer
+          - 'null'
+          default: 1
+          description: Version for the message schema.
+      required:
+      - abc_account_id
+      - digest
+      - digest_type
+      - signature
+    BeneficiaryAuthStatusUpdateList:
+      type: object
+      properties:
+        beneficiary_auth_status_updates:
+          type: array
+          items:
+            $ref: '#/components/schemas/BeneficiaryAuthStatusUpdate'
+      required:
+      - beneficiary_auth_status_updates
+      description: List of beneficiary authorization status update objects.
+    BeneficiaryAuthRecord:
+      type: object
+      properties:
+        expiration:
+          type: string
+          format: date-time
+          description: ISO formatted timestamp for the authorization to last.
+        investor_id:
+          type: string
+          description: Identifier of the investor that is being authorized.
+        beneficiary_auth_id:
+          type: string
+          format: uuid
+          description: Identifier of the beneficiary authorization denoting permission to receive the asset.
+        asset_id:
+          type: string
+          description: Identifier of the asset being authorized.
+      required:
+      - asset_id
+      - beneficiary_auth_id
+      - expiration
+      - investor_id
+      description: Beneficiary authorization record object.
+    BeneficiaryAuth:
+      type: object
+      properties:
+        execution_status:
+          type:
+          - string
+          - 'null'
+          default: null
+          description: Execution status for the beneficiary authorization object.
+        metadata:
+          description: Metadata for the associated record object.
+          allOf:
+          - $ref: '#/components/schemas/Metadata4'
+        schema_version:
+          type: integer
+          default: 1
+          description: Version for the message schema.
+        signature:
+          default: null
+          description: Signature for the associated record object.
+          allOf:
+          - $ref: '#/components/schemas/AbcSignature4'
+        record:
+          description: Beneficiary authorization record.
+          allOf:
+          - $ref: '#/components/schemas/BeneficiaryAuthRecord'
+      required:
+      - record
+      description: Beneficiary authorization schema.
     OnetimeIdMap4:
       type: object
       properties:
@@ -198,136 +338,6 @@ components:
           - 'null'
           default: false
           description: Expiry status for the record object.
-    BeneficiaryAuthList:
-      type: object
-      properties:
-        beneficiary_auths:
-          type: array
-          items:
-            $ref: '#/components/schemas/BeneficiaryAuth'
-      required:
-      - beneficiary_auths
-    AbcSignature4:
-      type: object
-      properties:
-        digest_type:
-          type: string
-          description: The ABC digest type.
-        abc_account_id:
-          type: string
-          description: Identifier of the ABC account.
-        signature:
-          type: string
-          description: Signature of the digest.
-        digest:
-          type: string
-          description: The digest to be signed.
-        schema_version:
-          type:
-          - integer
-          - 'null'
-          default: 1
-          description: Version for the message schema.
-      required:
-      - abc_account_id
-      - digest
-      - digest_type
-      - signature
-    BeneficiaryAuth:
-      type: object
-      properties:
-        execution_status:
-          type:
-          - string
-          - 'null'
-          default: null
-          description: Execution status for the beneficiary authorization object.
-        metadata:
-          description: Metadata for the associated record object.
-          allOf:
-          - $ref: '#/components/schemas/Metadata4'
-        schema_version:
-          type: integer
-          default: 1
-          description: Version for the message schema.
-        signature:
-          default: null
-          description: Signature for the associated record object.
-          allOf:
-          - $ref: '#/components/schemas/AbcSignature4'
-        record:
-          description: Beneficiary authorization record.
-          allOf:
-          - $ref: '#/components/schemas/BeneficiaryAuthRecord'
-      required:
-      - record
-      description: Beneficiary authorization schema.
-    OnetimeIdMapList4:
-      type: object
-      properties:
-        id_maps:
-          type: array
-          description: The list of ID mappings.
-          items:
-            $ref: '#/components/schemas/OnetimeIdMap4'
-      description: List of ID mappings.
-    BeneficiaryAuthStatusUpdateList:
-      type: object
-      properties:
-        beneficiary_auth_status_updates:
-          type: array
-          items:
-            $ref: '#/components/schemas/BeneficiaryAuthStatusUpdate'
-      required:
-      - beneficiary_auth_status_updates
-      description: List of beneficiary authorization status update objects.
-    BeneficiaryAuthStatusUpdate:
-      type: object
-      properties:
-        beneficiary_auth_status_update_id:
-          type: string
-          format: uuid
-          description: Identifier of the beneficiary auth status update.
-        last_updated:
-          type: string
-          format: date-time
-          description: ISO formatted timestamp for beneficiary authorization last status update.
-        beneficiary_auth_id:
-          type: string
-          format: uuid
-          description: Identifier of the beneficiary authorization denoting permission to receive the asset.
-        status:
-          type: string
-          description: The most recently updated beneficiary auth status.
-      required:
-      - beneficiary_auth_id
-      - beneficiary_auth_status_update_id
-      - last_updated
-      - status
-      description: Beneficiary authorization status update object.
-    BeneficiaryAuthRecord:
-      type: object
-      properties:
-        expiration:
-          type: string
-          format: date-time
-          description: ISO formatted timestamp for the authorization to last.
-        investor_id:
-          type: string
-          description: Identifier of the investor that is being authorized.
-        beneficiary_auth_id:
-          type: string
-          format: uuid
-          description: Identifier of the beneficiary authorization denoting permission to receive the asset.
-        asset_id:
-          type: string
-          description: Identifier of the asset being authorized.
-      required:
-      - asset_id
-      - beneficiary_auth_id
-      - expiration
-      - investor_id
-      description: Beneficiary authorization record object.
   securitySchemes:
     OAuth2:
       type: oauth2

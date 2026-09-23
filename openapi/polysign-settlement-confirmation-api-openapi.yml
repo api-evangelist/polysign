@@ -14,7 +14,7 @@ tags:
 paths:
   /v1/settlement_confirmations/{settlement_id}:
     get:
-      summary: Get all settlement confirmations for a settlement_id in AtomicNet.
+      summary: Get all settlement confirmations for a settlement_id in AtomicNet
       tags:
       - settlement confirmation
       parameters:
@@ -31,9 +31,11 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/SettlementConfirmationList'
+      operationId: getV1SettlementConfirmationsBySettlementId
+      x-operation-id-source: derived
   /v1/settlement_confirmations/{give_order_id}/{take_order_id}:
     get:
-      summary: Get the detail of a settlement confirmation on AtomicNet.
+      summary: Get the detail of a settlement confirmation on AtomicNet
       tags:
       - settlement confirmation
       parameters:
@@ -56,9 +58,11 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/SettlementConfirmation'
+      operationId: getV1SettlementConfirmationsByGiveOrderIdByTakeOrderId
+      x-operation-id-source: derived
   /v1/settlement_confirmations/list:
     get:
-      summary: Get the detail of all settlement confirmations on AtomicNet.
+      summary: Get the detail of all settlement confirmations on AtomicNet
       tags:
       - settlement confirmation
       parameters:
@@ -75,13 +79,11 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/SettlementConfirmationList'
+      operationId: getV1SettlementConfirmationsList
+      x-operation-id-source: derived
   /v1/settlement_confirmations/list/local:
     get:
-      summary: 'Get the detail of all settlement confirmations involved by this node on
-
-        AtomicNet.
-
-        '
+      summary: Get the detail of all settlement confirmations involved by this node on…
       tags:
       - settlement confirmation
       parameters:
@@ -98,11 +100,11 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/SettlementConfirmationList'
+      operationId: getV1SettlementConfirmationsListLocal
+      x-operation-id-source: derived
   /v1/settlement_confirmations/:
     put:
-      summary: 'Release a settlement confirmation on execution after being memorialized on ABC.
-
-        '
+      summary: Release a settlement confirmation on execution after being memorialized on ABC
       tags:
       - settlement confirmation
       requestBody:
@@ -117,11 +119,11 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/SettlementConfirmation'
+      operationId: putV1SettlementConfirmations
+      x-operation-id-source: derived
   /v1/settlement_confirmation_status_updates/{give_order_id}/{take_order_id}:
     get:
-      summary: 'Get all status updates associated with a settlement confirmation by its id.
-
-        '
+      summary: Get all status updates associated with a settlement confirmation by its id
       tags:
       - settlement confirmation
       parameters:
@@ -144,124 +146,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/SettlementConfirmationStatusUpdateList'
+      operationId: getV1SettlementConfirmationStatusUpdatesByGiveOrderIdByTakeOrderId
+      x-operation-id-source: derived
 components:
   schemas:
-    SettlementConfirmationStatusUpdateList:
-      type: object
-      properties:
-        settlement_confirmation_status_updates:
-          type: array
-          items:
-            $ref: '#/components/schemas/SettlementConfirmationStatusUpdate'
-      required:
-      - settlement_confirmation_status_updates
-      description: List of settlement confirmation status update objects.
-    SettlementConfirmationRecord:
-      type: object
-      properties:
-        settlement_id:
-          type: string
-          format: uuid
-          description: Identifier of the settlement this confirmation involved.
-        asset_quantity:
-          type: number
-          description: The quantity of the asset to be traded.
-        beneficiary_auth_id:
-          type: string
-          format: uuid
-          description: Identifier of the beneficiary authorization of the taken order.
-        take_order_id:
-          type: string
-          format: uuid
-          description: Identifier of the taken order.
-        give_order_id:
-          type: string
-          format: uuid
-          description: Identifier of the given order.
-        asset_id:
-          type: string
-          description: Identifier of the asset to be traded.
-        escrow_auth_id:
-          type: string
-          format: uuid
-          description: Identifier of the escrow authorization of the given order.
-      required:
-      - asset_id
-      - asset_quantity
-      - beneficiary_auth_id
-      - escrow_auth_id
-      - give_order_id
-      - settlement_id
-      - take_order_id
-    AbcSignature5:
-      type: object
-      properties:
-        digest_type:
-          type: string
-          description: The ABC digest type.
-        abc_account_id:
-          type: string
-          description: Identifier of the ABC account.
-        signature:
-          type: string
-          description: Signature of the digest.
-        digest:
-          type: string
-          description: The digest to be signed.
-        schema_version:
-          type:
-          - integer
-          - 'null'
-          default: 1
-          description: Version for the message schema.
-      required:
-      - abc_account_id
-      - digest
-      - digest_type
-      - signature
-    OnetimeIdMapList5:
-      type: object
-      properties:
-        id_maps:
-          type: array
-          description: The list of ID mappings.
-          items:
-            $ref: '#/components/schemas/OnetimeIdMap5'
-      description: List of ID mappings.
-    SettlementConfirmation:
-      type: object
-      properties:
-        abc_memorial_digest:
-          type:
-          - string
-          - 'null'
-          default: null
-          description: The digest been memorialized in ABC.
-        metadata:
-          description: Metadata for the associated record object.
-          allOf:
-          - $ref: '#/components/schemas/Metadata5'
-        schema_version:
-          type: integer
-          default: 1
-          description: Version for the message schema.
-        signature:
-          default: null
-          description: Signature for the associated record object.
-          allOf:
-          - $ref: '#/components/schemas/AbcSignature5'
-        abc_memorialization_block:
-          type:
-          - integer
-          - 'null'
-          default: null
-          description: The block height the memorialization localed.
-        record:
-          description: The record object for the settlement confirmation.
-          allOf:
-          - $ref: '#/components/schemas/SettlementConfirmationRecord'
-      required:
-      - record
     SettlementConfirmationList:
       type: object
       properties:
@@ -271,19 +159,15 @@ components:
             $ref: '#/components/schemas/SettlementConfirmation'
       required:
       - settlement_confirmations
-    OnetimeIdMap5:
+    OnetimeIdMapList5:
       type: object
       properties:
-        one_time_id:
-          type: string
-          description: The one time ID.
-        real_id:
-          type: string
-          description: The real ID.
-      required:
-      - one_time_id
-      - real_id
-      description: ID mapping.
+        id_maps:
+          type: array
+          description: The list of ID mappings.
+          items:
+            $ref: '#/components/schemas/OnetimeIdMap5'
+      description: List of ID mappings.
     SettlementConfirmationStatusUpdate:
       type: object
       properties:
@@ -313,6 +197,55 @@ components:
       - status
       - take_order_id
       description: Settlement confirmation status update object.
+    OnetimeIdMap5:
+      type: object
+      properties:
+        one_time_id:
+          type: string
+          description: The one time ID.
+        real_id:
+          type: string
+          description: The real ID.
+      required:
+      - one_time_id
+      - real_id
+      description: ID mapping.
+    AbcSignature5:
+      type: object
+      properties:
+        digest_type:
+          type: string
+          description: The ABC digest type.
+        abc_account_id:
+          type: string
+          description: Identifier of the ABC account.
+        signature:
+          type: string
+          description: Signature of the digest.
+        digest:
+          type: string
+          description: The digest to be signed.
+        schema_version:
+          type:
+          - integer
+          - 'null'
+          default: 1
+          description: Version for the message schema.
+      required:
+      - abc_account_id
+      - digest
+      - digest_type
+      - signature
+    SettlementConfirmationStatusUpdateList:
+      type: object
+      properties:
+        settlement_confirmation_status_updates:
+          type: array
+          items:
+            $ref: '#/components/schemas/SettlementConfirmationStatusUpdate'
+      required:
+      - settlement_confirmation_status_updates
+      description: List of settlement confirmation status update objects.
     Metadata5:
       type: object
       properties:
@@ -372,6 +305,77 @@ components:
           - 'null'
           default: false
           description: Expiry status for the record object.
+    SettlementConfirmation:
+      type: object
+      properties:
+        abc_memorial_digest:
+          type:
+          - string
+          - 'null'
+          default: null
+          description: The digest been memorialized in ABC.
+        metadata:
+          description: Metadata for the associated record object.
+          allOf:
+          - $ref: '#/components/schemas/Metadata5'
+        schema_version:
+          type: integer
+          default: 1
+          description: Version for the message schema.
+        signature:
+          default: null
+          description: Signature for the associated record object.
+          allOf:
+          - $ref: '#/components/schemas/AbcSignature5'
+        abc_memorialization_block:
+          type:
+          - integer
+          - 'null'
+          default: null
+          description: The block height the memorialization localed.
+        record:
+          description: The record object for the settlement confirmation.
+          allOf:
+          - $ref: '#/components/schemas/SettlementConfirmationRecord'
+      required:
+      - record
+    SettlementConfirmationRecord:
+      type: object
+      properties:
+        settlement_id:
+          type: string
+          format: uuid
+          description: Identifier of the settlement this confirmation involved.
+        asset_quantity:
+          type: number
+          description: The quantity of the asset to be traded.
+        beneficiary_auth_id:
+          type: string
+          format: uuid
+          description: Identifier of the beneficiary authorization of the taken order.
+        take_order_id:
+          type: string
+          format: uuid
+          description: Identifier of the taken order.
+        give_order_id:
+          type: string
+          format: uuid
+          description: Identifier of the given order.
+        asset_id:
+          type: string
+          description: Identifier of the asset to be traded.
+        escrow_auth_id:
+          type: string
+          format: uuid
+          description: Identifier of the escrow authorization of the given order.
+      required:
+      - asset_id
+      - asset_quantity
+      - beneficiary_auth_id
+      - escrow_auth_id
+      - give_order_id
+      - settlement_id
+      - take_order_id
   securitySchemes:
     OAuth2:
       type: oauth2

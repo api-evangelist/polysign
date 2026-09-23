@@ -14,7 +14,7 @@ tags:
 paths:
   /v1/book_transfer_confirmations/{book_transfer_id}:
     get:
-      summary: Get the detail of a book transfer confirmation on AtomicNet.
+      summary: Get the detail of a book transfer confirmation on AtomicNet
       tags:
       - book transfer confirmation
       parameters:
@@ -31,9 +31,11 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/BookTransferConfirmation'
+      operationId: getV1BookTransferConfirmationsByBookTransferId
+      x-operation-id-source: derived
   /v1/book_transfer_confirmations/list:
     get:
-      summary: Get the detail of all book transfer confirmations on AtomicNet.
+      summary: Get the detail of all book transfer confirmations on AtomicNet
       tags:
       - book transfer confirmation
       parameters:
@@ -50,13 +52,11 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/BookTransferConfirmationList'
+      operationId: getV1BookTransferConfirmationsList
+      x-operation-id-source: derived
   /v1/book_transfer_confirmations/list/local:
     get:
-      summary: 'Get the detail of all book transfer confirmations involved by this node on
-
-        AtomicNet.
-
-        '
+      summary: Get the detail of all book transfer confirmations involved by this node on…
       tags:
       - book transfer confirmation
       parameters:
@@ -73,13 +73,11 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/BookTransferConfirmationList'
+      operationId: getV1BookTransferConfirmationsListLocal
+      x-operation-id-source: derived
   /v1/book_transfer_confirmations/:
     put:
-      summary: 'Release a book transfer confirmation on execution after
-
-        being memorialized on ABC.
-
-        '
+      summary: Release a book transfer confirmation on execution after being memorialized on…
       tags:
       - book transfer confirmation
       requestBody:
@@ -94,8 +92,101 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/BookTransferConfirmation'
+      operationId: putV1BookTransferConfirmations
+      x-operation-id-source: derived
 components:
   schemas:
+    OnetimeIdMap8:
+      type: object
+      properties:
+        one_time_id:
+          type: string
+          description: The one time ID.
+        real_id:
+          type: string
+          description: The real ID.
+      required:
+      - one_time_id
+      - real_id
+      description: ID mapping.
+    BookTransferConfirmation:
+      type: object
+      properties:
+        abc_memorial_digest:
+          type:
+          - string
+          - 'null'
+          default: null
+          description: The digest been memorialized in ABC.
+        metadata:
+          description: Metadata for the associated record object.
+          allOf:
+          - $ref: '#/components/schemas/Metadata7'
+        schema_version:
+          type: integer
+          default: 1
+          description: Version for the message schema.
+        signature:
+          default: null
+          description: Signature for the associated record object.
+          allOf:
+          - $ref: '#/components/schemas/AbcSignature7'
+        abc_memorialization_block:
+          type:
+          - integer
+          - 'null'
+          default: null
+          description: The block height the memorialization localed.
+        record:
+          description: The record object for the book_transfer confirmation.
+          allOf:
+          - $ref: '#/components/schemas/BookTransferConfirmationRecord'
+      required:
+      - record
+    OnetimeIdMapList7:
+      type: object
+      properties:
+        id_maps:
+          type: array
+          description: The list of ID mappings.
+          items:
+            $ref: '#/components/schemas/OnetimeIdMap8'
+      description: List of ID mappings.
+    BookTransferConfirmationList:
+      type: object
+      properties:
+        book_transfer_confirmations:
+          type: array
+          items:
+            $ref: '#/components/schemas/BookTransferConfirmation'
+      required:
+      - book_transfer_confirmations
+    AbcSignature7:
+      type: object
+      properties:
+        digest_type:
+          type: string
+          description: The ABC digest type.
+        abc_account_id:
+          type: string
+          description: Identifier of the ABC account.
+        signature:
+          type: string
+          description: Signature of the digest.
+        digest:
+          type: string
+          description: The digest to be signed.
+        schema_version:
+          type:
+          - integer
+          - 'null'
+          default: 1
+          description: Version for the message schema.
+      required:
+      - abc_account_id
+      - digest
+      - digest_type
+      - signature
     Metadata7:
       type: object
       properties:
@@ -155,53 +246,6 @@ components:
           - 'null'
           default: false
           description: Expiry status for the record object.
-    OnetimeIdMap8:
-      type: object
-      properties:
-        one_time_id:
-          type: string
-          description: The one time ID.
-        real_id:
-          type: string
-          description: The real ID.
-      required:
-      - one_time_id
-      - real_id
-      description: ID mapping.
-    BookTransferConfirmation:
-      type: object
-      properties:
-        abc_memorial_digest:
-          type:
-          - string
-          - 'null'
-          default: null
-          description: The digest been memorialized in ABC.
-        metadata:
-          description: Metadata for the associated record object.
-          allOf:
-          - $ref: '#/components/schemas/Metadata7'
-        schema_version:
-          type: integer
-          default: 1
-          description: Version for the message schema.
-        signature:
-          default: null
-          description: Signature for the associated record object.
-          allOf:
-          - $ref: '#/components/schemas/AbcSignature7'
-        abc_memorialization_block:
-          type:
-          - integer
-          - 'null'
-          default: null
-          description: The block height the memorialization localed.
-        record:
-          description: The record object for the book_transfer confirmation.
-          allOf:
-          - $ref: '#/components/schemas/BookTransferConfirmationRecord'
-      required:
-      - record
     BookTransferConfirmationRecord:
       type: object
       properties:
@@ -229,50 +273,6 @@ components:
       - beneficiary_auth_id
       - book_transfer_id
       - escrow_auth_id
-    OnetimeIdMapList7:
-      type: object
-      properties:
-        id_maps:
-          type: array
-          description: The list of ID mappings.
-          items:
-            $ref: '#/components/schemas/OnetimeIdMap8'
-      description: List of ID mappings.
-    BookTransferConfirmationList:
-      type: object
-      properties:
-        book_transfer_confirmations:
-          type: array
-          items:
-            $ref: '#/components/schemas/BookTransferConfirmation'
-      required:
-      - book_transfer_confirmations
-    AbcSignature7:
-      type: object
-      properties:
-        digest_type:
-          type: string
-          description: The ABC digest type.
-        abc_account_id:
-          type: string
-          description: Identifier of the ABC account.
-        signature:
-          type: string
-          description: Signature of the digest.
-        digest:
-          type: string
-          description: The digest to be signed.
-        schema_version:
-          type:
-          - integer
-          - 'null'
-          default: 1
-          description: Version for the message schema.
-      required:
-      - abc_account_id
-      - digest
-      - digest_type
-      - signature
   securitySchemes:
     OAuth2:
       type: oauth2

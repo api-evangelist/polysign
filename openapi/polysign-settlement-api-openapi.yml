@@ -10,13 +10,13 @@ security:
 - OAuth2:
   - participant
 tags:
-- name: settlement
+- name: Settlement
 paths:
   /v1/settlements/:
     put:
-      summary: Publish a settlement to AtomicNet after being memorialized on ABC.
+      summary: Publish a settlement to AtomicNet after being memorialized on ABC
       tags:
-      - settlement
+      - Settlement
       requestBody:
         content:
           application/json:
@@ -29,11 +29,13 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Settlement'
+      operationId: putV1Settlements
+      x-operation-id-source: derived
   /v1/settlements/{settlement_id}:
     get:
-      summary: Get the detail of a settlement on AtomicNet by its id.
+      summary: Get the detail of a settlement on AtomicNet by its id
       tags:
-      - settlement
+      - Settlement
       parameters:
       - name: settlement_id
         in: path
@@ -48,11 +50,13 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Settlement'
+      operationId: getV1SettlementsBySettlementId
+      x-operation-id-source: derived
   /v1/settlements/list:
     get:
-      summary: Get The detail of all settlements on AtomicNet.
+      summary: Get The detail of all settlements on AtomicNet
       tags:
-      - settlement
+      - Settlement
       parameters:
       - name: status
         in: query
@@ -67,11 +71,13 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/SettlementList'
+      operationId: getV1SettlementsList
+      x-operation-id-source: derived
   /v1/settlements/order/{order_id}:
     get:
-      summary: Get The detail of all settlements for an order on AtomicNet.
+      summary: Get The detail of all settlements for an order on AtomicNet
       tags:
-      - settlement
+      - Settlement
       parameters:
       - name: order_id
         in: path
@@ -86,11 +92,13 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/SettlementList'
+      operationId: getV1SettlementsOrderByOrderId
+      x-operation-id-source: derived
   /v1/settlement_status_updates/{settlement_id}:
     get:
-      summary: Get all status updates associated with a settlement by its id.
+      summary: Get all status updates associated with a settlement by its id
       tags:
-      - settlement
+      - Settlement
       parameters:
       - name: settlement_id
         in: path
@@ -105,17 +113,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/SettlementStatusUpdateList'
+      operationId: getV1SettlementStatusUpdatesBySettlementId
+      x-operation-id-source: derived
 components:
   schemas:
-    OnetimeIdMapList3:
-      type: object
-      properties:
-        id_maps:
-          type: array
-          description: The list of ID mappings.
-          items:
-            $ref: '#/components/schemas/OnetimeIdMap3'
-      description: List of ID mappings.
     SettlementRecord:
       type: object
       properties:
@@ -153,6 +154,30 @@ components:
       - right_order_commission
       - right_order_give_quantity
       - right_order_id
+    SettlementStatusUpdate:
+      type: object
+      properties:
+        settlement_id:
+          type: string
+          format: uuid
+          description: Identifier of the settlement.
+        last_updated:
+          type: string
+          format: date-time
+          description: ISO formatted timestamp for settlement last status update.
+        settlement_status_update_id:
+          type: string
+          format: uuid
+          description: Identifier of the settlement status update.
+        status:
+          type: string
+          description: The most recently updated settlement status.
+      required:
+      - last_updated
+      - settlement_id
+      - settlement_status_update_id
+      - status
+      description: Settlement status update object.
     Metadata3:
       type: object
       properties:
@@ -212,56 +237,6 @@ components:
           - 'null'
           default: false
           description: Expiry status for the record object.
-    SettlementStatusUpdate:
-      type: object
-      properties:
-        settlement_id:
-          type: string
-          format: uuid
-          description: Identifier of the settlement.
-        last_updated:
-          type: string
-          format: date-time
-          description: ISO formatted timestamp for settlement last status update.
-        settlement_status_update_id:
-          type: string
-          format: uuid
-          description: Identifier of the settlement status update.
-        status:
-          type: string
-          description: The most recently updated settlement status.
-      required:
-      - last_updated
-      - settlement_id
-      - settlement_status_update_id
-      - status
-      description: Settlement status update object.
-    AbcSignature3:
-      type: object
-      properties:
-        digest_type:
-          type: string
-          description: The ABC digest type.
-        abc_account_id:
-          type: string
-          description: Identifier of the ABC account.
-        signature:
-          type: string
-          description: Signature of the digest.
-        digest:
-          type: string
-          description: The digest to be signed.
-        schema_version:
-          type:
-          - integer
-          - 'null'
-          default: 1
-          description: Version for the message schema.
-      required:
-      - abc_account_id
-      - digest
-      - digest_type
-      - signature
     Settlement:
       type: object
       properties:
@@ -306,6 +281,50 @@ components:
       required:
       - settlement_status_updates
       description: List of settlement status update objects.
+    OnetimeIdMapList3:
+      type: object
+      properties:
+        id_maps:
+          type: array
+          description: The list of ID mappings.
+          items:
+            $ref: '#/components/schemas/OnetimeIdMap3'
+      description: List of ID mappings.
+    AbcSignature3:
+      type: object
+      properties:
+        digest_type:
+          type: string
+          description: The ABC digest type.
+        abc_account_id:
+          type: string
+          description: Identifier of the ABC account.
+        signature:
+          type: string
+          description: Signature of the digest.
+        digest:
+          type: string
+          description: The digest to be signed.
+        schema_version:
+          type:
+          - integer
+          - 'null'
+          default: 1
+          description: Version for the message schema.
+      required:
+      - abc_account_id
+      - digest
+      - digest_type
+      - signature
+    SettlementList:
+      type: object
+      properties:
+        settlements:
+          type: array
+          items:
+            $ref: '#/components/schemas/Settlement'
+      required:
+      - settlements
     OnetimeIdMap3:
       type: object
       properties:
@@ -319,15 +338,6 @@ components:
       - one_time_id
       - real_id
       description: ID mapping.
-    SettlementList:
-      type: object
-      properties:
-        settlements:
-          type: array
-          items:
-            $ref: '#/components/schemas/Settlement'
-      required:
-      - settlements
   securitySchemes:
     OAuth2:
       type: oauth2

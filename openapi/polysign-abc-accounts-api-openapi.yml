@@ -14,7 +14,7 @@ tags:
 paths:
   /v1/abc_accounts/{atomicnet_id}:
     get:
-      summary: Get registered ABC account details by AtomicNet ID.
+      summary: Get registered ABC account details by AtomicNet ID
       tags:
       - ABC Accounts
       parameters:
@@ -31,9 +31,11 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ABCAccount'
+      operationId: getV1AbcAccountsByAtomicnetId
+      x-operation-id-source: derived
   /v1/abc_accounts/info/{abc_account_id}:
     get:
-      summary: Get ABC account information.
+      summary: Get ABC account information
       tags:
       - ABC Accounts
       parameters:
@@ -46,9 +48,11 @@ paths:
       responses:
         '200':
           description: ABCAccountInfo
+      operationId: getV1AbcAccountsInfoByAbcAccountId
+      x-operation-id-source: derived
   /v1/abc_accounts/:
     put:
-      summary: Register an abc account.
+      summary: Register an abc account
       tags:
       - ABC Accounts
       requestBody:
@@ -59,6 +63,8 @@ paths:
       responses:
         '200':
           description: Empty
+      operationId: putV1AbcAccounts
+      x-operation-id-source: derived
 components:
   schemas:
     ABCAccount:

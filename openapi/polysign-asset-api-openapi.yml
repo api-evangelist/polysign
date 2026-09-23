@@ -10,13 +10,13 @@ security:
 - OAuth2:
   - participant
 tags:
-- name: asset
+- name: Asset
 paths:
   /v1/assets/{asset_id}:
     get:
-      summary: Get the detail of the registered asset on AtomicNet by its id.
+      summary: Get the detail of the registered asset on AtomicNet by its id
       tags:
-      - asset
+      - Asset
       parameters:
       - name: asset_id
         in: path
@@ -31,11 +31,13 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Asset'
+      operationId: getV1AssetsByAssetId
+      x-operation-id-source: derived
   /v1/assets/list:
     get:
-      summary: Get the detail of all registered assets on AtomicNet.
+      summary: Get the detail of all registered assets on AtomicNet
       tags:
-      - asset
+      - Asset
       responses:
         '200':
           description: A list of registered assets.
@@ -43,10 +45,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/AssetList'
+      operationId: getV1AssetsList
+      x-operation-id-source: derived
     put:
-      summary: Register a list of new assets and publish to the AtomicNet.
+      summary: Register a list of new assets and publish to the AtomicNet
       tags:
-      - asset
+      - Asset
       requestBody:
         content:
           application/json:
@@ -55,11 +59,13 @@ paths:
       responses:
         '200':
           description: Empty
+      operationId: putV1AssetsList
+      x-operation-id-source: derived
   /v1/assets/:
     put:
-      summary: Register a new asset and publish to the AtomicNet.
+      summary: Register a new asset and publish to the AtomicNet
       tags:
-      - asset
+      - Asset
       requestBody:
         content:
           application/json:
@@ -68,11 +74,13 @@ paths:
       responses:
         '200':
           description: Empty
+      operationId: putV1Assets
+      x-operation-id-source: derived
   /v1/assets/update_asset_mapping:
     put:
-      summary: Update the partner asset id mapping on this node for a single asset.
+      summary: Update the partner asset id mapping on this node for a single asset
       tags:
-      - asset
+      - Asset
       requestBody:
         content:
           application/json:
@@ -81,11 +89,13 @@ paths:
       responses:
         '200':
           description: Empty
+      operationId: putV1AssetsUpdateAssetMapping
+      x-operation-id-source: derived
   /v1/assets/register:
     put:
-      summary: Register assets to AtomicNet node.
+      summary: Register assets to AtomicNet node
       tags:
-      - asset
+      - Asset
       requestBody:
         content:
           application/json:
@@ -94,20 +104,36 @@ paths:
       responses:
         '200':
           description: Empty
+      operationId: putV1AssetsRegister
+      x-operation-id-source: derived
 components:
   schemas:
-    AssetMapping:
+    AbcSignature:
       type: object
       properties:
-        partner_asset_id:
+        digest_type:
           type: string
-          description: Partner's asset ID.
-        asset_id:
+          description: The ABC digest type.
+        abc_account_id:
           type: string
-          description: The PolyNet CUSIP asset ID.
+          description: Identifier of the ABC account.
+        signature:
+          type: string
+          description: Signature of the digest.
+        digest:
+          type: string
+          description: The digest to be signed.
+        schema_version:
+          type:
+          - integer
+          - 'null'
+          default: 1
+          description: Version for the message schema.
       required:
-      - asset_id
-      - partner_asset_id
+      - abc_account_id
+      - digest
+      - digest_type
+      - signature
     Metadata:
       type: object
       properties:
@@ -194,32 +220,6 @@ components:
       - precision
       - status
       description: Asset record object.
-    AbcSignature:
-      type: object
-      properties:
-        digest_type:
-          type: string
-          description: The ABC digest type.
-        abc_account_id:
-          type: string
-          description: Identifier of the ABC account.
-        signature:
-          type: string
-          description: Signature of the digest.
-        digest:
-          type: string
-          description: The digest to be signed.
-        schema_version:
-          type:
-          - integer
-          - 'null'
-          default: 1
-          description: Version for the message schema.
-      required:
-      - abc_account_id
-      - digest
-      - digest_type
-      - signature
     Asset:
       type: object
       properties:
@@ -257,6 +257,29 @@ components:
           items:
             $ref: '#/components/schemas/OnetimeIdMap'
       description: List of ID mappings.
+    AssetMapping:
+      type: object
+      properties:
+        partner_asset_id:
+          type: string
+          description: Partner's asset ID.
+        asset_id:
+          type: string
+          description: The PolyNet CUSIP asset ID.
+      required:
+      - asset_id
+      - partner_asset_id
+    AssetList:
+      type: object
+      properties:
+        assets:
+          type: array
+          description: The list of assets.
+          items:
+            $ref: '#/components/schemas/Asset'
+      required:
+      - assets
+      description: List of asset registration object.
     OnetimeIdMap:
       type: object
       properties:
@@ -270,17 +293,51 @@ components:
       - one_time_id
       - real_id
       description: ID mapping.
-    AssetList:
+    Asset_2:
       type: object
       properties:
-        assets:
-          type: array
-          description: The list of assets.
-          items:
-            $ref: '#/components/schemas/Asset'
+        partner_asset_id:
+          type:
+          - string
+          - 'null'
+          default: null
+          description: Partner's asset ID.
+        record:
+          description: Asset record.
+          allOf:
+          - $ref: '#/components/schemas/AssetRecord_2'
+        signature:
+          default: null
+          description: Signature for the associated record object. Not required to register an asset.
+          allOf:
+          - $ref: '#/components/schemas/AbcSignature'
       required:
-      - assets
-      description: List of asset registration object.
+      - record
+    AssetRecord_2:
+      type: object
+      properties:
+        asset_id:
+          type: string
+          description: Identifier of the asset.
+        status:
+          type: string
+          description: The activation status of the asset.
+        precision:
+          type: integer
+          description: Asset precision.
+        book_operator_id:
+          type: string
+          description: UUID of the Book Operator to process the asset.
+        exchange_id:
+          type: string
+          description: UUID of the Exchange to process the asset.
+      required:
+      - asset_id
+      - book_operator_id
+      - exchange_id
+      - precision
+      - status
+      description: Asset record object.
   securitySchemes:
     OAuth2:
       type: oauth2

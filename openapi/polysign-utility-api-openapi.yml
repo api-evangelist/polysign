@@ -10,13 +10,13 @@ security:
 - OAuth2:
   - participant
 tags:
-- name: utility
+- name: Utility
 paths:
   /v1/utils/atomicnet_uid:
     get:
-      summary: Get an AtomicNet UID.
+      summary: Get an AtomicNet UID
       tags:
-      - utility
+      - Utility
       responses:
         '200':
           description: AtomicNet UID.
@@ -24,11 +24,13 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/AtomicNetUID'
+      operationId: getV1UtilsAtomicnetUid
+      x-operation-id-source: derived
   /v1/utils/canonicalize:
     get:
-      summary: Canonicalize a AtomicNet object record.
+      summary: Canonicalize a AtomicNet object record
       tags:
-      - utility
+      - Utility
       requestBody:
         description: "Requests must describe the relevant schema in the message type field.\nSupported schemas:\n  OrderRecord\n  BeneficiaryAuthRecord\n  EscrowAuthRecord\n  SettlementConfirmationRecord\n  SettlementRecord\n  AssetRecord\n  BookTransferRecord\n  BookTransferConfirmationRecord\n"
         content:
@@ -42,11 +44,13 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CanonicalizeResp'
+      operationId: getV1UtilsCanonicalize
+      x-operation-id-source: derived
   /v1/data_sync/:
     put:
-      summary: Trigger the data synchronization.
+      summary: Trigger the data synchronization
       tags:
-      - utility
+      - Utility
       requestBody:
         description: The response body.
         content:
@@ -60,11 +64,13 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/DataSyncViewResponse'
+      operationId: putV1DataSync
+      x-operation-id-source: derived
   /v1/data_sync/{request_id}:
     get:
-      summary: Get the status details of sync request by its id.
+      summary: Get the status details of sync request by its id
       tags:
-      - utility
+      - Utility
       parameters:
       - name: request_id
         in: path
@@ -79,11 +85,13 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/DataSyncStatus'
+      operationId: getV1DataSyncByRequestId
+      x-operation-id-source: derived
   /v1/data_sync/list:
     get:
-      summary: Get the list of data sync requests.
+      summary: Get the list of data sync requests
       tags:
-      - utility
+      - Utility
       parameters:
       - name: status
         in: query
@@ -98,25 +106,52 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/DataSyncStatusList'
+      operationId: getV1DataSyncList
+      x-operation-id-source: derived
 components:
   schemas:
-    DataSyncEntityStatus:
+    AtomicNetUID:
       type: object
       properties:
-        entity:
-          type: string
-          description: Sync target.
-        status:
-          type: string
-          description: Sync status for this entity.
-        source_node:
+        atomicnet_uid:
           type: string
           format: uuid
-          description: The UUID of the data source node.
+          description: AtomicNet UID.
+        schema_version:
+          type: integer
+          default: 1
+          description: Version for the message schema.
       required:
-      - entity
-      - source_node
+      - atomicnet_uid
+    DataSyncRequestStatus:
+      type: object
+      properties:
+        request_id:
+          type: string
+          format: uuid
+          description: The identifier for this request.
+        status:
+          type: string
+          description: Overall sync status for this request.
+        destination_node:
+          type: string
+          format: uuid
+          description: The node's UUID who asks the sync.
+        target_types:
+          type: array
+          description: The list of types reqeusted for sync.
+          items:
+            type: string
+        options:
+          description: The options corresponding to this request.
+          allOf:
+          - $ref: '#/components/schemas/DataSyncOptions'
+      required:
+      - destination_node
+      - options
+      - request_id
       - status
+      - target_types
     DataSyncViewResponse:
       type: object
       properties:
@@ -130,6 +165,16 @@ components:
           description: Version for the message schema.
       required:
       - request_id
+    DataSyncStatusList:
+      type: object
+      properties:
+        requests:
+          type: array
+          items:
+            $ref: '#/components/schemas/DataSyncRequestStatus'
+      required:
+      - requests
+      description: List of data sync.
     DataSyncStatus:
       type: object
       properties:
@@ -148,50 +193,23 @@ components:
       required:
       - entities
       - sync_request
-    DataSyncViewRequest:
+    DataSyncEntityStatus:
       type: object
       properties:
-        target_types:
-          type: array
-          description: The list of types to sync.
-          items:
-            type: string
-        schema_version:
-          type: integer
-          default: 1
-          description: Version for the message schema.
-        options:
-          description: The options corresponding to this request.
-          allOf:
-          - $ref: '#/components/schemas/DataSyncOptions'
-      required:
-      - options
-      - target_types
-    AtomicNetUID:
-      type: object
-      properties:
-        atomicnet_uid:
+        entity:
+          type: string
+          description: Sync target.
+        status:
+          type: string
+          description: Sync status for this entity.
+        source_node:
           type: string
           format: uuid
-          description: AtomicNet UID.
-        schema_version:
-          type: integer
-          default: 1
-          description: Version for the message schema.
+          description: The UUID of the data source node.
       required:
-      - atomicnet_uid
-    CanonicalizeReq:
-      type: object
-      properties:
-        schema_version:
-          type: integer
-          default: 1
-          description: Version for the message schema.
-        message_data:
-          description: Data to be canonicalized.
-      required:
-      - message_data
-      description: Canonicalization request object.
+      - entity
+      - source_node
+      - status
     CanonicalizeResp:
       type: object
       properties:
@@ -230,35 +248,37 @@ components:
       - digest
       - serialized_message
       description: Canonicalization response object.
-    DataSyncRequestStatus:
+    DataSyncViewRequest:
       type: object
       properties:
-        request_id:
-          type: string
-          format: uuid
-          description: The identifier for this request.
-        status:
-          type: string
-          description: Overall sync status for this request.
-        destination_node:
-          type: string
-          format: uuid
-          description: The node's UUID who asks the sync.
         target_types:
           type: array
-          description: The list of types reqeusted for sync.
+          description: The list of types to sync.
           items:
             type: string
+        schema_version:
+          type: integer
+          default: 1
+          description: Version for the message schema.
         options:
           description: The options corresponding to this request.
           allOf:
           - $ref: '#/components/schemas/DataSyncOptions'
       required:
-      - destination_node
       - options
-      - request_id
-      - status
       - target_types
+    CanonicalizeReq:
+      type: object
+      properties:
+        schema_version:
+          type: integer
+          default: 1
+          description: Version for the message schema.
+        message_data:
+          description: Data to be canonicalized.
+      required:
+      - message_data
+      description: Canonicalization request object.
     DataSyncOptions:
       type: object
       properties:
@@ -294,16 +314,6 @@ components:
           type: integer
           default: 1
           description: Version for the message schema.
-    DataSyncStatusList:
-      type: object
-      properties:
-        requests:
-          type: array
-          items:
-            $ref: '#/components/schemas/DataSyncRequestStatus'
-      required:
-      - requests
-      description: List of data sync.
   securitySchemes:
     OAuth2:
       type: oauth2

@@ -14,7 +14,7 @@ tags:
 paths:
   /v1/investors/real_investor_id/{real_investor_id}:
     get:
-      summary: Generate a one time investor ID for the real investor ID.
+      summary: Generate a one time investor ID for the real investor ID
       tags:
       - investor
       parameters:
@@ -31,11 +31,11 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/OnetimeIdMap6'
+      operationId: getV1InvestorsRealInvestorIdByRealInvestorId
+      x-operation-id-source: derived
   /v1/investors/one_time_investor_id/{one_time_investor_id}:
     get:
-      summary: 'Get the detail of an investor involved by this node by its one time investor id.
-
-        '
+      summary: Get the detail of an investor involved by this node by its one time investor id
       tags:
       - investor
       parameters:
@@ -52,21 +52,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Investor'
+      operationId: getV1InvestorsOneTimeInvestorIdByOneTimeInvestorId
+      x-operation-id-source: derived
 components:
   schemas:
-    OnetimeIdMap6:
-      type: object
-      properties:
-        one_time_id:
-          type: string
-          description: The one time ID.
-        real_id:
-          type: string
-          description: The real ID.
-      required:
-      - one_time_id
-      - real_id
-      description: ID mapping.
     Investor:
       type: object
       properties:
@@ -86,6 +75,19 @@ components:
       - one_time_investor_ids
       - real_investor_id
       description: Investor object.
+    OnetimeIdMap6:
+      type: object
+      properties:
+        one_time_id:
+          type: string
+          description: The one time ID.
+        real_id:
+          type: string
+          description: The real ID.
+      required:
+      - one_time_id
+      - real_id
+      description: ID mapping.
   securitySchemes:
     OAuth2:
       type: oauth2

@@ -10,13 +10,13 @@ security:
 - OAuth2:
   - participant
 tags:
-- name: system
+- name: System
 paths:
   /v1/system/circuit_breakers:
     get:
-      summary: Get the status of all circuit breakers on the server.
+      summary: Get the status of all circuit breakers on the server
       tags:
-      - system
+      - System
       responses:
         '200':
           description: Map of breakers to their statuses
@@ -24,11 +24,13 @@ paths:
             application/json:
               schema:
                 type: object
+      operationId: getV1SystemCircuitBreakers
+      x-operation-id-source: derived
   /v1/system/ping:
     get:
-      summary: Basic health check.
+      summary: Basic health check
       tags:
-      - system
+      - System
       responses:
         '200':
           description: System status
@@ -36,11 +38,13 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Ping'
+      operationId: getV1SystemPing
+      x-operation-id-source: derived
   /v1/system/version:
     get:
-      summary: Get the version of the server.
+      summary: Get the version of the server
       tags:
-      - system
+      - System
       responses:
         '200':
           description: Version
@@ -48,11 +52,13 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Version'
+      operationId: getV1SystemVersion
+      x-operation-id-source: derived
   /v1/system/deep_ping:
     get:
-      summary: Deep health check.
+      summary: Deep health check
       tags:
-      - system
+      - System
       responses:
         '200':
           description: Deep system status
@@ -60,6 +66,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/DeepPing'
+      operationId: getV1SystemDeepPing
+      x-operation-id-source: derived
 components:
   schemas:
     DeepPing:
@@ -72,11 +80,6 @@ components:
       required:
       - alive
       - database_reachable
-    Ping:
-      type: object
-      properties:
-        alive:
-          type: boolean
     Version:
       type: object
       properties:
@@ -84,6 +87,25 @@ components:
           type: string
         version:
           type: string
+    Ping:
+      type: object
+      properties:
+        alive:
+          type: boolean
+    DeepPing_2:
+      type: object
+      properties:
+        alive:
+          type: boolean
+        database_reachable:
+          type: boolean
+        schema_version:
+          type: integer
+          default: 1
+          description: Version for the message schema.
+      required:
+      - alive
+      - database_reachable
   securitySchemes:
     OAuth2:
       type: oauth2

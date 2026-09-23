@@ -14,7 +14,7 @@ tags:
 paths:
   /v1/abc_memorials/:
     put:
-      summary: Memorialize a digest using abc account for the given AtomicNet id.
+      summary: Memorialize a digest using abc account for the given AtomicNet id
       tags:
       - ABC Memorials
       requestBody:
@@ -25,9 +25,11 @@ paths:
       responses:
         '200':
           description: Empty
+      operationId: putV1AbcMemorials
+      x-operation-id-source: derived
   /v1/abc_memorials/{digest}:
     get:
-      summary: Verify if the digest is memorialized to ABC.
+      summary: Verify if the digest is memorialized to ABC
       tags:
       - ABC Memorials
       parameters:
@@ -44,21 +46,36 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ABCVerifyMemorialResponse'
+      operationId: getV1AbcMemorialsByDigest
+      x-operation-id-source: derived
 components:
   schemas:
-    ABCVerifyMemorialResponse:
+    AbcSignature:
       type: object
       properties:
-        block_height:
-          type: integer
-          description: The block height of the memorialized digest.
-        status:
+        schema_version:
+          type:
+          - integer
+          - 'null'
+          default: 1
+          description: Version for the message schema.
+        digest_type:
           type: string
-          description: The status of memorial.
+          description: The ABC digest type.
+        signature:
+          type: string
+          description: Signature of the digest.
+        digest:
+          type: string
+          description: The digest to be signed.
+        abc_account_id:
+          type: string
+          description: Identifier of the ABC account.
       required:
-      - block_height
-      - status
-      description: Dataclass for ABC check memorial response schema.
+      - abc_account_id
+      - digest
+      - digest_type
+      - signature
     ABCMemorialRequest:
       type: object
       properties:
@@ -96,32 +113,19 @@ components:
       - digest
       - signature
       description: Dataclass for ABC memorial request schema.
-    AbcSignature:
+    ABCVerifyMemorialResponse:
       type: object
       properties:
-        schema_version:
-          type:
-          - integer
-          - 'null'
-          default: 1
-          description: Version for the message schema.
-        digest_type:
+        block_height:
+          type: integer
+          description: The block height of the memorialized digest.
+        status:
           type: string
-          description: The ABC digest type.
-        signature:
-          type: string
-          description: Signature of the digest.
-        digest:
-          type: string
-          description: The digest to be signed.
-        abc_account_id:
-          type: string
-          description: Identifier of the ABC account.
+          description: The status of memorial.
       required:
-      - abc_account_id
-      - digest
-      - digest_type
-      - signature
+      - block_height
+      - status
+      description: Dataclass for ABC check memorial response schema.
   securitySchemes:
     OAuth2:
       type: oauth2

@@ -10,17 +10,13 @@ security:
 - OAuth2:
   - participant
 tags:
-- name: book transfer
+- name: Book Transfer
 paths:
   /v1/book_transfers/:
     put:
-      summary: 'Publish a new book transfer to AtomicNet.
-
-        The authorizations will be acquired if not provided before publishing.
-
-        '
+      summary: Publish a new book transfer to AtomicNet.
       tags:
-      - book transfer
+      - Book Transfer
       requestBody:
         content:
           application/json:
@@ -33,11 +29,13 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/BookTransfer'
+      operationId: putV1BookTransfers
+      x-operation-id-source: derived
   /v1/book_transfers/{book_transfer_id}:
     get:
-      summary: Get the detail of a book transfer on AtomicNet by its id.
+      summary: Get the detail of a book transfer on AtomicNet by its id
       tags:
-      - book transfer
+      - Book Transfer
       parameters:
       - name: book_transfer_id
         in: path
@@ -52,11 +50,13 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/BookTransfer'
+      operationId: getV1BookTransfersByBookTransferId
+      x-operation-id-source: derived
   /v1/book_transfers/list:
     get:
-      summary: Get the detail of all book transfers on AtomicNet.
+      summary: Get the detail of all book transfers on AtomicNet
       tags:
-      - book transfer
+      - Book Transfer
       parameters:
       - name: status
         in: query
@@ -83,15 +83,13 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/BookTransferList'
+      operationId: getV1BookTransfersList
+      x-operation-id-source: derived
   /v1/book_transfers/list/local:
     get:
-      summary: 'Get the detail of all book transfers involved by this node on
-
-        AtomicNet.
-
-        '
+      summary: Get the detail of all book transfers involved by this node on AtomicNet
       tags:
-      - book transfer
+      - Book Transfer
       parameters:
       - name: status
         in: query
@@ -106,13 +104,13 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/BookTransferList'
+      operationId: getV1BookTransfersListLocal
+      x-operation-id-source: derived
   /v1/book_transfers/submit:
     put:
-      summary: 'Submit book transfer to AtomicNet node.
-
-        '
+      summary: Submit book transfer to AtomicNet node
       tags:
-      - book transfer
+      - Book Transfer
       requestBody:
         content:
           application/json:
@@ -125,63 +123,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/BookTransfer_2'
+      operationId: putV1BookTransfersSubmit
+      x-operation-id-source: derived
 components:
   schemas:
-    BookTransfer:
-      type: object
-      properties:
-        execution_status:
-          type:
-          - string
-          - 'null'
-          default: null
-          description: Execution status for the book_transfer object.
-        metadata:
-          description: Metadata for the associated record object.
-          allOf:
-          - $ref: '#/components/schemas/Metadata6'
-        schema_version:
-          type: integer
-          default: 1
-          description: Version for the message schema.
-        beneficiary_auth_id:
-          type:
-          - string
-          - 'null'
-          format: uuid
-          default: null
-          description: Identifier of the pre-approved beneficiary authorization.
-        signature:
-          default: null
-          description: Signature for the associated record object.
-          allOf:
-          - $ref: '#/components/schemas/AbcSignature6'
-        record:
-          description: BookTransfer record.
-          allOf:
-          - $ref: '#/components/schemas/BookTransferRecord'
-        escrow_auth_id:
-          type:
-          - string
-          - 'null'
-          format: uuid
-          default: null
-          description: Identifier of the pre-approved escrow authorization.
-      required:
-      - record
-    OnetimeIdMap7:
-      type: object
-      properties:
-        one_time_id:
-          type: string
-          description: The one time ID.
-        real_id:
-          type: string
-          description: The real ID.
-      required:
-      - one_time_id
-      - real_id
-      description: ID mapping.
     Metadata6:
       type: object
       properties:
@@ -241,42 +186,48 @@ components:
           - 'null'
           default: false
           description: Expiry status for the record object.
-    BookTransferList:
+    BookTransfer:
       type: object
       properties:
-        book_transfers:
-          type: array
-          items:
-            $ref: '#/components/schemas/BookTransfer'
-      required:
-      - book_transfers
-      description: List of complete book_transfers object.
-    AbcSignature:
-      type: object
-      properties:
-        schema_version:
+        execution_status:
           type:
-          - integer
+          - string
           - 'null'
+          default: null
+          description: Execution status for the book_transfer object.
+        metadata:
+          description: Metadata for the associated record object.
+          allOf:
+          - $ref: '#/components/schemas/Metadata6'
+        schema_version:
+          type: integer
           default: 1
           description: Version for the message schema.
-        abc_account_id:
-          type: string
-          description: Identifier of the ABC account.
+        beneficiary_auth_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          default: null
+          description: Identifier of the pre-approved beneficiary authorization.
         signature:
-          type: string
-          description: Signature of the digest.
-        digest_type:
-          type: string
-          description: The ABC digest type.
-        digest:
-          type: string
-          description: The digest to be signed.
+          default: null
+          description: Signature for the associated record object.
+          allOf:
+          - $ref: '#/components/schemas/AbcSignature6'
+        record:
+          description: BookTransfer record.
+          allOf:
+          - $ref: '#/components/schemas/BookTransferRecord'
+        escrow_auth_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          default: null
+          description: Identifier of the pre-approved escrow authorization.
       required:
-      - abc_account_id
-      - digest
-      - digest_type
-      - signature
+      - record
     BookTransferRecord:
       type: object
       properties:
@@ -304,6 +255,29 @@ components:
       - give_investor_id
       - quantity
       - take_investor_id
+    OnetimeIdMap7:
+      type: object
+      properties:
+        one_time_id:
+          type: string
+          description: The one time ID.
+        real_id:
+          type: string
+          description: The real ID.
+      required:
+      - one_time_id
+      - real_id
+      description: ID mapping.
+    BookTransferList:
+      type: object
+      properties:
+        book_transfers:
+          type: array
+          items:
+            $ref: '#/components/schemas/BookTransfer'
+      required:
+      - book_transfers
+      description: List of complete book_transfers object.
     OnetimeIdMapList6:
       type: object
       properties:
@@ -334,6 +308,32 @@ components:
           - 'null'
           default: 1
           description: Version for the message schema.
+      required:
+      - abc_account_id
+      - digest
+      - digest_type
+      - signature
+    AbcSignature:
+      type: object
+      properties:
+        schema_version:
+          type:
+          - integer
+          - 'null'
+          default: 1
+          description: Version for the message schema.
+        abc_account_id:
+          type: string
+          description: Identifier of the ABC account.
+        signature:
+          type: string
+          description: Signature of the digest.
+        digest_type:
+          type: string
+          description: The ABC digest type.
+        digest:
+          type: string
+          description: The digest to be signed.
       required:
       - abc_account_id
       - digest

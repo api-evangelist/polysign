@@ -14,7 +14,7 @@ tags:
 paths:
   /v1/escrow_authorizations/{escrow_auth_id}:
     get:
-      summary: Get the detail of a escrow authorization on AtomicNet by its id.
+      summary: Get the detail of a escrow authorization on AtomicNet by its id
       tags:
       - escrow authorization
       parameters:
@@ -31,9 +31,11 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/EscrowAuth'
+      operationId: getV1EscrowAuthorizationsByEscrowAuthId
+      x-operation-id-source: derived
   /v1/escrow_authorizations/list:
     get:
-      summary: Get the detail of all escrow authorizations on AtomicNet.
+      summary: Get the detail of all escrow authorizations on AtomicNet
       tags:
       - escrow authorization
       parameters:
@@ -50,9 +52,11 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/EscrowAuthList'
+      operationId: getV1EscrowAuthorizationsList
+      x-operation-id-source: derived
   /v1/escrow_authorizations/list/local:
     get:
-      summary: Get the detail of all escrow authorizations involved by this node.
+      summary: Get the detail of all escrow authorizations involved by this node
       tags:
       - escrow authorization
       parameters:
@@ -69,9 +73,11 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/EscrowAuthList'
+      operationId: getV1EscrowAuthorizationsListLocal
+      x-operation-id-source: derived
   /v1/escrow_authorizations/request:
     post:
-      summary: Request a new escrow authorization.
+      summary: Request a new escrow authorization
       tags:
       - escrow authorization
       requestBody:
@@ -86,9 +92,11 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/EscrowAuth'
+      operationId: postV1EscrowAuthorizationsRequest
+      x-operation-id-source: derived
   /v1/escrow_authorizations/:
     put:
-      summary: Approve an escrow authorization.
+      summary: Approve an escrow authorization
       tags:
       - escrow authorization
       requestBody:
@@ -103,9 +111,11 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/EscrowAuth'
+      operationId: putV1EscrowAuthorizations
+      x-operation-id-source: derived
   /v1/escrow_status_updates/{escrow_auth_id}:
     get:
-      summary: Get all status updates associated with an escrow authorization by its id.
+      summary: Get all status updates associated with an escrow authorization by its id
       tags:
       - escrow authorization
       parameters:
@@ -122,8 +132,151 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/EscrowAuthStatusUpdateList'
+      operationId: getV1EscrowStatusUpdatesByEscrowAuthId
+      x-operation-id-source: derived
 components:
   schemas:
+    EscrowAuthRecord:
+      type: object
+      properties:
+        expiration:
+          type: string
+          format: date-time
+          description: ISO formatted timestamp for the authorization to last.
+        investor_id:
+          type: string
+          description: Identifier of the investor that holds the asset under escrow.
+        asset_quantity:
+          type: number
+          description: Quantity of the asset being escrowed
+        asset_id:
+          type: string
+          description: Identifier of the asset being escrowed.
+        escrow_auth_id:
+          type: string
+          format: uuid
+          description: Identifier of the escrow that holds the assets.
+      required:
+      - asset_id
+      - asset_quantity
+      - escrow_auth_id
+      - expiration
+      - investor_id
+      description: Escrow authorization record object.
+    OnetimeIdMapList1:
+      type: object
+      properties:
+        id_maps:
+          type: array
+          description: The list of ID mappings.
+          items:
+            $ref: '#/components/schemas/OnetimeIdMap1'
+      description: List of ID mappings.
+    EscrowAuthList:
+      type: object
+      properties:
+        escrow_auths:
+          type: array
+          items:
+            $ref: '#/components/schemas/EscrowAuth'
+      required:
+      - escrow_auths
+    OnetimeIdMap1:
+      type: object
+      properties:
+        one_time_id:
+          type: string
+          description: The one time ID.
+        real_id:
+          type: string
+          description: The real ID.
+      required:
+      - one_time_id
+      - real_id
+      description: ID mapping.
+    EscrowAuthStatusUpdate:
+      type: object
+      properties:
+        escrow_auth_status_update_id:
+          type: string
+          format: uuid
+          description: Identifier of the escrow auth status update.
+        last_updated:
+          type: string
+          format: date-time
+          description: ISO formatted timestamp for escrow authorization last status update.
+        escrow_auth_id:
+          type: string
+          format: uuid
+          description: Identifier of the escrow authorization denoting permission to receive the asset.
+        status:
+          type: string
+          description: The most recently updated beneficiary auth status.
+      required:
+      - escrow_auth_id
+      - escrow_auth_status_update_id
+      - last_updated
+      - status
+      description: Escrow authorization status update object.
+    Metadata1:
+      type: object
+      properties:
+        investor_ids:
+          default: null
+          description: The investor id mappings.
+          allOf:
+          - $ref: '#/components/schemas/OnetimeIdMapList1'
+        book_operator_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          default: null
+          description: Identifier for the associated Book Operator node.
+        request_id:
+          type:
+          - string
+          - 'null'
+          default: null
+          description: Unique identifier for the request.
+        exchange_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          default: null
+          description: Identifier for the associated Exchange node.
+        status:
+          type:
+          - string
+          - 'null'
+          default: null
+          description: State status for the record object.
+        trade_portal_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          default: null
+          description: Identifier for the associated Trade Portal node.
+        commission:
+          type:
+          - number
+          - 'null'
+          default: null
+          description: Order commissison.
+        real_investor_id:
+          type:
+          - string
+          - 'null'
+          default: null
+          description: Original identifier for the investor.
+        expired:
+          type:
+          - boolean
+          - 'null'
+          default: false
+          description: Expiry status for the record object.
     AbcSignature1:
       type: object
       properties:
@@ -185,120 +338,6 @@ components:
       required:
       - record
       description: Escrow authorization schema.
-    OnetimeIdMapList1:
-      type: object
-      properties:
-        id_maps:
-          type: array
-          description: The list of ID mappings.
-          items:
-            $ref: '#/components/schemas/OnetimeIdMap1'
-      description: List of ID mappings.
-    OnetimeIdMap1:
-      type: object
-      properties:
-        one_time_id:
-          type: string
-          description: The one time ID.
-        real_id:
-          type: string
-          description: The real ID.
-      required:
-      - one_time_id
-      - real_id
-      description: ID mapping.
-    Metadata1:
-      type: object
-      properties:
-        investor_ids:
-          default: null
-          description: The investor id mappings.
-          allOf:
-          - $ref: '#/components/schemas/OnetimeIdMapList1'
-        book_operator_id:
-          type:
-          - string
-          - 'null'
-          format: uuid
-          default: null
-          description: Identifier for the associated Book Operator node.
-        request_id:
-          type:
-          - string
-          - 'null'
-          default: null
-          description: Unique identifier for the request.
-        exchange_id:
-          type:
-          - string
-          - 'null'
-          format: uuid
-          default: null
-          description: Identifier for the associated Exchange node.
-        status:
-          type:
-          - string
-          - 'null'
-          default: null
-          description: State status for the record object.
-        trade_portal_id:
-          type:
-          - string
-          - 'null'
-          format: uuid
-          default: null
-          description: Identifier for the associated Trade Portal node.
-        commission:
-          type:
-          - number
-          - 'null'
-          default: null
-          description: Order commissison.
-        real_investor_id:
-          type:
-          - string
-          - 'null'
-          default: null
-          description: Original identifier for the investor.
-        expired:
-          type:
-          - boolean
-          - 'null'
-          default: false
-          description: Expiry status for the record object.
-    EscrowAuthStatusUpdate:
-      type: object
-      properties:
-        escrow_auth_status_update_id:
-          type: string
-          format: uuid
-          description: Identifier of the escrow auth status update.
-        last_updated:
-          type: string
-          format: date-time
-          description: ISO formatted timestamp for escrow authorization last status update.
-        escrow_auth_id:
-          type: string
-          format: uuid
-          description: Identifier of the escrow authorization denoting permission to receive the asset.
-        status:
-          type: string
-          description: The most recently updated beneficiary auth status.
-      required:
-      - escrow_auth_id
-      - escrow_auth_status_update_id
-      - last_updated
-      - status
-      description: Escrow authorization status update object.
-    EscrowAuthList:
-      type: object
-      properties:
-        escrow_auths:
-          type: array
-          items:
-            $ref: '#/components/schemas/EscrowAuth'
-      required:
-      - escrow_auths
     EscrowAuthStatusUpdateList:
       type: object
       properties:
@@ -309,33 +348,6 @@ components:
       required:
       - escrow_auth_status_updates
       description: List of escrow authorization status update objects.
-    EscrowAuthRecord:
-      type: object
-      properties:
-        expiration:
-          type: string
-          format: date-time
-          description: ISO formatted timestamp for the authorization to last.
-        investor_id:
-          type: string
-          description: Identifier of the investor that holds the asset under escrow.
-        asset_quantity:
-          type: number
-          description: Quantity of the asset being escrowed
-        asset_id:
-          type: string
-          description: Identifier of the asset being escrowed.
-        escrow_auth_id:
-          type: string
-          format: uuid
-          description: Identifier of the escrow that holds the assets.
-      required:
-      - asset_id
-      - asset_quantity
-      - escrow_auth_id
-      - expiration
-      - investor_id
-      description: Escrow authorization record object.
   securitySchemes:
     OAuth2:
       type: oauth2

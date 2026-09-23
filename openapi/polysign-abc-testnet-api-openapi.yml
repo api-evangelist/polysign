@@ -14,7 +14,7 @@ tags:
 paths:
   /v1/abc_testnet/:
     put:
-      summary: Create an account on ABC testnet.
+      summary: Create an account on ABC testnet
       tags:
       - ABC Testnet
       requestBody:
@@ -31,9 +31,11 @@ paths:
                 $ref: '#/components/schemas/ABCCreateAccountResponse'
         '500':
           description: Account could not be created on the ABC
+      operationId: putV1AbcTestnet
+      x-operation-id-source: derived
   /v1/abc_testnet/faucet/{abc_account_id}:
     get:
-      summary: Faucet an account on ABC testnet.
+      summary: Faucet an account on ABC testnet
       tags:
       - ABC Testnet
       parameters:
@@ -46,6 +48,8 @@ paths:
       responses:
         '200':
           description: Empty
+      operationId: getV1AbcTestnetFaucetByAbcAccountId
+      x-operation-id-source: derived
 components:
   schemas:
     ABCCreateAccountRequest:

@@ -10,13 +10,13 @@ security:
 - OAuth2:
   - participant
 tags:
-- name: partner
+- name: Partner
 paths:
   /v1/partners/{atomicnet_id}:
     get:
-      summary: Get the detail of a partner registered on this node by its id.
+      summary: Get the detail of a partner registered on this node by its id
       tags:
-      - partner
+      - Partner
       parameters:
       - name: atomicnet_id
         in: path
@@ -31,11 +31,13 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Partner'
+      operationId: getV1PartnersByAtomicnetId
+      x-operation-id-source: derived
   /v1/partners/list:
     get:
-      summary: Get the detail of all partners registered on this node.
+      summary: Get the detail of all partners registered on this node
       tags:
-      - partner
+      - Partner
       responses:
         '200':
           description: The partners.
@@ -43,10 +45,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PartnerList'
+      operationId: getV1PartnersList
+      x-operation-id-source: derived
     put:
-      summary: Register a list of new partners to this node.
+      summary: Register a list of new partners to this node
       tags:
-      - partner
+      - Partner
       requestBody:
         content:
           application/json:
@@ -55,11 +59,13 @@ paths:
       responses:
         '200':
           description: Empty
+      operationId: putV1PartnersList
+      x-operation-id-source: derived
   /v1/partners/:
     put:
-      summary: Register a new partner to this node.
+      summary: Register a new partner to this node
       tags:
-      - partner
+      - Partner
       requestBody:
         content:
           application/json:
@@ -68,8 +74,21 @@ paths:
       responses:
         '200':
           description: Empty
+      operationId: putV1Partners
+      x-operation-id-source: derived
 components:
   schemas:
+    PartnerList:
+      type: object
+      properties:
+        partners:
+          type: array
+          description: The list of partners.
+          items:
+            $ref: '#/components/schemas/Partner'
+      required:
+      - partners
+      description: List of partner registration object.
     Partner:
       type: object
       properties:
@@ -120,17 +139,6 @@ components:
       required:
       - atomicnet_id
       description: Partner object.
-    PartnerList:
-      type: object
-      properties:
-        partners:
-          type: array
-          description: The list of partners.
-          items:
-            $ref: '#/components/schemas/Partner'
-      required:
-      - partners
-      description: List of partner registration object.
   securitySchemes:
     OAuth2:
       type: oauth2
