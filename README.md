@@ -64,5 +64,146 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-PolySign is a company surfaced via the API Evangelist harvest backlog (source: secondary-market) and added to the network as a stub for full-pipeline profiling.
-- https://forgeglobal.com/polysign_stock/
+PolySign, Inc. is an Oakland / San Francisco / New York financial technology company building blockchain-enabled infrastructure for institutional digital asset capital markets and payments. Founded by Arthur Britto, David Schwartz and Jack McDonald, PolySign operates a third-generation permissioned blockchain and the AtomicNet settlement network, and was the parent of Standard Custody & Trust Company, the NYDFS-regulated digital asset custody, trading and settlement platform acquired by Ripple in 2024. PolySign publishes three OpenAPI 3.0.3 contracts for AtomicNet — the AtomicNet API Server (node interface for assets, orders, escrow and beneficiary authorizations, settlements, settlement confirmations, book transfers, partners and investors), the AtomicNet Merchant Gate Node, and the AtomicNet ABC Proxy Service (account registration, digest memorialization, signing and testnet faucet) — all authenticated with OAuth 2.0 client credentials issued by a PolySign-hosted token endpoint.
+
+**Areas:** Digital Assets · Blockchain · institutional-custody · Settlement · Escrow · Capital Markets · Payments · Fintech · Distributed Ledger · atomicnet
+
+## PolySign on APIs.io
+
+Everything profiled for PolySign is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/polysign/](https://apis.io/providers/polysign/)** — or go straight to one of the APIs or properties below.
+
+### APIs (17)
+
+- [PolySign ABC Accounts API](https://apis.io/apis/polysign/polysign-abc-accounts-api/) — The ABC Accounts API from PolySign — 3 operation(s) for abc accounts.
+- [PolySign ABC Memorials API](https://apis.io/apis/polysign/polysign-abc-memorials-api/) — The ABC Memorials API from PolySign — 2 operation(s) for abc memorials.
+- [PolySign ABC Signing API](https://apis.io/apis/polysign/polysign-abc-signing-api/) — The ABC Signing API from PolySign — 1 operation(s) for abc signing.
+- [PolySign ABC Testnet API](https://apis.io/apis/polysign/polysign-abc-testnet-api/) — The ABC Testnet API from PolySign — 2 operation(s) for abc testnet.
+- [PolySign Asset API](https://apis.io/apis/polysign/polysign-asset-api/) — The asset API from PolySign — 5 operation(s) for asset.
+- [PolySign Authentication API](https://apis.io/apis/polysign/polysign-authentication-api/) — The authentication API from PolySign — 1 operation(s) for authentication.
+- [PolySign beneficiary authorization API](https://apis.io/apis/polysign/polysign-beneficiary-authorization-api/) — The beneficiary authorization API from PolySign — 6 operation(s) for beneficiary authorization.
+- [PolySign book transfer API](https://apis.io/apis/polysign/polysign-book-transfer-api/) — The book transfer API from PolySign — 5 operation(s) for book transfer.
+- [PolySign book transfer confirmation API](https://apis.io/apis/polysign/polysign-book-transfer-confirmation-api/) — The book transfer confirmation API from PolySign — 4 operation(s) for book transfer confirmation.
+- [PolySign escrow authorization API](https://apis.io/apis/polysign/polysign-escrow-authorization-api/) — The escrow authorization API from PolySign — 6 operation(s) for escrow authorization.
+- [PolySign Investor API](https://apis.io/apis/polysign/polysign-investor-api/) — The investor API from PolySign — 2 operation(s) for investor.
+- [PolySign Order API](https://apis.io/apis/polysign/polysign-order-api/) — The order API from PolySign — 5 operation(s) for order.
+- [PolySign Partner API](https://apis.io/apis/polysign/polysign-partner-api/) — The partner API from PolySign — 3 operation(s) for partner.
+- [PolySign Settlement API](https://apis.io/apis/polysign/polysign-settlement-api/) — The settlement API from PolySign — 5 operation(s) for settlement.
+- [PolySign settlement confirmation API](https://apis.io/apis/polysign/polysign-settlement-confirmation-api/) — The settlement confirmation API from PolySign — 6 operation(s) for settlement confirmation.
+- [PolySign System API](https://apis.io/apis/polysign/polysign-system-api/) — The system API from PolySign — 4 operation(s) for system.
+- [PolySign Utility API](https://apis.io/apis/polysign/polysign-utility-api/) — The utility API from PolySign — 5 operation(s) for utility.
+
+### Published properties
+
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
+
+#### MCP servers (1)
+
+Model Context Protocol servers that expose the API to agents.
+
+- [polysign-atomicnet](https://apis.io/servers/polysign/polysign-atomicnet/)
+
+#### Collections (17)
+
+Postman and Open Collection request collections.
+
+- [AtomicNet ABC Proxy Service ABC Accounts API](https://apis.io/collections/polysign/open-polysign-abc-accounts-api/)
+- [AtomicNet ABC Proxy Service ABC Memorials API](https://apis.io/collections/polysign/open-polysign-abc-memorials-api/)
+- [AtomicNet ABC Proxy Service ABC Signing API](https://apis.io/collections/polysign/open-polysign-abc-signing-api/)
+- [AtomicNet ABC Proxy Service ABC Testnet API](https://apis.io/collections/polysign/open-polysign-abc-testnet-api/)
+- [Polysign Asset API](https://apis.io/collections/polysign/open-polysign-asset-api/)
+- [Polysign Authentication API](https://apis.io/collections/polysign/open-polysign-authentication-api/)
+- [AtomicNet API Server beneficiary authorization API](https://apis.io/collections/polysign/open-polysign-beneficiary-authorization-api/)
+- [Polysign book transfer API](https://apis.io/collections/polysign/open-polysign-book-transfer-api/)
+- [AtomicNet API Server book transfer confirmation API](https://apis.io/collections/polysign/open-polysign-book-transfer-confirmation-api/)
+- [AtomicNet API Server escrow authorization API](https://apis.io/collections/polysign/open-polysign-escrow-authorization-api/)
+- [AtomicNet API Server Investor API](https://apis.io/collections/polysign/open-polysign-investor-api/)
+- [Polysign Order API](https://apis.io/collections/polysign/open-polysign-order-api/)
+- [AtomicNet API Server Partner API](https://apis.io/collections/polysign/open-polysign-partner-api/)
+- [AtomicNet API Server Settlement API](https://apis.io/collections/polysign/open-polysign-settlement-api/)
+- [AtomicNet API Server settlement confirmation API](https://apis.io/collections/polysign/open-polysign-settlement-confirmation-api/)
+- [Polysign System API](https://apis.io/collections/polysign/open-polysign-system-api/)
+- [AtomicNet API Server Utility API](https://apis.io/collections/polysign/open-polysign-utility-api/)
+
+#### Overlays (3)
+
+OpenAPI overlays, including conversational phrasing for each operation.
+
+- [Polysign Abc Proxy Service Overlay](https://apis.io/overlays/polysign/polysign-abc-proxy-service-overlay/)
+- [Polysign Atomicnet Api Server Overlay](https://apis.io/overlays/polysign/polysign-atomicnet-api-server-overlay/)
+- [Polysign Merchant Gate Overlay](https://apis.io/overlays/polysign/polysign-merchant-gate-overlay/)
+
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Polysign Authentication](https://apis.io/security/polysign/polysign-authentication/)
+- [Polysign Domain Security](https://apis.io/security/polysign/polysign-domain-security/)
+
+#### OAuth scopes (1)
+
+The permissions the API asks for.
+
+- [Polysign Scopes](https://apis.io/scopes/polysign/polysign-scopes/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://www.polysign.io/)
+- [Documentation](https://docs.polynet.sandbox.polysign.io/)
+- [API reference](https://docs.polynet.sandbox.polysign.io/)
+- [Support](https://www.polysign.io/contact.html)
+- [GitHub](https://github.com/PolySignInc)
+
+## API Evangelist rating
+
+**Kin Score 25.5** — emerging · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 62.5 |
+| Contract quality | 39.6 |
+| Contract governance | 4.5 |
+| Operational transparency | 2.6 |
+| Developer ergonomics | 42.3 |
+| Access clarity | 0.0 |
+
+**Agent readiness 22.5** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | — |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | negotiable (partial credit) |
+| Idempotency | — |
+| Error Semantics | derived (partial credit) |
+| OpenAPI Examples | partial |
+| Rate Limit Signal | — |
+| Event Surface Described | — |
+| Agent Skills | derived (partial credit) |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 24.1** — Payments
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/polysign/](https://apis.io/providers/polysign/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for PolySign: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/polysign/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
